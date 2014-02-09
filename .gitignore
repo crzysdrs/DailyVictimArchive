@@ -1,0 +1,10 @@
+archive.gamespy.com
+archive.tar.bz2
+*~
+#*
+out/
+tmp/
+mirror/
+.tidyall.d
+alpha_shape
+*.d

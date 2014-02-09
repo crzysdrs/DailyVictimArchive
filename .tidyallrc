@@ -1,0 +1,15 @@
+[PerlTidy]
+    select = *.{pl,pm,t}
+    argv = -nolq -ce -pt=2 -sbt=2 -bt=2 -bbt=2 -nsfs -skp -bar
+
+[PHPCodeSniffer]
+    select = site/**/*.php
+    argv = 
+
+;[JSBeautify]
+;	select = site/**/*.js
+;	argv = 
+
+;[CSSUnminifier]
+;	select = site/**/*.css
+;	argv = 
