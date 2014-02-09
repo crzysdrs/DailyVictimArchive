@@ -14,6 +14,6 @@ This includes:
 
 To build everything, you need to download the corresponding data archive from https://dl.dropboxusercontent.com/u/13119212/gamespy.tar.gz and extract it into the repo directory.
 
-The site based on this built data is located at http://crzysdrs.sytes.net .
+The site based on this built data is located at http://crzysdrs.sytes.net/dv/ .
 
 
