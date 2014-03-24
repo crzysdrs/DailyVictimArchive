@@ -9,8 +9,8 @@ HOST="blockade"
 STAGE="/var/www/dev_dv/"
 LIVE="/var/www/dv"
 
-MIRROR=mirror/
-GS_IMG=img/
+MIRROR=mirror
+GS_IMG=img
 HISTORY_DIR=history/
 
 DIR_IDS := $(shell cd $(MIRROR) && ls *.vote.html)
@@ -173,4 +173,4 @@ stage: all
 	rsync --exclude '*~' $(GS_OUT)/* $(GS_IMG) site/* "$(HOST):$(STAGE)" -r
 
 live: stage
-	ssh $(HOST) 'rsync "$(STAGE)" "$(LIVE)" -r'
+	ssh $(HOST) 'rsync --delete "$(STAGE)" "$(LIVE)" -r'

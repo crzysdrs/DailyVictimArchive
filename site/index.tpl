@@ -16,6 +16,9 @@ Daily Victim Archive
   .myCustomClass .qtip-content{
   padding: 0px;
   }
+  .num {
+       text-align: right;
+  }
 </style>
 <script type="text/javascript">
   jQuery.extend( jQuery.fn.dataTableExt.oSort, {
@@ -115,8 +118,10 @@ $(document).ready(function(){
 
 <h4>The Daily Victims</h4>
 <p>
-  <a href="map.php">Google Map of Connections</a><br />
-  <a href="reunion.php">Daily Victim Reunion</a><br />
+  <ul>
+    <li><a href="map.php">Google Map of Connections</a></li>
+    <li><a href="reunion.php">Daily Victim Reunion</a></li>
+  </ul>
 </p>
 <table id="dailyvictims" class="display" cellpadding="0" cellspacing="0">
   <thead><tr>
@@ -132,11 +137,11 @@ $(document).ready(function(){
   {foreach $articles as $article}
   <tr class="Text" data-vicpicsmall="{$article.vicpic_small}">
     <td class="nb">{$article.date}</td>
-    <td class="nb">{$article.avg|string_format:"%.2f"}</td>
-    <td class="nb">{$article.votes|number_format:0}</td>
-    <td class="nb">{$article.inlinks}</td>
-    <td class="nb">{$article.outlinks}</td>
-    <td class="nb">{$article.total}</td>
+    <td class="nb num">{$article.avg|string_format:"%.2f"}</td>
+    <td class="nb num" style="text-align: right;">{$article.votes|number_format:0}</td>
+    <td class="nb num">{$article.inlinks}</td>
+    <td class="nb num">{$article.outlinks}</td>
+    <td class="nb num">{$article.total}</td>
     <td class="nb">{$article.color|yesno}</td>
     <td><a href="article.php?id={$article.id}">{$article.title}</a>
     </td>
