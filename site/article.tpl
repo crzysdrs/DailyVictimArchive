@@ -49,7 +49,7 @@ Daily Victim Archive: {$article.title|strip_tags}
     <div style="overflow: auto; clear: both;">
       <div style="width: 33%; float:left; text-align:left;">
 	{if isset($prev_button) }
-	<a href="article.php?id={$prev_button.id}" title="{$prev_button.title|escape}">
+	<a rel="prev" href="article.php?id={$prev_button.id}" title="{$prev_button.title|escape}">
 	  <img style="border-style:none;" src="img/images/sub_layout/prev.gif" alt="Prev Button"/><br />
 	  <img style="border-style:none; float:left; height:100px; width:100px;" src="img/{$prev_button.vicpic_small}" />
 	  {$prev_button.title}
@@ -63,7 +63,7 @@ Daily Victim Archive: {$article.title|strip_tags}
       </div>
       <div style="width: 33%; float:left; text-align:right;">
 	{if isset($next_button)}
-	<a href="article.php?id={$next_button.id}" title="{$next_button.title|escape}">
+	<a rel="next" href="article.php?id={$next_button.id}" title="{$next_button.title|escape}">
 	  <img style="border-style:none;" src="img/images/sub_layout/next.gif" alt="Next Button"/><br />
 	  <img style="border-style:none; float:right; height:100px;width:100px;" src="img/{$next_button.vicpic_small}" />
 	  {$next_button.title}

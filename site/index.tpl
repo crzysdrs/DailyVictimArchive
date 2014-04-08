@@ -138,7 +138,7 @@ $(document).ready(function(){
   <tr class="Text" data-vicpicsmall="{$article.vicpic_small}">
     <td class="nb">{$article.date}</td>
     <td class="nb num">{$article.avg|string_format:"%.2f"}</td>
-    <td class="nb num" style="text-align: right;">{$article.votes|number_format:0}</td>
+    <td class="nb num">{$article.votes|number_format:0}</td>
     <td class="nb num">{$article.inlinks}</td>
     <td class="nb num">{$article.outlinks}</td>
     <td class="nb num">{$article.total}</td>
