@@ -2,7 +2,7 @@
 {block name="title"}
 Daily Victim Archive
 {/block}
-{block name="head"}
+{block name="css"}
 {literal}
 <style type="text/css">
   .Text{
@@ -20,6 +20,10 @@ Daily Victim Archive
        text-align: right;
   }
 </style>
+{/literal}
+{/block}
+{block name="javascript"}
+{literal}
 <script type="text/javascript">
   jQuery.extend( jQuery.fn.dataTableExt.oSort, {
     "formatted-num-pre": function ( a ) {

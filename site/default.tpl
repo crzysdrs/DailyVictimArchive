@@ -6,30 +6,22 @@
     version="XHTML+RDFa 1.0" xml:lang="en">
 <head>
   <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-  <link href="main.css" rel="stylesheet" type="text/css" />
   <title>{block name="title"}Default Title{/block}</title>
-  <!-- JQuery Begin -->
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
-  <script type="text/javascript" src="http://qtip2.com/v/stable/jquery.qtip.js"></script> 
-  <link rel="stylesheet" type="text/css" href="http://qtip2.com/v/stable/jquery.qtip.css"/>
-  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/css/jquery.dataTables.css"/>
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js"></script>
-  
-  <!-- Fancy Box -->
-  <link type="text/css" rel="stylesheet" href="//cdn.jsdelivr.net/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css" />
-  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
-  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/helpers/jquery.fancybox-media.js"></script>
-  <link type="text/css" rel="stylesheet" href="//cdn.jsdelivr.net/fancybox/2.1.5/helpers/jquery.fancybox-thumbs.css" />
-  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/helpers/jquery.fancybox-thumbs.js"></script>
-  <link type="text/css" rel="stylesheet" href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.css" />
-  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.js"></script>
-  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
-  <!-- Fancy Box -->
+  {block name="css"}{/block}
+  <link href="main.css" rel="stylesheet" type="text/css" />
+ 
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/css/jquery.dataTables.min.css"/>
+  <link type="text/css" rel="stylesheet" href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" />
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.css"/>
 
-  <!-- JQuery End -->
-  
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="http://cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.js"></script> 
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>  
+
   <script type="text/javascript" src="common.js"></script>
 
+  {block name="javascript"}{/block}
   {block name="head"}{/block}
 </head>
 <body>

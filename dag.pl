@@ -79,8 +79,8 @@ sub trans_clos($$) {
 my $node = $dbh->prepare(
     "SELECT id, article.vicpic_small, article.title FROM article WHERE id = ?");
 
-sub format_node($$$$) {
-    my ($id, $title, $label, $img) = @_;
+sub format_node($$$$$) {
+    my ($id, $title, $label, $img,$attribs) = @_;
     return
         $id
       . " [${label}nodesep=0.75,URL=\"article.php?id=${id}\",shape=square,label=\"\",tooltip=\""
@@ -88,7 +88,7 @@ sub format_node($$$$) {
       . "\",labelloc=b,image=\""
       . cwd() . '/'
       . $img
-      . "\"];\n";
+      . "\",$attribs];\n";
 }
 
 my $id = $ARGV[0];
@@ -119,7 +119,7 @@ if ($id ne 'all') {
                 $label = "color=red,";
             }
             my $img = "img/$row->{vicpic_small}";
-            my $fmt = format_node($row->{id}, $row->{title}, $label, $img);
+            my $fmt = format_node($row->{id}, $row->{title}, $label, $img, '');
             print $pipe $fmt;
         }
     }
@@ -142,7 +142,7 @@ if ($id ne 'all') {
     $all->execute();
     while (my $allrow = $all->fetchrow_hashref) {
         print $pipe format_node($allrow->{id}, $allrow->{title}, "",
-            'img/' . $allrow->{vicpic_small});
+            'img/' . $allrow->{vicpic_small}, 'height=1,width=1,fixedsize=true');
     }
 
     my $all_conns = $dbh->prepare("SELECT src, dst from conns");

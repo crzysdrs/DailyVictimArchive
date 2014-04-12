@@ -6,7 +6,8 @@
   <meta property="og:image" content="{$vicpic_path|strip_tags|escape}" /> 
   <meta property="og:url" content="{$url|escape}" /> 
   <!-- End Facebook Specific Properties -->
-
+{/block}
+{block name="javascript"}
   <script type="text/javascript">
     $(document).ready(function() {
     article_jquery();
