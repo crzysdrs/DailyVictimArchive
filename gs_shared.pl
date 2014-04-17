@@ -116,7 +116,7 @@ sub polishHTML($) {
     my ($text) = @_;
     my ($tidy_in, $tidy_out);
     my $pid = open2($tidy_out, $tidy_in,
-        "tidy -asxhtml -wrap 9999999999 --alt-text \"\" --indent yes -utf8 --preserve-entities yes 2> /dev/null"
+        "tidy -asxhtml -wrap 9999999999 --alt-text \"\" --indent yes -utf8 2> /dev/null"
     );
     $text =~ s/<br( *\/)?>((\s|&nbsp;)*<br( *\/)?>)+/<p>/isg;
     $text =~ s/\n+/\n/isg;

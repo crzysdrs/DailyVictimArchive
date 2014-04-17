@@ -25,6 +25,7 @@ Daily Victim Archive
 {block name="javascript"}
 {literal}
 <script type="text/javascript">
+<!--
   jQuery.extend( jQuery.fn.dataTableExt.oSort, {
     "formatted-num-pre": function ( a ) {
         a = (a === "-" || a === "") ? 0 : a.replace( /[^\d\-\.]/g, "" );
@@ -89,6 +90,7 @@ $(document).ready(function(){
       }, event); 
   }); 
  });
+//-->
 </script>
 {/literal}
 {/block}
@@ -111,6 +113,7 @@ $(document).ready(function(){
 
 <table id="meta_articles" class="display" cellpadding="0" cellspacing="0">
   <thead><tr><th>Date</th><th>Title</th><th>Author</th></tr></thead>
+  <tbody>
   {foreach $metas as $meta}
   <tr class="Text">
     <td class="nb">{$meta.date}</td>
@@ -118,15 +121,14 @@ $(document).ready(function(){
     <td>{$meta.author}</td>
   </tr>
   {/foreach}
+  </tbody>
 </table>
 
 <h4>The Daily Victims</h4>
-<p>
-  <ul>
-    <li><a href="map.php">Google Map of Connections</a></li>
-    <li><a href="reunion.php">Daily Victim Reunion</a></li>
-  </ul>
-</p>
+<ul>
+  <li><a href="map.php">Google Map of Connections</a></li>
+  <li><a href="reunion.php">Daily Victim Reunion</a></li>
+</ul>
 <table id="dailyvictims" class="display" cellpadding="0" cellspacing="0">
   <thead><tr>
       <th>Date</th>
@@ -138,6 +140,7 @@ $(document).ready(function(){
       <th>Color</th>
       <th>Title</th>
   </tr></thead>
+  <tbody>
   {foreach $articles as $article}
   <tr class="Text" data-vicpicsmall="{$article.vicpic_small}">
     <td class="nb">{$article.date}</td>
@@ -151,6 +154,7 @@ $(document).ready(function(){
     </td>
   </tr>
   {/foreach}
+  </tbody>
 </table>
 
 <div style="font-size: 60%; float: right;">All Scores Listed From 2009-12-09</div>

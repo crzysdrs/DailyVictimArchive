@@ -4,7 +4,7 @@
   <meta property="og:title" content="{$article.title|strip_tags|escape}" /> 
   <meta property="og:description" content="Daily Victim Archive For {$article.date|escape}" />  
   <meta property="og:image" content="{$vicpic_path|strip_tags|escape}" /> 
-  <meta property="og:url" content="{$url|escape}" /> 
+  <meta property="og:url" content="{$url|escape:'url'}" /> 
   <!-- End Facebook Specific Properties -->
 {/block}
 {block name="javascript"}
@@ -50,9 +50,9 @@ Daily Victim Archive: {$article.title|strip_tags}
     <div style="overflow: auto; clear: both;">
       <div style="width: 33%; float:left; text-align:left;">
 	{if isset($prev_button) }
-	<a rel="prev" href="article.php?id={$prev_button.id}" title="{$prev_button.title|escape}">
+	<a rel="prev" href="article.php?id={$prev_button.id}" title="{$prev_button.title|escape:'url'}">
 	  <img style="border-style:none;" src="img/images/sub_layout/prev.gif" alt="Prev Button"/><br />
-	  <img style="border-style:none; float:left; height:100px; width:100px;" src="img/{$prev_button.vicpic_small}" />
+	  <img style="border-style:none; float:left; height:100px; width:100px;" src="img/{$prev_button.vicpic_small}" alt="Previous Victim Picture" />
 	  {$prev_button.title}
 	</a>
 	{else}
@@ -64,9 +64,9 @@ Daily Victim Archive: {$article.title|strip_tags}
       </div>
       <div style="width: 33%; float:left; text-align:right;">
 	{if isset($next_button)}
-	<a rel="next" href="article.php?id={$next_button.id}" title="{$next_button.title|escape}">
+	<a rel="next" href="article.php?id={$next_button.id}" title="{$next_button.title|escape:'url'}">
 	  <img style="border-style:none;" src="img/images/sub_layout/next.gif" alt="Next Button"/><br />
-	  <img style="border-style:none; float:right; height:100px;width:100px;" src="img/{$next_button.vicpic_small}" />
+	  <img style="border-style:none; float:right; height:100px;width:100px;" src="img/{$next_button.vicpic_small}" alt="Next Victim Picture"/>
 	  {$next_button.title}
 	</a>
 	{else}
