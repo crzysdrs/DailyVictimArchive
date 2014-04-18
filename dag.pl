@@ -3,10 +3,6 @@ use strict;
 use DBI;
 use Cwd;
 
-#use open ':encoding(utf8)';
-
-#require 'poly.pl';
-
 sub strip_html($) {
     my ($str) = @_;
     $str =~ s/<.+?>//ig;
@@ -95,7 +91,7 @@ my $id = $ARGV[0];
 if ($id ne 'all') {
     print "Creating DAG for $id\n";
     use utf8;
-
+#    open my $pipe, ">-";
     open my $pipe,
       "| dot -Tcmapx -o $ENV{GS_OUT}/dags/$id.map -Tpng -o $ENV{GS_OUT}/dags/$id.png"
       or die ("Unable to open pipe");
@@ -123,7 +119,7 @@ if ($id ne 'all') {
             print $pipe $fmt;
         }
     }
-    print $pipe "};\n";
+    print $pipe "}\n";
     close $pipe;
 } elsif ($id == 'all') {
     print "Creating DAG for ALL\n";

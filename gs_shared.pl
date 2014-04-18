@@ -101,7 +101,6 @@ sub common_cleanup($$$$) {
     $text =~ s@BORDER="?0"?@@ig;
     $text =~ s@<(/?)strike>@<$1del>@ig;
     $text =~ s/\x{C2}\x{A0}/&nbsp;/ig;
-
     #$text =~ s@\x{FFFD}@&nbsp;@ig;
 
     return $text;
@@ -116,7 +115,7 @@ sub polishHTML($) {
     my ($text) = @_;
     my ($tidy_in, $tidy_out);
     my $pid = open2($tidy_out, $tidy_in,
-        "tidy -asxhtml -wrap 9999999999 --alt-text \"\" --indent yes -utf8 2> /dev/null"
+        "tidy -asxhtml -wrap 9999999999 --char-encoding utf8 --alt-text \"\" --indent yes -utf8 2> /dev/null"
     );
     $text =~ s/<br( *\/)?>((\s|&nbsp;)*<br( *\/)?>)+/<p>/isg;
     $text =~ s/\n+/\n/isg;

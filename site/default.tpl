@@ -40,7 +40,7 @@
   <p>
     {foreach $breadcrumbs as $b}
     <span typeof="v:Breadcrumb">
-      <a href="{$b.url|escape:'url'}" rel="v:url" property="v:title">
+      <a href="{$b.url|escape}" rel="v:url" property="v:title">
         {$b.title}
       </a>
       {if !$b@last}
