@@ -13,14 +13,16 @@ MIRROR=mirror
 GS_IMG=img
 HISTORY_DIR=history/
 
-DIR_IDS := $(shell cd $(MIRROR) && ls *.vote.html)
-IDS := $(DIR_IDS:.vote.html=)
-IDS += 698
-IDS += 697
+include ids.mk
+
+.PHONY : all clean graph stage live depends vote_data
+.SECONDARY :
+.SUFFIXES :
 
 ARTICLES := $(addprefix $(GS_TMP)/, $(addsuffix .article,$(IDS)))
 VOTES    := $(addprefix $(GS_TMP)/, $(addsuffix .vote,$(IDS)))
 DAGS     := $(addprefix $(GS_OUT)/dags/, $(addsuffix .png,$(IDS)))
+#DAGS     += $(GS_OUT)/dags/all.png
 
 VOTE_BREAKDOWN := $(addprefix $(GS_OUT)/chart/, $(addsuffix .png,$(IDS)))
 VOTE_HISTORY := $(addprefix $(GS_OUT)/chart/, $(addsuffix _history.png,$(IDS)))
@@ -36,35 +38,45 @@ ALPHAS        := $(addprefix $(GS_TMP)/alpha/, $(addsuffix .alpha.png,$(ALPHA_ID
 SAMPLES       := $(addprefix $(GS_TMP)/alpha/, $(addsuffix .sample,$(ALPHA_IDS)))
 ALPHA_SHAPES  := $(addprefix $(GS_TMP)/alpha/, $(addsuffix .alpha_shape,$(ALPHA_IDS)))
 
-HISTORY   := $(shell ls $(HISTORY_DIR)/*.vote.*.html)
-HISTORYM  := $(shell ls $(MIRROR)/*.vote.html)
-HISTORYA  := $(shell ls archive.gamespy.com/comics/DailyVictim/vote.asp_id_*_dontvote_true)
-
-.PHONY : all clean graph stage live depends vote_data
-.SECONDARY :
 
 all : $(GS_OUT)/dv.db $(GS_OUT)/tiles/reunion graph $(DAGS) vote_data
 	@echo "All"
 
+gamespy.tar.gz : 
+	git annex get .
+
+archive.touch : gamespy.tar.gz
+	tar xvf gamespy.tar.gz
+	touch archive.touch
+
+history.d : archive.touch
+	$(eval HISTORY   := $(shell ls $(HISTORY_DIR)/*.vote.*.html))
+	$(eval HISTORYM  := $(shell ls $(MIRROR)/*.vote.html))
+	$(eval HISTORYA  := $(shell ls archive.gamespy.com/comics/DailyVictim/vote.asp_id_*_dontvote_true))
+	$(eval RULES = $(foreach ID, $(IDS), \
+		'$$$$(GS_TMP)/$(ID).vote : ./vote.pl $(filter $(HISTORY_DIR)/$(ID).%,$(HISTORY)) $(filter mirror/$(ID).vote.html,$(HISTORYM)) $(filter %_$(ID)_dontvote_true,$(HISTORYA)) | $$$$(GS_TMP) \n\t./vote.pl $$$$@ $(ID) $(filter $(HISTORY_DIR)/$(ID).%,$(HISTORY)) $(filter %_$(ID)_dontvote_true,$(HISTORYA)) $(filter $(MIRROR)/$(ID).vote.html,$(HISTORYM))\n'))
+	@echo $(RULES) > history.d
+
+archive.gamespy.com $(HISTORY_DIR) $(MIRROR) $(GS_IMG): archive.touch
+
 clean:
 	rm -rf "$(GS_TMP)" || true
 	rm -rf "$(GS_OUT)" || true
+	rm history.d
 	find alpha_data -size 0 -exec rm {} \;
 
 fullclean: clean
 	rm -rf archive.gamespy.com || true
 	rm -rf $(MIRROR) $(GS_IMG) $(HISTORY_DIR) || true
+	rm archive.touch
+	rm history.d
+	git annex drop .
 
 vote_data: $(VOTE_HISTORY) $(VOTE_BREAKDOWN)
 	@echo "Votes"
 
 $(GS_OUT)/chart/%.png $(GS_OUT)/chart/%_history.png : $(GS_TMP)/%.vote ./plot.pl | $(GS_OUT)/chart
 	./plot.pl $(GS_OUT)/chart/$*.png $(GS_OUT)/chart/$*_history.png $* $^
-
-history.d : $(HISTORY_DIR) $(wildcard archive.gamespy.com/comics/DailyVictim/vote.asp_id_*_dontvote_true) | archive.gamespy.com
-	rm history.d || true
-	$(eval RULES = $(foreach ID, $(IDS), '$$$$(GS_TMP)/$(ID).vote : $(filter $(HISTORY_DIR)/$(ID).%,$(HISTORY)) $(filter mirror/$(ID).vote.html,$(HISTORYM)) $(filter %_$(ID)_dontvote_true,$(HISTORYA)) \n'))
-	@echo $(RULES) > history.d
 
 -include history.d
 
@@ -99,9 +111,6 @@ $(GS_TMP) :
 
 $(GS_TMP)/alpha : | $(GS_TMP)
 	mkdir $(GS_TMP)/alpha
-
-$(GS_TMP)/%.vote : ./vote.pl | $(GS_TMP)/
-	./vote.pl $@ $* $(filter $(HISTORY_DIR)/$*.%,$(HISTORY)) $(filter %_$*_dontvote_true,$(HISTORYA)) $(filter $(MIRROR)/$*.vote.html,$(HISTORYM))
 
 $(GS_OUT)/dags/%.png $(GS_OUT)/dags/%.map $(GS_OUT)/dags/%.plain : $(ARTICLES) $(GS_OUT)/dv.db ./dag.pl | $(GS_OUT)/dags
 	./dag.pl $*
