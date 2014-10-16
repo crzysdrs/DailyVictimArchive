@@ -89,7 +89,8 @@ depends :
 		libfile-slurp-unicode-perl \
 		libencode-perl \
 		libcgal-dev \
-		libmoosex-getopt-perl
+		libmoosex-getopt-perl \
+		git-annex
 
 alpha_data/%.alpha : 
 	touch $@

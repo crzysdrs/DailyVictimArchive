@@ -14,8 +14,21 @@ This includes:
   * Javascript/CSS
   * PHP files
 
-To build everything, you need to download the corresponding data archive from https://dl.dropboxusercontent.com/u/13119212/gamespy.tar.gz and extract it into the repo directory.
+## Build
+
+You may first need to run ```sudo make depends``` in Ubuntu 
+to get all the dependencies installed. Afterwords, just run make.
+
+```
+make
+```
+
+To install, edit the variables ```HOST```, ```STAGE```, ```LIVE```
+and run the corresponding ```make stage``` or ```make live```
+to put the site on your webserver.
+
+## Misc
+
+Git-Annex will get the archive from https://dl.dropboxusercontent.com/u/13119212/gamespy.tar.gz
 
 The site based on these scripts is located at http://crzysdrs.sytes.net/dv/ .
-
-
