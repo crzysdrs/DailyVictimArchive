@@ -43,6 +43,7 @@ all : $(GS_OUT)/dv.db $(GS_OUT)/tiles/reunion graph $(DAGS) vote_data
 	@echo "All"
 
 gamespy.tar.gz : 
+	git annex init
 	git annex get .
 
 archive.touch : gamespy.tar.gz
