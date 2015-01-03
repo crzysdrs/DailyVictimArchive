@@ -70,7 +70,6 @@ fullclean: clean
 	rm -rf archive.gamespy.com || true
 	rm -rf $(MIRROR) $(GS_IMG) $(HISTORY_DIR) || true
 	rm archive.touch
-	rm history.d
 	git annex drop .
 
 vote_data: $(VOTE_HISTORY) $(VOTE_BREAKDOWN)
