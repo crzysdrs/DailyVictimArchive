@@ -6,6 +6,8 @@
 #include <fstream>
 #include <vector>
 #include <list>
+#include <Magick++.h>
+
 typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
 typedef K::FT FT;
 typedef K::Point_2  Point;
@@ -16,6 +18,7 @@ typedef CGAL::Triangulation_data_structure_2<Vb,Fb> Tds;
 typedef CGAL::Delaunay_triangulation_2<K,Tds> Triangulation_2;
 typedef CGAL::Alpha_shape_2<Triangulation_2>  Alpha_shape_2;
 typedef Alpha_shape_2::Alpha_shape_edges_iterator Alpha_shape_edges_iterator;
+
 template <class OutputIterator>
 void
 alpha_edges( const Alpha_shape_2&  A,
@@ -46,17 +49,44 @@ file_input(char * file, OutputIterator out)
     return false;
   }
 }
+template <class OutputIterator>
+bool
+img_input(char * img, OutputIterator out) 
+{
+    Magick::Image image;
+    try {
+        image.read(img);
+        Magick::Pixels view(image);
+        int count = 0;
+        for (int y = 0; y < image.rows(); y++) {
+            for (int x = 0; x < image.columns(); x++) {           
+                Magick::Color c = image.pixelColor(x, y);
+                if (c.redQuantum() > 0 || c.blueQuantum() > 0 || c.greenQuantum() > 0) {
+                    count++;
+                    *out = Point(x, y);
+                    out++;
+                }
+            }
+        }
+        return count > 1;
+    } catch (Magick::Exception & ex) {
+        std::cout << "Caught exception: " << ex.what() << std::endl; 
+        return false;
+    }
+}
+
 // Reads a list of points and returns a list of segments
 // corresponding to the Alpha shape.
 int main(int argc, char * argv[]) 
 {
+  Magick::InitializeMagick(*argv);
   std::list<Point> points;
   if (argc < 3) {
     return -1;
   }
   char * in_file = argv[2];
   char * out_file = argv[1];
-  if(! file_input(in_file, std::back_inserter(points))){
+  if(! img_input(in_file, std::back_inserter(points))){
     return 0;
   }
   Alpha_shape_2 A(points.begin(), points.end(),

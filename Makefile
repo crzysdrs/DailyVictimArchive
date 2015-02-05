@@ -117,12 +117,9 @@ $(GS_OUT)/dags/%.png $(GS_OUT)/dags/%.map $(GS_OUT)/dags/%.plain : $(ARTICLES) $
 	./dag.pl $*
 
 ./alpha_shape : alpha_shape.c
-	g++ alpha_shape.c -o alpha_shape -lCGAL -lgmp -frounding-math -g
+	g++ alpha_shape.c -o alpha_shape -lCGAL -lgmp -frounding-math -g `Magick++-config --cppflags --cxxflags --ldflags --libs`
 
-$(GS_TMP)/alpha/%.sample : $(GS_TMP)/alpha/%.mask.png ./sample.pl
-	./sample.pl $@ $<
-
-$(GS_TMP)/alpha/%.alpha_shape : $(GS_TMP)/alpha/%.sample ./alpha_shape
+$(GS_TMP)/alpha/%.alpha_shape : $(GS_TMP)/alpha/%.mask.png ./alpha_shape
 	./alpha_shape $@ $<
 
 $(GS_TMP)/alpha/%.alpha.png $(GS_TMP)/alpha/%.mask.png : $(GS_IMG)/victimpics/%.gif  alpha_data/%.alpha | $(GS_TMP)/alpha
