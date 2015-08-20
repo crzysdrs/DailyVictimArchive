@@ -7,7 +7,7 @@ import Development.Shake.Util
 import System.Directory
 import System.FilePath.Posix
 import System.SetEnv
-       
+
 votefile id = concat ["_build/archive/archive.gamespy.com/comics/DailyVictim/vote.asp_id_", id, "_dontvote_true"]
 htmlfile id = concat ["_build/archive/archive.gamespy.com/Dailyvictim/index.asp_id_", id, ".html"]
 articlefile id = concat [tmpdir, "/", id, ".article"]
@@ -32,9 +32,10 @@ tmpdir = concat [builddir, "/tmp"]
 dbfile = concat [outdir, "/dv.db"]
 mirrordir = "_build/archive/mirror"
 archivedir = "_build/archive"
-           
+
 main :: IO ()
-main = shakeArgs shakeOptions{shakeFiles="_build", shakeVerbosity=Chatty} $ do
+main =  
+  shakeArgs shakeOptions{shakeFiles="_build",shakeVerbosity=Chatty} $ do
   want["all"]
   
   phony "depends" $ do
@@ -67,34 +68,30 @@ main = shakeArgs shakeOptions{shakeFiles="_build", shakeVerbosity=Chatty} $ do
     () <- cmd ["git", "annex", "init"]
     cmd ["git", "annex", "get", "."]
 
-  [votefile "*", htmlfile "*"] &%> \[vote, html] -> do
-    need [archivedir]
-
-  mirrorhtml "*" %> \out -> do
-    need [archivedir]
-
-  (anatomy_html ++ top10_html) &%> \files -> do
-    need [archivedir]
-
   voteout "*" %> \v -> do
     let id = takeFileName $ dropExtension $ v
     need [archivedir]
-    votes_for_id <- getDirectoryFiles "" [votefile id, historyfile id, mirrorvote id]
-    need votes_for_id
-    cmd (["./vote.pl", v, id] ++ votes_for_id)
+    let votefiles = if (read id) <= 696
+                    then [votefile id, mirrorvote id]
+                    else []
+    need votefiles
+    --getDirectoryFiles seems to be respsonible for speed issues
+    vote_history <- getDirectoryFiles "" [historyfile id]
+    need vote_history
+    cmd (["./vote.pl", v, id] ++ vote_history ++ votefiles)
      
   dbfile %> \db -> do
     need (anatomy_html ++ top10_html ++ all_articles ++ all_votes ++ ["loaddb.pl"])
     removeFilesAfter "" [dbfile]
     cmd ["./loaddb.pl", dbfile, tmpdir, mirrordir]
      
-  archivedir %> \a -> do
+  [archivedir] ++ anatomy_html ++ top10_html &%> \a -> do
     need ["gamespy.tar.gz"]
-    () <- cmd ["mkdir", "-p", a]
-    () <- cmd ["tar", "xf", "gamespy.tar.gz", "-C", a]
-    cmd ["touch", a]
+    () <- cmd ["mkdir", "-p", archivedir]
+    cmd ["tar", "xf", "gamespy.tar.gz", "-C", archivedir]
            
   articlefile "*" %> \out -> do
+    need [archivedir]
     let id = takeFileName $ dropExtension $ out
     let (html, vote) = if (read id) <= 696
                        then (htmlfile id, Just (votefile id))
