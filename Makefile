@@ -172,7 +172,7 @@ $(GS_OUT)/dv.db : $(ARTICLES) $(VOTES) ./loaddb.pl \
 	$(MIRROR)/anatofvictim.5.html $(MIRROR)/top10.1.html $(MIRROR)/top10.2.html \
 	$(MIRROR)/top10.3.html $(MIRROR)/top10.4.html | $(GS_OUT)
 	rm $(GS_OUT)/dv.db || true
-	./loaddb.pl || rm $(GS_OUT)/dv.db
+	./loaddb.pl $(GS_OUT)/dv.db $(GS_TMP) mirror || rm $(GS_OUT)/dv.db
 
 %.pl : gs_shared.pl
 
