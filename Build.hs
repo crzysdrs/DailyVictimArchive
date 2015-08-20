@@ -7,6 +7,10 @@ import Development.Shake.Util
 import System.Directory
 import System.FilePath.Posix
 import System.SetEnv
+import System.FilePath.Glob
+import qualified Data.Map as Map
+
+sortAndGroup assocs = Map.fromListWith (++) [(k, [v]) | (k, v) <- assocs]
 
 votefile id = concat ["_build/archive/archive.gamespy.com/comics/DailyVictim/vote.asp_id_", id, "_dontvote_true"]
 htmlfile id = concat ["_build/archive/archive.gamespy.com/Dailyvictim/index.asp_id_", id, ".html"]
@@ -59,7 +63,18 @@ main =
          "git-annex",
          "libjson-perl"
         ]
-       
+      
+  cachedir <- newCache $ \globpath-> do
+    putNormal (concat ["Reading cached dir: ", globpath])
+    files <- liftIO (glob globpath)
+    return files
+
+  history_map <- newCache $ \globpath -> do
+    files <- cachedir globpath
+    let keyed_list =  zip (map (takeFileName . takeBaseName .takeBaseName .takeBaseName . takeBaseName) files) files
+    let fixed_map = Map.fromListWith (++) . map (\(x,y) -> (x,[y])) $ keyed_list
+    return fixed_map
+    
   phony "clean" $ do
     putNormal "Cleaning files in _build"
     removeFilesAfter "_build" ["//*"]
@@ -75,10 +90,15 @@ main =
                     then [votefile id, mirrorvote id]
                     else []
     need votefiles
-    --getDirectoryFiles seems to be respsonible for speed issues
-    vote_history <- getDirectoryFiles "" [historyfile id]
-    need vote_history
-    cmd (["./vote.pl", v, id] ++ vote_history ++ votefiles)
+    all_history <- history_map "_build/archive/history/*.html"
+    let history_ids = Map.lookup id all_history
+    case history_ids of
+      Just h -> need h
+      Nothing -> return ()
+    let all_votefiles = case history_ids of
+          Just h -> votefiles ++ h
+          Nothing -> votefiles          
+    cmd (["./vote.pl", v, id] ++ all_votefiles)
      
   dbfile %> \db -> do
     need (anatomy_html ++ top10_html ++ all_articles ++ all_votes ++ ["loaddb.pl"])
