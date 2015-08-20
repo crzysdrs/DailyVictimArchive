@@ -11,7 +11,8 @@ use File::Slurp;
 
 require 'gs_shared.pl';
 
-my $dbh = DBI->connect("dbi:SQLite:dbname=$ENV{GS_OUT}/dv.db", "", "");
+my ($dbfile, $tmpdir, $mirrordir) = @ARGV;
+my $dbh = DBI->connect("dbi:SQLite:dbname=$dbfile", "", "");
 
 $dbh->do("begin transaction;");
 $dbh->do(
@@ -52,7 +53,7 @@ my $meta = $dbh->prepare(
     "INSERT INTO meta_article (title, date, article, author) VALUES (?, ?, ?, ?)"
 );
 
-foreach my $j (`ls $ENV{GS_TMP}/*.article`) {
+foreach my $j (`ls ${tmpdir}/*.article`) {
     chomp $j;
     my $text = read_file($j);
     my $json = from_json($text);
@@ -70,7 +71,7 @@ foreach my $j (`ls $ENV{GS_TMP}/*.article`) {
     }
 }
 
-foreach my $j (`ls $ENV{GS_TMP}/*.vote`) {
+foreach my $j (`ls ${tmpdir}/*.vote`) {
     chomp $j;
     my $json = from_json(read_file($j, {binmode => ':utf8'}));
     foreach my $d (keys %{$json->{'votes'}}) {
@@ -123,7 +124,7 @@ sub get_editor_info($$) {
 }
 
 #handle meta articles
-my $folder       = "mirror/";
+my $folder       = "${mirrordir}/";
 my @anat         = `ls $folder/anat*`;
 my $anat_article = "";
 my %editor;
