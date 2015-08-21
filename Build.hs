@@ -21,6 +21,8 @@ mirrorvote id = concat ["_build/archive/mirror/", id, ".vote.html"]
 historyfile id = concat ["_build/archive/history/", id, ".*.html"]
 alphaout id = concat ["_build/tmp/alpha/", id, ".alpha.png"]
 alphashape id = concat ["_build/tmp/alpha/", id, ".alpha_shape"]
+scorechart id = concat [outdir, "/chart/", id, ".score.png"]
+historychart id = concat [outdir, "/chart/", id, ".history.png"]
 
 dagfile id = concat [outdir, "/dags/", id, ".png"]
 voteout id = concat [tmpdir, "/", id, ".vote"]
@@ -31,6 +33,7 @@ all_dags = map dagfile ((map show article_ids) ++ ["all"])
 all_votes = map voteout (map show article_ids)
 all_alpha = map alphaout ((map show article_ids) ++ ["fargo", "hotsoup", "gabe"])
 all_shapes = map alphashape (map show article_ids)
+all_charts = map scorechart (map show article_ids) ++ map historychart (map show article_ids)
 
 anatomy_html =  map (\x -> concat [mirrordir, x]) $ map (\x -> concat ["/anatofvictim.", show x, ".html"]) [1..5]
 top10_html =  map (\x -> concat [mirrordir, x]) $ map (\x -> concat ["/top10.", show x, ".html"]) [1..4]
@@ -53,7 +56,7 @@ main =
 
   phony "extract" $ do
     () <- cmd ["git", "annex", "init"]
-    cmd ["git", "annex", "get", "."]
+    () <- cmd ["git", "annex", "get", "."]
     need ["gamespy.tar.gz"]
     () <- cmd ["mkdir", "-p", archivedir]
     cmd ["tar", "xf", "gamespy.tar.gz", "-C", archivedir]         
@@ -133,6 +136,17 @@ main =
   
     cmd ["./article.pl", articlefile id, id, html, vote_str]
 
+  "_build/out/tiles/*" %> \t -> do
+    let id = takeFileName $ t
+    putNormal id
+    let m = Map.fromList [("all", "_build/out/dags/all.png"), ("reunion", "_build/out/reunion.png")]
+    let d = Map.lookup id m
+    let dfile = case d of
+          Nothing -> "ERROR"
+          Just x -> x
+    need [dfile]
+    cmd ["./create_tiles.pl", "-v", "--path", dropFileName t, dfile]
+    
   dagfiles "*" &%> \[dpng, dmap, dplain] -> do
     let id = takeFileName $ dropExtension $ dpng
     need ["./dag.pl", dbfile]
@@ -186,6 +200,11 @@ main =
     need $ ["./composite.pl"] ++ all_alpha ++ all_shapes
     cmd ["./composite.pl", dbfile, tmpdir, outdir]
 
+  [scorechart "*", historychart "*"] &%> \[score, history] -> do
+    let id = (takeFileName . takeBaseName . takeBaseName) score
+    need ["plot.pl", voteout id]
+    cmd ["./plot.pl", score, history, id, voteout id]
+  
   alphashape "*" %> \file -> do
     let id = (takeFileName . takeBaseName) file
     let src = concat [tmpdir, "/alpha/", id, ".mask.png"]
@@ -194,4 +213,4 @@ main =
     cmd ["touch", file]
     
   phony "all" $ do
-    need ([dbfile, "_build/out/reunion.png"])
+    need ([dbfile, "_build/out/tiles/reunion", "_build/out/tiles/all"] ++ all_dags ++ all_charts)

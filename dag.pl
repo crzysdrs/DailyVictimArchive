@@ -18,6 +18,8 @@ sub sort_unique {
 }
 
 my ($id, $dagdir, $dbfile)  = @ARGV;
+my $archivedir = "_build/archive";
+
 my $dbh = DBI->connect("dbi:SQLite:dbname=${dbfile}", "", "");
 
 my $trans_forward = $dbh->prepare("SELECT src, dst from conns WHERE src = ?");
@@ -115,7 +117,7 @@ if ($id ne 'all') {
             if ($row->{id} == $id) {
                 $label = "color=red,";
             }
-            my $img = "img/$row->{vicpic_small}";
+            my $img = $archivedir . "/img/$row->{vicpic_small}";
             my $fmt = format_node($row->{id}, $row->{title}, $label, $img, '');
             print $pipe $fmt;
         }
@@ -139,7 +141,7 @@ if ($id ne 'all') {
     $all->execute();
     while (my $allrow = $all->fetchrow_hashref) {
         print $pipe format_node($allrow->{id}, $allrow->{title}, "",
-            'img/' . $allrow->{vicpic_small}, 'height=1,width=1,fixedsize=true');
+            $archivedir . '/img/' . $allrow->{vicpic_small}, 'height=1,width=1,fixedsize=true');
     }
 
     my $all_conns = $dbh->prepare("SELECT src, dst from conns");
