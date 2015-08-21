@@ -114,7 +114,7 @@ $(GS_TMP)/alpha : | $(GS_TMP)
 	mkdir $(GS_TMP)/alpha
 
 $(GS_OUT)/dags/%.png $(GS_OUT)/dags/%.map $(GS_OUT)/dags/%.plain : $(ARTICLES) $(GS_OUT)/dv.db ./dag.pl | $(GS_OUT)/dags
-	./dag.pl $*
+	./dag.pl $* $(GS_OUT)/dags/ $(GS_OUT)/dv.db
 
 ./alpha_shape : alpha_shape.c
 	g++ alpha_shape.c -o alpha_shape -lCGAL -lgmp -frounding-math -g `Magick++-config --cppflags --cxxflags --ldflags --libs`
@@ -154,7 +154,7 @@ $(GS_OUT)/tiles/all : $(GS_OUT)/dags/all.png ./create_tiles.pl
 	nice ./create_tiles.pl -v --path $(GS_OUT)/tiles $(GS_OUT)/dags/all.png
 
 $(GS_OUT)/dags/all_poly.js : ./poly.pl $(GS_OUT)/dags/all.plain $(GS_OUT)/dags/all.png $(GS_OUT)/dags/all.map | $(GS_OUT)/dags/
-	./poly.pl $(GS_OUT)/dags/all.png $(GS_OUT)/dags/all.plain $(GS_OUT)/dags/all.map $@
+	./poly.pl $(GS_OUT)/dv.db $(GS_OUT)/dags/all.png $(GS_OUT)/dags/all.plain $(GS_OUT)/dags/all.map $@
 
 $(GS_TMP)/%.article : archive.gamespy.com/Dailyvictim/index.asp_id_%.html \
 	archive.gamespy.com/comics/DailyVictim/vote.asp_id_%_dontvote_true ./article.pl | $(GS_TMP)

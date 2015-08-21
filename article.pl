@@ -12,6 +12,8 @@ my $smallpic;
 my $blurb;
 my $title = "";
 my $text  = read_file($article);
+my $archivedir = "_build/archive/";
+
 use Text::Iconv;
 my $converter = Text::Iconv->new("cp1252", "utf8");
 $text = $converter->convert($text);
@@ -143,7 +145,7 @@ push (@conns, ($blurb =~ /article.php\?id=([0-9]+)/ig));
 
 my $sqlitedate = sqlite_date($date_year, $date_mon, $date_day);
 
-my $c = ($vic_pic =~ /\/COLOR[^\/]+$/i) || is_color("img/$vic_pic");
+my $c = ($vic_pic =~ /\/COLOR[^\/]+$/i) || is_color($archivedir . "img/$vic_pic");
 
 if ($smallpic =~ /blank.gif/ || $smallpic eq '') {
     $smallpic = 'question-mark.gif';

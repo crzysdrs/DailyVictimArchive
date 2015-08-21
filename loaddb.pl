@@ -287,11 +287,12 @@ my $all =
 $all->execute();
 my $missing = 0;
 my $total   = 0;
-
+my $archivedir = "_build/archive/";
+    
 sub check_imgs($$$$) {
     my ($id, $t, $missing, $total) = @_;
     while ($t =~ m@(?:src|href)="([^"]+\.(?:jpe?g|png|gif))"@ig) {
-        if (!-e $1) {
+        if (!-e $archivedir . $1) {
             print $id, ": ", $1 . " missing.\n";
             $$missing++;
         }
@@ -302,12 +303,12 @@ sub check_imgs($$$$) {
 while (my $all_row = $all->fetchrow_hashref()) {
     check_imgs('A' . $all_row->{id}, $all_row->{article}, \$missing, \$total);
 
-    if (!-e "img/" . $all_row->{vicpic_small}) {
+    if (!-e $archivedir . "img/" . $all_row->{vicpic_small}) {
         print $all_row->{vicpic_small} . " missing.\n";
         $missing++;
     }
     $total++;
-    if (!-e "img/" . $all_row->{vicpic}) {
+    if (!-e $archivedir . "img/" . $all_row->{vicpic}) {
         print $all_row->{vicpic} . " missing.\n";
         $missing++;
     }
@@ -323,5 +324,6 @@ print "Missing $missing/$total images.\n";
 $dbh->disconnect();
 
 if ($missing > 0) {
+    `rm '$dbfile'`;
     exit 1;
 }

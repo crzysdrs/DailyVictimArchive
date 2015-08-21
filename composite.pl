@@ -19,6 +19,9 @@ sub handle_row($$) {
     }
     return $max_height;
 }
+
+my ($dbfile, $tmpdir, $outdir) = @ARGV;
+
 my @accumulate = (
     [510, 501],
     [517, 513],
@@ -156,7 +159,7 @@ foreach my $a (@accumulate) {
     $ids{$first} = $a;
 }
 my @imgs;
-foreach my $path (`ls $ENV{GS_TMP}/alpha/*.alpha.png`) {
+foreach my $path (`ls ${tmpdir}/alpha/*.alpha.png`) {
     chomp $path;
     my ($width, $height) = imgsize($path);
     my ($id) = ($path =~ m/([0-9]+).alpha.png/);
@@ -185,7 +188,7 @@ my $pixel_indent = 30;
 my $rows         = 0;
 my $z_index      = 0;
 
-my $title = 'img/title.svg';
+my $title = "${tmpdir}/../archive/img/title.svg";
 my ($title_w, $title_h) = imgsize($title);
 my $title_scale = 8;
 $title_h *= $title_scale;
@@ -236,7 +239,8 @@ foreach my $i (@imgs) {
 }
 
 $max_y += 100;
-my $fargo = "$ENV{GS_TMP}/alpha/fargo.alpha.png";
+
+my $fargo = "${tmpdir}/alpha/fargo.alpha.png";
 my ($w, $h) = imgsize($fargo);
 push @imgs,
   {
@@ -247,7 +251,7 @@ push @imgs,
     w     => $w,
     id    => 'fargo'
   };
-my $gabe = "$ENV{GS_TMP}/alpha/gabe.alpha.png";
+my $gabe = "${tmpdir}/alpha/gabe.alpha.png";
 my ($w, $h) = imgsize($gabe);
 push @imgs,
   {
@@ -258,7 +262,7 @@ push @imgs,
     w     => $w,
     id    => 'gabe'
   };
-my $hotsoup = "$ENV{GS_TMP}/alpha/hotsoup.alpha.png";
+my $hotsoup = "${tmpdir}/alpha/hotsoup.alpha.png";
 my ($w, $h) = imgsize($hotsoup);
 push @imgs,
   {
@@ -275,10 +279,10 @@ $max_y += 100;
 $max_x = int ($max_x);
 $max_y = int ($max_y);
 
-use Image::Magick;
+use Graphics::Magick;
 my $w;
 
-my $canvas = Image::Magick->new;
+my $canvas = Graphics::Magick->new;
 $w = $canvas->Set('size' => "${max_x}x${max_y}");
 warn "$w" if "$w";
 $w = $canvas->Read("xc:white");
@@ -305,7 +309,7 @@ for (;;) {
 foreach my $i (@imgs) {
     $count++;
     print $count, "/", $total, " ", $i->{name}, "\n";
-    my $comp = Image::Magick->new;
+    my $comp = Graphics::Magick->new;
     $comp->Set('antialias' => 1);
     if ($i->{id} eq 'title') {
         $comp->Set('density' => 72 * $title_scale);
@@ -314,16 +318,19 @@ foreach my $i (@imgs) {
     $comp->Read($i->{name});
     if ($i->{id} ne 'title') {
         my $shadow = $comp->Clone();
-        my $sigma  = 3;
-        $shadow->Set(background => 'gray');
-        $shadow->Shadow(
+        my $sigma  = 5;
+        $shadow->Colorize(fill => 'gray');
+        my $temp = $comp->Clone();
+        $w = $temp->Composite('image' => $shadow, 'compose' => 'in');
+        $shadow = $temp;    
+        $shadow->Blur(
             'sigma'   => $sigma,
             'radius'  => 3,
-            'opacity' => 100,
-            'x'       => 0,
-            'y'       => 0
+            #'opacity' => 100,
+            #'x'       => 0,
+            #'y'       => 0
         );
-        my $off = 5;
+        my $off = 0;
         my ($x_off, $y_off) = ($i->{x_loc} - $off, $i->{y_loc} - $off);
         $w = $canvas->Composite(
             'image'    => $shadow,
@@ -341,7 +348,7 @@ foreach my $i (@imgs) {
     warn "$w" if "$w";
 }
 
-$w = $canvas->Write(filename => "$ENV{GS_OUT}/reunion.png");
+$w = $canvas->Write(filename => "${outdir}/reunion.png");
 warn "$w" if "$w";
 
 #http://karthaus.nl/rdp/js/rdp.js
@@ -399,7 +406,7 @@ my $y_img_off = int (($dim - $max_y) / 2);
 
 my %composite_json;
 foreach my $i (@imgs) {
-    open my $sample, "<$ENV{GS_TMP}/alpha/$i->{id}.alpha_shape";
+    open my $sample, "<$tmpdir/alpha/$i->{id}.alpha_shape";
     my @points;
     my $x_off = int ($i->{x_loc});
     my $y_off = int ($i->{y_loc});
@@ -453,5 +460,5 @@ foreach my $i (@imgs) {
     $composite_json{$i->{id}} = \%json;
 }
 
-write_file("$ENV{GS_OUT}/reunion.json",
+write_file("${outdir}/reunion.json",
     'var reunion_json = ' . to_json(\%composite_json));

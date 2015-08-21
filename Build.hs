@@ -9,6 +9,7 @@ import System.FilePath.Posix
 import System.SetEnv
 import System.FilePath.Glob
 import qualified Data.Map as Map
+import System.Process
 
 sortAndGroup assocs = Map.fromListWith (++) [(k, [v]) | (k, v) <- assocs]
 
@@ -18,30 +19,45 @@ articlefile id = concat [tmpdir, "/", id, ".article"]
 mirrorhtml id = concat ["_build/archive/mirror/", id, ".html"]
 mirrorvote id = concat ["_build/archive/mirror/", id, ".vote.html"]
 historyfile id = concat ["_build/archive/history/", id, ".*.html"]
-            
+alphaout id = concat ["_build/tmp/alpha/", id, ".alpha.png"]
+alphashape id = concat ["_build/tmp/alpha/", id, ".alpha_shape"]
+
 dagfile id = concat [outdir, "/dags/", id, ".png"]
 voteout id = concat [tmpdir, "/", id, ".vote"]
          
 article_ids = filter (\x -> not (x == 228 || x == 464)) ([10, 11, 13, 14, 15, 16, 17] ++ [19..700])
 all_articles = map articlefile (map show article_ids)
-all_dags = map dagfile (map show article_ids)
+all_dags = map dagfile ((map show article_ids) ++ ["all"])
 all_votes = map voteout (map show article_ids)
+all_alpha = map alphaout ((map show article_ids) ++ ["fargo", "hotsoup", "gabe"])
+all_shapes = map alphashape (map show article_ids)
 
 anatomy_html =  map (\x -> concat [mirrordir, x]) $ map (\x -> concat ["/anatofvictim.", show x, ".html"]) [1..5]
 top10_html =  map (\x -> concat [mirrordir, x]) $ map (\x -> concat ["/top10.", show x, ".html"]) [1..4]
-           
+
+dagfiles id = map (\ext -> concat [dagdir,"/", id, ext]) [".png", ".plain", ".map"]
+
 builddir = "_build"
 outdir = concat [builddir, "/out"]
 tmpdir = concat [builddir, "/tmp"]
+dagdir = concat [outdir, "/dags"]
 dbfile = concat [outdir, "/dv.db"]
 mirrordir = "_build/archive/mirror"
 archivedir = "_build/archive"
 
+feather_size = 2
 main :: IO ()
-main =  
-  shakeArgs shakeOptions{shakeFiles="_build",shakeVerbosity=Chatty} $ do
+main =
+  shakeArgs shakeOptions{shakeFiles="_build"} $ do
   want["all"]
-  
+
+  phony "extract" $ do
+    () <- cmd ["git", "annex", "init"]
+    cmd ["git", "annex", "get", "."]
+    need ["gamespy.tar.gz"]
+    () <- cmd ["mkdir", "-p", archivedir]
+    cmd ["tar", "xf", "gamespy.tar.gz", "-C", archivedir]         
+    
   phony "depends" $ do
     -- Ubuntu dependency installation
     () <- cmd ["cpan", "install", "Lingua:EN:Titlecase:HTML"]
@@ -53,9 +69,11 @@ main =
          "libdbd-sqlite3-perl",
          "sqlite3",
          "tidy",
-         "perlmagick",
+         "libgraphicsmagick1-dev",
+         "graphicsmagick-libmagick-dev-compat",
          "libcode-tidyall-perl",
          "php-codesniffer",
+         "libmagickcore-6-arch-config",
          "libfile-slurp-unicode-perl",
          "libencode-perl",
          "libcgal-dev",
@@ -79,13 +97,8 @@ main =
     putNormal "Cleaning files in _build"
     removeFilesAfter "_build" ["//*"]
 
-  "gamespy.tar.gz" %> \out -> do
-    () <- cmd ["git", "annex", "init"]
-    cmd ["git", "annex", "get", "."]
-
   voteout "*" %> \v -> do
     let id = takeFileName $ dropExtension $ v
-    need [archivedir]
     let votefiles = if (read id) <= 696
                     then [votefile id, mirrorvote id]
                     else []
@@ -104,14 +117,8 @@ main =
     need (anatomy_html ++ top10_html ++ all_articles ++ all_votes ++ ["loaddb.pl"])
     removeFilesAfter "" [dbfile]
     cmd ["./loaddb.pl", dbfile, tmpdir, mirrordir]
-     
-  [archivedir] ++ anatomy_html ++ top10_html &%> \a -> do
-    need ["gamespy.tar.gz"]
-    () <- cmd ["mkdir", "-p", archivedir]
-    cmd ["tar", "xf", "gamespy.tar.gz", "-C", archivedir]
-           
+                
   articlefile "*" %> \out -> do
-    need [archivedir]
     let id = takeFileName $ dropExtension $ out
     let (html, vote) = if (read id) <= 696
                        then (htmlfile id, Just (votefile id))
@@ -126,10 +133,65 @@ main =
   
     cmd ["./article.pl", articlefile id, id, html, vote_str]
 
-  ["_build/out/dags/*.png", "_build/out/dags/*.map", "_build/out/dags/*.plain"] &%> \[dpng, dmap, dplain] -> do
+  dagfiles "*" &%> \[dpng, dmap, dplain] -> do
     let id = takeFileName $ dropExtension $ dpng
-    need (["./dag.pl", dbfile] ++ all_articles)
-    cmd ["./dag.pl", id]
-     
+    need ["./dag.pl", dbfile]
+    cmd ["./dag.pl", id, dagdir, dbfile]
+
+  "_build/out/dags/all_poly.js" %> \file -> do
+    let polyfiles = dagfiles "all"
+    need (["poly.pl", dbfile] ++ polyfiles)
+    cmd (["./poly.pl", dbfile] ++ polyfiles ++ [file])
+
+  [concat [tmpdir, "/alpha/*.alpha.png"], concat [tmpdir, "/alpha/*.mask.png"]] &%> \[alpha, mask] -> do
+    need ["alpha.pl", "alpha_done.pl"]
+    let id = (takeFileName . takeBaseName . takeBaseName) alpha
+    let alphadone = concat ["alpha_done/", id, ".mask.png"]
+    let pre_alpha = concat ["alpha_data/", id, ".alpha"]
+    let img_path = concat ["_build/archive/img/victimpics/", id, ".gif"]
+    alpha_done_exist  <- Development.Shake.doesFileExist alphadone
+    alphadata_exist <- Development.Shake.doesFileExist pre_alpha
+    img_exist <- Development.Shake.doesFileExist img_path
+    () <- if alpha_done_exist
+      then do
+        need [articlefile id]
+        () <- cmd ["cp", alphadone, mask]
+        cmd ["./alpha_done.pl", alpha, id, articlefile id, mask]
+      else do
+        let alpha_args = if alphadata_exist
+                           then ["-alpha", pre_alpha]
+                           else []
+        let file_args = if img_exist
+                           then ["-file", img_path]
+                           else ["-article", articlefile id]
+        () <- if img_exist
+                then return ()
+                else need [articlefile id]
+        -- Dump the article image with opacity added
+        () <- cmd $ ["./alpha.pl", "-target", alpha] ++ alpha_args ++ file_args
+        -- Dump just the opacity mask
+        () <- cmd ["convert", alpha, "-alpha", "extract", mask]
+        -- Feather the mask to clean up the edges
+        cmd ["feather", "-d", show feather_size, mask, mask]
+
+    -- Apply the mask to the final image
+    cmd ["convert",  alpha, mask, "-alpha", "Off", "-compose", "CopyOpacity", "-composite", alpha]
+    
+  "alpha_shape" %> \file -> do
+    need ["alpha_shape.c"]
+    Stdout magick <- cmd ["Magick++-config", "--cppflags", "--cxxflags", "--ldflags", "--libs"]
+    cmd (["g++", "alpha_shape.c", "-o", file, "-lCGAL", "-lgmp", "-frounding-math", "-g"] ++ (words magick))
+
+  ["_build/out/reunion.png", "_build/out/reunion.json"] &%> \[png, json] -> do
+    need $ ["./composite.pl"] ++ all_alpha ++ all_shapes
+    cmd ["./composite.pl", dbfile, tmpdir, outdir]
+
+  alphashape "*" %> \file -> do
+    let id = (takeFileName . takeBaseName) file
+    let src = concat [tmpdir, "/alpha/", id, ".mask.png"]
+    need [src, "./alpha_shape"]
+    () <- cmd ["./alpha_shape", file, src]
+    cmd ["touch", file]
+    
   phony "all" $ do
-    need [dbfile]
+    need ([dbfile, "_build/out/reunion.png"])
