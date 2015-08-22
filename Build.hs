@@ -118,13 +118,15 @@ main =
      
   dbfile %> \db -> do
     need (anatomy_html ++ top10_html ++ all_articles ++ all_votes ++ ["loaddb.pl"])
-    removeFilesAfter "" [dbfile]
+    liftIO $ removeFiles "" [dbfile]
     cmd ["./loaddb.pl", dbfile, tmpdir, mirrordir]
                 
   articlefile "*" %> \out -> do
     let id = takeFileName $ dropExtension $ out
     let (html, vote) = if (read id) <= 696
                        then (htmlfile id, Just (votefile id))
+                       else if (read id) == 700
+                       then (mirrorhtml id, Just (mirrorvote id))
                        else (mirrorhtml id, Nothing)
     let vote_str = case vote of
           Just x -> x

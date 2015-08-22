@@ -137,7 +137,7 @@ if ($index == 56) {
 } elsif ($index == 699) {
     $smallpic = 'unfinished/cowboy_s.gif';
     $blurb =
-      'Why no good sir, I do not appear to be afflicted with a \"brokeback\" but if you would like to examine me regardless it will require a physical...';
+      'Why no good sir, I do not appear to be afflicted with a "brokeback" but if you would like to examine me regardless it will require a physical...';
 }
 
 my @conns = ($vic_text =~ /article.php\?id=([0-9]+)/ig);

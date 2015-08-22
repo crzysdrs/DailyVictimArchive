@@ -12,6 +12,7 @@ use File::Slurp;
 require 'gs_shared.pl';
 
 my ($dbfile, $tmpdir, $mirrordir) = @ARGV;
+`rm $dbfile`;
 my $dbh = DBI->connect("dbi:SQLite:dbname=$dbfile", "", "");
 
 $dbh->do("begin transaction;");
