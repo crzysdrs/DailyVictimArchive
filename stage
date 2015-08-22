@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#TARGET should be in the form that
+TARGET=$1
+COPY="_build/out/* _build/archive/img site/*"
+rsync -av --delete --exclude '*~' ${COPY} -r ${TARGET}

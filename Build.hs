@@ -145,8 +145,11 @@ main =
           Nothing -> "ERROR"
           Just x -> x
     need [dfile]
+    () <- if id == "all"
+      then need ["_build/out/dags/all_poly.js"]
+      else return ()
     cmd ["./create_tiles.pl", "-v", "--path", dropFileName t, dfile]
-    
+
   dagfiles "*" &%> \[dpng, dmap, dplain] -> do
     let id = takeFileName $ dropExtension $ dpng
     need ["./dag.pl", dbfile]

@@ -112,8 +112,8 @@ Daily Victim Archive: {$article.title|strip_tags}
       </span> 
       Total Votes: <span property="v:votes">{$article.votes}</span> as of 2009-12-09.
     </h5>
-    <img src="chart/{$article.id}.png" alt="Histogram of Votes"/> <br />
-    <img src="chart/{$article.id}_history.png" alt="Plot of Scores/Votes Change over Time"/>
+    <img src="chart/{$article.id}.score.png" alt="Histogram of Votes"/> <br />
+    <img src="chart/{$article.id}.history.png" alt="Plot of Scores/Votes Change over Time"/>
     {else}
     <h5> No vote data for this article. </h5>
     {/if}

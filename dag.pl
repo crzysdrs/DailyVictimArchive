@@ -84,7 +84,7 @@ sub format_node($$$$$) {
         $id
       . " [${label}nodesep=0.75,URL=\"article.php?id=${id}\",shape=square,label=\"\",tooltip=\""
       . strip_html($title)
-      . "\",labelloc=b,image=\""
+      . "\",image=\""
       . cwd() . '/'
       . $img
       . "\",$attribs];\n";
@@ -130,8 +130,10 @@ if ($id ne 'all') {
     my $all_png   = $dagdir . "/all.png";
     my $all_plain = $dagdir . "/all.plain";
     my $all_map   = $dagdir . "/all.map";
+    
     open my $pipe,
-      "| ccomps -x -z | dot | gvpack -g | neato -s -y -n2 -Nlabel=\"\" -Tpng -o $all_png -Tplain -o $all_plain -Tcmapx -o $all_map";
+      "| ccomps -x -z | dot | gvpack -g | sed -e 's/label=\"[^\"]*\",\\?//ig' | neato -Nlabel= -s -y -n2 -Tpng -o $all_png -Tplain -o $all_plain -Tcmapx -o $all_map";
+    
     binmode ($pipe, ":utf8");
 
     print $pipe "digraph G {\n";
@@ -141,7 +143,7 @@ if ($id ne 'all') {
     $all->execute();
     while (my $allrow = $all->fetchrow_hashref) {
         print $pipe format_node($allrow->{id}, $allrow->{title}, "",
-            $archivedir . '/img/' . $allrow->{vicpic_small}, 'height=1,width=1,fixedsize=true');
+            $archivedir . '/img/' . $allrow->{vicpic_small}, '');
     }
 
     my $all_conns = $dbh->prepare("SELECT src, dst from conns");
