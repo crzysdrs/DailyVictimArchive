@@ -35,7 +35,7 @@ if (defined $args{file}) {
     $file = $args{file};
 } else {
     my $json = from_json(read_file($args{article}));
-    $file = "img/$json->{vicpic}";
+    $file = "_build/archive/img/$json->{vicpic}";
     if ($thresholds{$json->{id}}) {
         $threshold = $thresholds{$json->{id}};
     } elsif ($json->{id} <= 48 || $json->{id} == 696) {

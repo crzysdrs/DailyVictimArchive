@@ -17,7 +17,10 @@ sub sort_unique {
     return sort keys %hash;
 }
 
-my $dbh = DBI->connect("dbi:SQLite:dbname=$ENV{GS_OUT}/dv.db", "", "");
+my ($id, $dagdir, $dbfile)  = @ARGV;
+my $archivedir = "_build/archive";
+
+my $dbh = DBI->connect("dbi:SQLite:dbname=${dbfile}", "", "");
 
 my $trans_forward = $dbh->prepare("SELECT src, dst from conns WHERE src = ?");
 my $trans_back    = $dbh->prepare("SELECT src, dst from conns WHERE dst = ?");
@@ -81,19 +84,19 @@ sub format_node($$$$$) {
         $id
       . " [${label}nodesep=0.75,URL=\"article.php?id=${id}\",shape=square,label=\"\",tooltip=\""
       . strip_html($title)
-      . "\",labelloc=b,image=\""
+      . "\",image=\""
       . cwd() . '/'
       . $img
       . "\",$attribs];\n";
 }
 
-my $id = $ARGV[0];
+
 if ($id ne 'all') {
     print "Creating DAG for $id\n";
     use utf8;
 #    open my $pipe, ">-";
     open my $pipe,
-      "| dot -Tcmapx -o $ENV{GS_OUT}/dags/$id.map -Tpng -o $ENV{GS_OUT}/dags/$id.png"
+      "| dot -Tcmapx -o ${dagdir}/$id.map -Tpng -o ${dagdir}/$id.png -Tplain -o ${dagdir}/$id.plain"
       or die ("Unable to open pipe");
 
     print $pipe "digraph G {\n";
@@ -114,7 +117,7 @@ if ($id ne 'all') {
             if ($row->{id} == $id) {
                 $label = "color=red,";
             }
-            my $img = "img/$row->{vicpic_small}";
+            my $img = $archivedir . "/img/$row->{vicpic_small}";
             my $fmt = format_node($row->{id}, $row->{title}, $label, $img, '');
             print $pipe $fmt;
         }
@@ -124,11 +127,13 @@ if ($id ne 'all') {
 } elsif ($id == 'all') {
     print "Creating DAG for ALL\n";
 
-    my $all_png   = $ENV{GS_OUT} . "/dags/all.png";
-    my $all_plain = $ENV{GS_OUT} . "/dags/all.plain";
-    my $all_map   = $ENV{GS_OUT} . "/dags/all.map";
+    my $all_png   = $dagdir . "/all.png";
+    my $all_plain = $dagdir . "/all.plain";
+    my $all_map   = $dagdir . "/all.map";
+    
     open my $pipe,
-      "| ccomps -x -z | dot | gvpack -g | neato -s -y -n2 -Nlabel=\"\" -Tpng -o $all_png -Tplain -o $all_plain -Tcmapx -o $all_map";
+      "| ccomps -x -z | dot | gvpack -g | sed -e 's/label=\"[^\"]*\",\\?//ig' | neato -Nlabel= -s -y -n2 -Tpng -o $all_png -Tplain -o $all_plain -Tcmapx -o $all_map";
+    
     binmode ($pipe, ":utf8");
 
     print $pipe "digraph G {\n";
@@ -138,7 +143,7 @@ if ($id ne 'all') {
     $all->execute();
     while (my $allrow = $all->fetchrow_hashref) {
         print $pipe format_node($allrow->{id}, $allrow->{title}, "",
-            'img/' . $allrow->{vicpic_small}, 'height=1,width=1,fixedsize=true');
+            $archivedir . '/img/' . $allrow->{vicpic_small}, '');
     }
 
     my $all_conns = $dbh->prepare("SELECT src, dst from conns");

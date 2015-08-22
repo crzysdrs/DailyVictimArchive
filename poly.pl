@@ -4,8 +4,9 @@ use Image::Size;
 use DBI;
 use JSON;
 
-my $dbh = DBI->connect("dbi:SQLite:dbname=$ENV{GS_OUT}/dv.db", "", "");
-create_poly($dbh, $ARGV[0], '', $ARGV[1], $ARGV[2], $ARGV[3], $ARGV[4]);
+my ($dbfile, $original, $square, $plain, $map, $output) = @ARGV;
+my $dbh = DBI->connect("dbi:SQLite:dbname=$dbfile", "", "");
+create_poly($dbh, $original, '', $square, $plain, $map, $output);
 
 sub new_loc($$$) {
     my ($scale, $off, $pixel) = @_;

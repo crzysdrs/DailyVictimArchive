@@ -126,7 +126,7 @@ $(document).ready(function(){
 
 <h4>The Daily Victims</h4>
 <ul>
-  <li><a href="map.php">Google Map of Connections</a></li>
+  <li><a href="map.php">Map of Connections</a></li>
   <li><a href="reunion.php">Daily Victim Reunion</a></li>
 </ul>
 <table id="dailyvictims" class="display" cellpadding="0" cellspacing="0">
