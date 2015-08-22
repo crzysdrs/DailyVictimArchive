@@ -16,16 +16,14 @@ This includes:
 
 ## Build
 
-You may first need to run ```sudo make depends``` in Ubuntu 
-to get all the dependencies installed. Afterwords, just run make.
+If you are on Ubuntu 15.04, these steps should fully build the entirety of
+the Daily Victim Archive.
 
 ```
-make
+sudo cabal install shake glob
+sudo ./Build.hs depends
+./Build.hs extract && ./Build.hs
 ```
-
-To install, edit the variables ```HOST```, ```STAGE```, ```LIVE```
-and run the corresponding ```make stage``` or ```make live```
-to put the site on your webserver.
 
 ## Misc
 
