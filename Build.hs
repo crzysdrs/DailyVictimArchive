@@ -27,18 +27,17 @@ historychart id = concat [outdir, "/chart/", id, ".history.png"]
 dagfile id = concat [outdir, "/dags/", id, ".png"]
 voteout id = concat [tmpdir, "/", id, ".vote"]
          
-article_ids = filter (\x -> not (x == 228 || x == 464)) ([10, 11, 13, 14, 15, 16, 17] ++ [19..700])
-all_articles = map articlefile (map show article_ids)
-all_dags = map dagfile ((map show article_ids) ++ ["all"])
-all_votes = map voteout (map show article_ids)
+article_ids = [x | x <- [10..700], x /= 12, x /= 18, x /= 228, x /= 464]
+all_articles = map (articlefile . show) article_ids
+all_dags = map (dagfile . show) article_ids ++ [dagfile "all"]
+all_votes = map (voteout . show) article_ids
 all_alpha = map alphaout ((map show article_ids) ++ ["fargo", "hotsoup", "gabe"])
-all_shapes = map alphashape (map show article_ids)
-all_charts = map scorechart (map show article_ids) ++ map historychart (map show article_ids)
+all_shapes = map (alphashape . show) article_ids
+all_charts = map (scorechart . show) article_ids ++ map (historychart . show) article_ids
 
-anatomy_html =  map (\x -> concat [mirrordir, x]) $ map (\x -> concat ["/anatofvictim.", show x, ".html"]) [1..5]
-top10_html =  map (\x -> concat [mirrordir, x]) $ map (\x -> concat ["/top10.", show x, ".html"]) [1..4]
-
-dagfiles id = map (\ext -> concat [dagdir,"/", id, ext]) [".png", ".plain", ".map"]
+anatomy_html =  [mirrordir ++ "/anatofvictim." ++ show x ++ ".html" | x <- [1..5]]
+top10_html =  [mirrordir ++ "/top10." ++ show x ++ ".html" | x <- [1..4]]
+dagfiles id = [dagdir ++ "/" ++ id ++ x | x <- [".png", ".plain", ".map"]]
 
 builddir = "_build"
 outdir = concat [builddir, "/out"]
@@ -139,13 +138,12 @@ main =
     cmd ["./article.pl", articlefile id, id, html, vote_str]
 
   "_build/out/tiles/*" %> \t -> do
-    let id = takeFileName $ t
+    let id = takeFileName t
     putNormal id
-    let m = Map.fromList [("all", "_build/out/dags/all.png"), ("reunion", "_build/out/reunion.png")]
-    let d = Map.lookup id m
-    let dfile = case d of
-          Nothing -> "ERROR"
-          Just x -> x
+    let dfile = case id of
+                   "all" -> "_build/out/dags/all.png"
+                   "reunion" -> "_build/out/reunion.png"
+                   _ -> error "Unknown tiled image"
     need [dfile]
     () <- if id == "all"
       then need ["_build/out/dags/all_poly.js"]
