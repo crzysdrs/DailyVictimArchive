@@ -10,7 +10,8 @@ import System.SetEnv
 import System.FilePath.Glob
 import qualified Data.Map as Map
 import System.Process
-
+import Control.Monad
+    
 sortAndGroup assocs = Map.fromListWith (++) [(k, [v]) | (k, v) <- assocs]
 
 votefile id = concat ["_build/archive/archive.gamespy.com/comics/DailyVictim/vote.asp_id_", id, "_dontvote_true"]
@@ -145,9 +146,7 @@ main =
                    "reunion" -> "_build/out/reunion.png"
                    _ -> error "Unknown tiled image"
     need [dfile]
-    () <- if id == "all"
-      then need ["_build/out/dags/all_poly.js"]
-      else return ()
+    when (id == "all") $ need ["_build/out/dags/all_poly.js"]
     cmd ["./create_tiles.pl", "-v", "--path", dropFileName t, dfile]
 
   dagfiles "*" &%> \[dpng, dmap, dplain] -> do
@@ -181,9 +180,7 @@ main =
         let file_args = if img_exist
                            then ["-file", img_path]
                            else ["-article", articlefile id]
-        () <- if img_exist
-                then return ()
-                else need [articlefile id]
+        unless img_exist $ need [articlefile id]
         -- Dump the article image with opacity added
         () <- cmd $ ["./alpha.pl", "-target", alpha] ++ alpha_args ++ file_args
         -- Dump just the opacity mask
