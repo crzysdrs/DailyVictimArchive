@@ -11,7 +11,7 @@ import System.FilePath.Glob
 import qualified Data.Map as Map
 import System.Process
 import Control.Monad
-    
+
 sortAndGroup assocs = Map.fromListWith (++) [(k, [v]) | (k, v) <- assocs]
 
 votefile id = concat ["_build/archive/archive.gamespy.com/comics/DailyVictim/vote.asp_id_", id, "_dontvote_true"]
@@ -27,7 +27,7 @@ historychart id = concat [outdir, "/chart/", id, ".history.png"]
 
 dagfile id = concat [outdir, "/dags/", id, ".png"]
 voteout id = concat [tmpdir, "/", id, ".vote"]
-         
+
 article_ids = [x | x <- [10..700], x /= 12, x /= 18, x /= 228, x /= 464]
 all_articles = map (articlefile . show) article_ids
 all_dags = map (dagfile . show) article_ids ++ [dagfile "all"]
@@ -59,8 +59,8 @@ main =
     () <- cmd ["git", "annex", "get", "."]
     need ["gamespy.tar.gz"]
     () <- cmd ["mkdir", "-p", archivedir]
-    cmd ["tar", "xf", "gamespy.tar.gz", "-C", archivedir]         
-    
+    cmd ["tar", "xf", "gamespy.tar.gz", "-C", archivedir]
+
   phony "depends" $ do
     -- Ubuntu dependency installation
     () <- cmd ["cpan", "install", "Lingua:EN:Titlecase:HTML"]
@@ -69,6 +69,7 @@ main =
          "graphviz",
          "libimage-size-perl",
          "imagemagick",
+         "libwebp-dev",
          "libdbd-sqlite3-perl",
          "sqlite3",
          "tidy",
@@ -84,7 +85,7 @@ main =
          "git-annex",
          "libjson-perl"
         ]
-      
+
   cachedir <- newCache $ \globpath-> do
     putNormal (concat ["Reading cached dir: ", globpath])
     files <- liftIO (glob globpath)
@@ -95,7 +96,7 @@ main =
     let keyed_list =  zip (map (takeFileName . takeBaseName .takeBaseName .takeBaseName . takeBaseName) files) files
     let fixed_map = Map.fromListWith (++) . map (\(x,y) -> (x,[y])) $ keyed_list
     return fixed_map
-    
+
   phony "clean" $ do
     putNormal "Cleaning files in _build"
     removeFilesAfter "_build" ["//*"]
@@ -113,14 +114,14 @@ main =
       Nothing -> return ()
     let all_votefiles = case history_ids of
           Just h -> votefiles ++ h
-          Nothing -> votefiles          
+          Nothing -> votefiles
     cmd (["./vote.pl", v, id] ++ all_votefiles)
-     
+
   dbfile %> \db -> do
     need (anatomy_html ++ top10_html ++ all_articles ++ all_votes ++ ["loaddb.pl"])
     liftIO $ removeFiles "" [dbfile]
     cmd ["./loaddb.pl", dbfile, tmpdir, mirrordir]
-                
+
   articlefile "*" %> \out -> do
     let id = takeFileName $ dropExtension $ out
     let (html, vote) = if (read id) <= 696
@@ -130,12 +131,12 @@ main =
                        else (mirrorhtml id, Nothing)
     let vote_str = case vote of
           Just x -> x
-          Nothing -> "NO VOTE DATA"     
-    need ["article.pl", html]    
+          Nothing -> "NO VOTE DATA"
+    need ["article.pl", html]
     case vote of
       Just v -> need[v]
       Nothing -> return ()
-  
+
     cmd ["./article.pl", articlefile id, id, html, vote_str]
 
   "_build/out/tiles/*" %> \t -> do
@@ -190,7 +191,7 @@ main =
 
     -- Apply the mask to the final image
     cmd ["convert",  alpha, mask, "-alpha", "Off", "-compose", "CopyOpacity", "-composite", alpha]
-    
+
   "alpha_shape" %> \file -> do
     need ["alpha_shape.c"]
     Stdout magick <- cmd ["Magick++-config", "--cppflags", "--cxxflags", "--ldflags", "--libs"]
@@ -204,13 +205,13 @@ main =
     let id = (takeFileName . takeBaseName . takeBaseName) score
     need ["plot.pl", voteout id]
     cmd ["./plot.pl", score, history, id, voteout id]
-  
+
   alphashape "*" %> \file -> do
     let id = (takeFileName . takeBaseName) file
     let src = concat [tmpdir, "/alpha/", id, ".mask.png"]
     need [src, "./alpha_shape"]
     () <- cmd ["./alpha_shape", file, src]
     cmd ["touch", file]
-    
+
   phony "all" $ do
     need ([dbfile, "_build/out/tiles/reunion", "_build/out/tiles/all"] ++ all_dags ++ all_charts)
