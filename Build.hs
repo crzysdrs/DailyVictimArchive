@@ -17,6 +17,7 @@ sortAndGroup assocs = Map.fromListWith (++) [(k, [v]) | (k, v) <- assocs]
 votefile id = concat ["_build/archive/archive.gamespy.com/comics/DailyVictim/vote.asp_id_", id, "_dontvote_true"]
 htmlfile id = concat ["_build/archive/archive.gamespy.com/Dailyvictim/index.asp_id_", id, ".html"]
 articlefile id = concat [tmpdir, "/", id, ".article"]
+articlemd id = concat [tmpdir, "/", id, ".md"]
 mirrorhtml id = concat ["_build/archive/mirror/", id, ".html"]
 mirrorvote id = concat ["_build/archive/mirror/", id, ".vote.html"]
 historyfile id = concat ["_build/archive/history/", id, ".*.html"]
@@ -31,6 +32,7 @@ voteout id = concat [tmpdir, "/", id, ".vote"]
 article_ids = [x | x <- [10..700], x /= 12, x /= 18, x /= 228, x /= 464]
 all_articles = map (articlefile . show) article_ids
 all_dags = map (dagfile . show) article_ids ++ [dagfile "all"]
+all_md = map (articlemd . show) article_ids
 all_votes = map (voteout . show) article_ids
 all_alpha = map alphaout ((map show article_ids) ++ ["fargo", "hotsoup", "gabe"])
 all_shapes = map (alphashape . show) article_ids
@@ -122,6 +124,10 @@ main =
     liftIO $ removeFiles "" [dbfile]
     cmd ["./loaddb.pl", dbfile, tmpdir, mirrordir]
 
+  articlemd "*" %> \out -> do
+    let id = takeFileName $ dropExtension $ out
+    need ["./articlefm.py", articlefile id]
+    cmd ["./articlefm.py", articlefile id, out]
   articlefile "*" %> \out -> do
     let id = takeFileName $ dropExtension $ out
     let (html, vote) = if (read id) <= 696
@@ -214,4 +220,4 @@ main =
     cmd ["touch", file]
 
   phony "all" $ do
-    need ([dbfile, "_build/out/tiles/reunion", "_build/out/tiles/all"] ++ all_dags ++ all_charts)
+    need ([dbfile, "_build/out/tiles/reunion", "_build/out/tiles/all"] ++ all_dags ++ all_charts ++ all_md)
