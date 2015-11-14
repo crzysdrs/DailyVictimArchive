@@ -21,6 +21,12 @@ def fix(s):
     s = s.replace(u'\xa0', '&nbsp;')
     return s
 
+def yamltitle(s):
+    s = re.sub('[^ a-zA-Z0-9]', '', s);
+    s = re.sub(' ', '-', s)
+    s = s.lower()
+    return s
+
 frontmatter.yaml.Dumper.add_representer(unicode, str_presenter)
 parser = argparse.ArgumentParser(description='Process Article into Frontmatter')
 parser.add_argument('article', help='json article')
@@ -43,6 +49,7 @@ post['vicpic_small'] = article['vicpic_small']
 post['vicpic'] = article['vicpic']
 post['date'] = article['date']
 post['color'] = bool(int(article['color']))
+post['permalink'] = '/%s/%s/' % (post['id'], yamltitle(post['title']))
 
 out = codecs.open(args.target, 'w', 'utf-8')
 frontmatter.dump(post, out, Dumper=frontmatter.yaml.Dumper, allow_unicode=True)
