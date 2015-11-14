@@ -1,0 +1,65 @@
+---
+layout: default
+---
+<article id="post-page">
+    <h2>{{ page.title | markdownify | remove_p}}</h2>
+    <time datetime="{{ page.date | date_to_xmlschema }}" class="by-line">{{ page.date | date_to_string }}</time>
+    <div class="content" style="overflow: auto;">
+        <img style="float:right;"
+             src="{{ site.baseurl | append: '/img/' | append: page.vicpic | replace: '//', '/' }}" />
+        {{ content | article_cleanup: site.baseurl, site.lookup.dv }}
+    </div>
+    <hr />
+    <div id="articleBlurb" style="overflow: auto;">
+        <img style="float:left; padding-right: 5px; height:100px; width:100px;"
+             src="{{ site.baseurl | append: '/img/' | append: page.vicpic_small | replace: '//', '/' }}"
+             alt="Victim Pic Small" />
+        {{ page.blurb | markdownify | article_cleanup: site.baseurl, site.lookup.dv }}
+    </div>
+    <hr />
+    <p style="text-align: right;">
+    <em>
+        <span rel="v:rating">
+	    <span typeof="v:Rating">
+	        Score: <span property="v:average">{{page.score}}</span>; 
+                <span property="v:best" content="10"/>  
+                <span property="v:worst" content="1"/> 
+	    </span>
+        </span> 
+        Total Votes: <span property="v:votes">{{page.votes}}</span> as of 2009-12-09.
+    </em>
+    </p>
+    <hr />
+    {% if page.inlinks %}
+    {% for inlink in page.inlinks %}
+    <a href="{{ site.baseurl | append: site.lookup.dv[inlink].url }}">
+        {{ site.lookup.dv[inlink].title | markdownify | remove_p }}
+    </a>
+    {% endfor %}
+    {% endif %}
+    
+    {% if page.outlinks %}
+    {% for outlink in page.outlinks %}
+    <a href="{{ site.baseurl | append: site.lookup.dv[outlink].url }}">
+        {{ site.lookup.dv[outlink].title | markdownify | remove_p }}
+    </a>
+    {% endfor %}
+    {% endif %}
+
+    {% if page.previous %}
+    <p>
+        Previous:
+        <a href="{{ site.baseurl | append: page.previous.url }}">
+            {{ page.previous.title | markdownify | remove_p}}
+        </a>
+    </p>
+    {% endif %}
+    {% if page.next %}
+    <p>
+        Next:
+        <a href="{{ site.baseurl | append: page.next.url }}">
+            {{ page.next.title | markdownify | remove_p}}
+        </a>
+    </p>
+    {% endif %}
+</article>

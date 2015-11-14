@@ -27,10 +27,10 @@ archivedir = builddir </> "archive"
 votefile id = builddir </> "archive" </> "archive.gamespy.com" </> "comics" </> "DailyVictim" </> concat ["vote.asp_id_", id, "_dontvote_true"]
 htmlfile id = builddir </> "archive" </> "archive.gamespy.com" </> "Dailyvictim" </> concat ["index.asp_id_", id, ".html"]
 articlefile id = tmpdir </> concat [id, ".article"]
-articlemd id = tmpdir </> concat [id, ".md"]
+articlemd id = tmpdir </> "md" </> concat [id, ".md"]
 mirrorhtml id = mirrordir </> concat [id, ".html"]
 mirrorvote id = mirrordir </> concat [id, ".vote.html"]
-historyfile id = concat [builddir, "/archive/history/", id, ".*.html"]
+historyfile id = builddir </> "archive" </> concat ["history", id, ".*.html"]
 alphaout id = tmpdir </> "alpha" </> concat [id, ".alpha.png"]
 alphashape id = tmpdir </> "alpha" </> concat [id, ".alpha_shape"]
 scorechart id = outdir </> "chart" </> concat [id, ".score.png"]
@@ -90,7 +90,8 @@ main = do
          "libcgal-dev",
          "libmoosex-getopt-perl",
          "git-annex",
-         "libjson-perl"
+         "libjson-perl",
+         "jekyll"
         ]
 
   cachedir <- newCache $ \globpath-> do
@@ -132,10 +133,10 @@ main = do
   articlemd "*" %> \out -> do
     let id = takeFileName $ dropExtension $ out
     let mdformatter = "." </> scriptdir </> "articlefm.py"
-    need [mdformatter, articlefile id]
+    need [mdformatter, articlefile id, voteout id]
     --let getMeta (Pandoc m a) = m
     --stringify $ fromJust $ lookupMeta "title" (getMeta (fromRight doc))
-    cmd [mdformatter, articlefile id, out]
+    cmd [mdformatter, articlefile id, voteout id, out]
 
   articlefile "*" %> \out -> do
     let id = takeFileName $ dropExtension $ out
@@ -238,5 +239,13 @@ main = do
     () <- cmd [alphashape_cmd, file, src]
     cmd ["touch", file]
 
-  phony "all" $ do
+  phony "prereq" $ do
     need ([dbfile, outdir </> "tiles" </> "reunion", outdir </> "tiles" </> "all"] ++ all_dags ++ all_charts ++ all_md)
+
+  phony "jekyll" $ do
+    need ["prereq"]
+    cmd ["jekyll", "build"]
+
+  phony "all" $ do
+    need ["jekyll"]
+          

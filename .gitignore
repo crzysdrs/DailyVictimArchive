@@ -7,3 +7,9 @@ history.d
 alpha_data
 _build
 alpha_shape
+
+#####=== Jekyll ===#####
+
+_site/
+.sass-cache/
+
