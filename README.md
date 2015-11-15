@@ -20,13 +20,14 @@ If you are on Ubuntu 15.04, these steps should fully build the entirety of
 the Daily Victim Archive.
 
 ```
-sudo cabal install shake glob
-sudo ./Build.hs depends
-./Build.hs extract && ./Build.hs
+# Requires SuperUser permissions to install dependencies
+sudo ./depends
+# Extracting some archived files
+./build extract
+# Building the entire project
+./build -j
 ```
 
 ## Misc
-
-Git-Annex will get the archive from https://dl.dropboxusercontent.com/u/13119212/gamespy.tar.gz
 
 The site based on these scripts is located at http://crzysdrs.sytes.net/dv/ .

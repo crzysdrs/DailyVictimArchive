@@ -11,7 +11,6 @@ import "Glob" System.FilePath.Glob
 import qualified Data.Map as Map
 import System.Process
 import Control.Monad
-import Text.Pandoc
 
 sortAndGroup assocs = Map.fromListWith (++) [(k, [v]) | (k, v) <- assocs]
 
@@ -63,37 +62,12 @@ main = do
 
   phony "extract" $ do
     () <- cmd ["git", "annex", "init"]
+    Exit _ <- cmd ["git", "remote", "add", "web", "http://crzysdrs.sytes.net/dv.git"]
     () <- cmd ["git", "annex", "get", "."]
     need ["gamespy.tar.gz"]
     () <- cmd ["mkdir", "-p", archivedir]
     cmd ["tar", "xf", "gamespy.tar.gz", "-C", archivedir]
-
-  phony "depends" $ do
-    -- Ubuntu dependency installation
-    () <- cmd ["cpan", "install", "Lingua:EN:Titlecase:HTML"]
-    cmd ["apt-get", "install",
-         "gnuplot",
-         "graphviz",
-         "libimage-size-perl",
-         "imagemagick",
-         "libwebp-dev",
-         "libdbd-sqlite3-perl",
-         "sqlite3",
-         "tidy",
-         "libgraphicsmagick1-dev",
-         "graphicsmagick-libmagick-dev-compat",
-         "libcode-tidyall-perl",
-         "php-codesniffer",
-         "libmagickcore-6-arch-config",
-         "libfile-slurp-unicode-perl",
-         "libencode-perl",
-         "libcgal-dev",
-         "libmoosex-getopt-perl",
-         "git-annex",
-         "libjson-perl",
-         "jekyll"
-        ]
-
+    
   cachedir <- newCache $ \globpath-> do
     putNormal (concat ["Reading cached dir: ", globpath])
     files <- liftIO (glob globpath)
@@ -134,8 +108,6 @@ main = do
     let id = takeFileName $ dropExtension $ out
     let mdformatter = "." </> scriptdir </> "articlefm.py"
     need [mdformatter, articlefile id, voteout id]
-    --let getMeta (Pandoc m a) = m
-    --stringify $ fromJust $ lookupMeta "title" (getMeta (fromRight doc))
     cmd [mdformatter, articlefile id, voteout id, out]
 
   articlefile "*" %> \out -> do

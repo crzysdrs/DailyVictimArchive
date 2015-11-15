@@ -1,0 +1,18 @@
+Name: shakefile
+Version: 0.1.0
+Cabal-Version: >= 1.2
+Build-Type: Simple
+
+Executable shakefile
+  Main-Is: Build.hs
+  Ghc-Options: -rtsopts -with-rtsopts=-I0
+  Build-Depends:
+                base == 4.*
+              , setenv
+              , Glob
+              , containers
+              , directory
+              , process
+              , filepath
+              , pandoc
+              , shake
