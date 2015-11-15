@@ -1,0 +1,28 @@
+---
+layout: default
+---
+<article id="post-page">
+    <h2>{{ page.title | markdownify | remove_p}}</h2>
+    <time datetime="{{ page.date | date_to_xmlschema }}" class="by-line">{{ page.date | date_to_string }}</time>
+    <div class="content" style="overflow: auto;">
+        {{ content | article_cleanup: site.baseurl, site.lookup.dv }}
+    </div>
+    <hr />
+
+    {% if page.previous %}
+    <p>
+        Previous:
+        <a href="{{ site.baseurl | append: page.previous.url }}">
+            {{ page.previous.title | markdownify | remove_p}}
+        </a>
+    </p>
+    {% endif %}
+    {% if page.next %}
+    <p>
+        Next:
+        <a href="{{ site.baseurl | append: page.next.url }}">
+            {{ page.next.title | markdownify | remove_p}}
+        </a>
+    </p>
+    {% endif %}
+</article>

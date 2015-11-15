@@ -46,10 +46,20 @@ collections:
   dv:
     output: true
     id: id
-
+  meta:
+    output: true
+    id: date
+    permalink: /:collection/:path/
+    
 defaults:
   - scope:
       path: ""
       type: dv
     values:
       layout: article
+  - scope:
+      path: ""
+      type: meta
+    values:
+      layout: meta
+      

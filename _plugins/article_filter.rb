@@ -4,7 +4,11 @@ module Jekyll
       #Jekyll.logger.info lookup
       input.gsub(/%ARTICLE\[([0-9]+)\]%/) {
         |m| baseurl + lookup["#{$1}".to_i].url
-      }.gsub(/src="(img\/[^"]+)"/) {|m| "src=\"#{baseurl}#{$1}\""}
+      }.gsub(/src="(img\/[^"]+)"/) {
+        |m| "src=\"#{baseurl}#{$1}\""
+      }.gsub(/href="\.\/"/) {
+        |m| "href=\"#{baseurl}#\""
+      }
     end
 
     def remove_p(input)

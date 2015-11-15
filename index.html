@@ -2,34 +2,54 @@
 layout: default
 ---
 <!-- Posts -->
-<ul id="posts">  
-	  <h1>Victims</h1>
-	  <table id="dailyvictims" class="display" cellpadding="0" cellspacing="0">
-	    <thead><tr>
-		<th>Date</th>
-		<th>Score</th>
-		<th>Votes</th>
-		<th>Links To This</th>
-		<th>Links In This</th>
-		<th>Total</th>
-		<th>Color</th>
-		<th>Title</th>
-	    </tr></thead>
-	    <tbody>
-	      {% assign victims = site.collections.dv.docs | sort: 'date' %}
-	      {% for victim in victims %}
-	      <tr class="Text" data-vicpicsmall="{{victim.vicpic_small}}">
-		<td class="nb">{{victim.date}}</td>
-		<td class="nb num">{{victim.score}}</td>
-		<td class="nb num">{{victim.votes}}</td>
-		<td class="nb num">{{victim.inlinks}}</td>
-		<td class="nb num">{{victim.outlinks}}</td>
-		<td class="nb num">{{victim.total}}</td>
-		<td class="nb">{{victim.color}}</td>
-		<td><a href="{{site.baseurl | append: victim.url}}">{{victim.title | markdownify | remove_p}}</a>
-		</td>
-	      </tr>
-	      {% endfor %}
-	    </tbody>
-	  </table>
+<ul id="posts">
+  <h1>Meta</h1>
+  <table id="dailyvictims" class="display" cellpadding="0" cellspacing="0">
+    <thead><tr>
+	<th>Date</th>
+	<th>Title</th>
+	<th>Authors</th>
+    </tr></thead>
+    <tbody>
+      {% assign meta = site.collections.meta.docs | sort: 'date' %}
+      {% for m in meta %}
+      <tr class="Text" data-vicpicsmall="{{victim.vicpic_small}}">
+	<td class="nb">{{m.date}}</td>
+	<td>
+	  <a href="{{site.baseurl | append: m.url}}">{{m.title | markdownify | remove_p}}</a>
+	</td>
+	<td class="nb">{{m.author}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <h1>Victims</h1>
+  <table id="dailyvictims" class="display" cellpadding="0" cellspacing="0">
+    <thead><tr>
+	<th>Date</th>
+	<th>Score</th>
+	<th>Votes</th>
+	<th>Links To This</th>
+	<th>Links In This</th>
+	<th>Total</th>
+	<th>Color</th>
+	<th>Title</th>
+    </tr></thead>
+    <tbody>
+      {% assign victims = site.collections.dv.docs | sort: 'date' %}
+      {% for victim in victims %}
+      <tr class="Text" data-vicpicsmall="{{victim.vicpic_small}}">
+	<td class="nb">{{victim.date}}</td>
+	<td class="nb num">{{victim.score}}</td>
+	<td class="nb num">{{victim.votes}}</td>
+	<td class="nb num">{{victim.inlinks}}</td>
+	<td class="nb num">{{victim.outlinks}}</td>
+	<td class="nb num">{{victim.total}}</td>
+	<td class="nb">{{victim.color}}</td>
+	<td><a href="{{site.baseurl | append: victim.url}}">{{victim.title | markdownify | remove_p}}</a>
+	</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </ul>
