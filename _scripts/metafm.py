@@ -62,7 +62,8 @@ while r:
     post['title'] = title_md
     post['date'] = r['date']
     post['author'] = r['author']
-
+    post['id'] = r['id']
+    
     f = "_meta/" + r['date'] + "-" + yamltitle(title_md) + ".md"
     out = codecs.open(f, 'w', 'utf-8')
     frontmatter.dump(post, out, Dumper=frontmatter.yaml.Dumper, allow_unicode=True)

@@ -7,14 +7,14 @@ layout: default
     <div class="content" style="overflow: auto;">
         <img style="float:right;"
              src="{{ site.baseurl | append: '/img/' | append: page.vicpic | replace: '//', '/' }}" />
-        {{ content | article_cleanup: site.baseurl, site.lookup.dv }}
+        {{ content | article_cleanup: site.baseurl, site.lookup.article }}
     </div>
     <hr />
     <div id="articleBlurb" style="overflow: auto;">
         <img style="float:left; padding-right: 5px; height:100px; width:100px;"
              src="{{ site.baseurl | append: '/img/' | append: page.vicpic_small | replace: '//', '/' }}"
              alt="Victim Pic Small" />
-        {{ page.blurb | markdownify | article_cleanup: site.baseurl, site.lookup.dv }}
+        {{ page.blurb | markdownify | article_cleanup: site.baseurl, site.lookup.article }}
     </div>
     <hr />
     <p style="text-align: right;">
@@ -32,16 +32,16 @@ layout: default
     <hr />
     {% if page.inlinks %}
     {% for inlink in page.inlinks %}
-    <a href="{{ site.baseurl | append: site.lookup.dv[inlink].url }}">
-        {{ site.lookup.dv[inlink].title | markdownify | remove_p }}
+    <a href="{{ site.baseurl | append: site.lookup.article[inlink].url }}">
+        {{ site.lookup.article[inlink].title | markdownify | remove_p }}
     </a>
     {% endfor %}
     {% endif %}
     
     {% if page.outlinks %}
     {% for outlink in page.outlinks %}
-    <a href="{{ site.baseurl | append: site.lookup.dv[outlink].url }}">
-        {{ site.lookup.dv[outlink].title | markdownify | remove_p }}
+    <a href="{{ site.baseurl | append: site.lookup.article[outlink].url }}">
+        {{ site.lookup.article[outlink].title | markdownify | remove_p }}
     </a>
     {% endfor %}
     {% endif %}

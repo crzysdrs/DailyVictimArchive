@@ -1,3 +1,72 @@
 /*- Custom style -*/
 
 // -- Put custom style under this point -- //
+
+
+.left {
+      float: left;
+      display: block;
+      padding-right: 10px;
+}
+
+.right {
+       float: right;
+       display: block;
+       padding-left: 10px;
+}
+
+.caption {
+        width: 200px;
+        font-size: 11px;
+        font-weight: bold;
+        text-align: center;
+}
+
+.bigcaption {
+        width: 430px;
+        font-size: 11px;
+        font-weight: bold;
+        text-align: center;
+}
+
+.left img {
+       margin-bottom: 0px;
+}
+
+.right img {
+       margin-bottom: 0px;
+}
+
+.center img {
+      margin-bottom: 0px;
+}
+.center {
+        text-align:center;
+}
+.center p {
+        display: inline-block;
+}
+
+article p {
+        overflow: auto;
+}
+
+.uline {
+    text-decoration: underline;
+}
+
+ol {
+   list-style-position:inside;
+}
+
+.call {
+      color: #8888DD;
+}
+
+.candy {
+       color: #DD66DD;
+}
+
+.sandie {
+       color: #5555FF;
+}

@@ -36,7 +36,7 @@ layout: default
 	<th>Title</th>
     </tr></thead>
     <tbody>
-      {% assign victims = site.collections.dv.docs | sort: 'date' %}
+      {% assign victims = site.collections.article.docs | sort: 'date' %}
       {% for victim in victims %}
       <tr class="Text" data-vicpicsmall="{{victim.vicpic_small}}">
 	<td class="nb">{{victim.date}}</td>

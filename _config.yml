@@ -43,9 +43,9 @@ custom_nav_footer: false
 reverse: false
 
 collections:
-  dv:
+  article:
     output: true
-    id: id
+    id: id    
   meta:
     output: true
     id: date
@@ -54,7 +54,7 @@ collections:
 defaults:
   - scope:
       path: ""
-      type: dv
+      type: article
     values:
       layout: article
   - scope:

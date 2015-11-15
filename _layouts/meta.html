@@ -5,7 +5,7 @@ layout: default
     <h2>{{ page.title | markdownify | remove_p}}</h2>
     <time datetime="{{ page.date | date_to_xmlschema }}" class="by-line">{{ page.date | date_to_string }}</time>
     <div class="content" style="overflow: auto;">
-        {{ content | article_cleanup: site.baseurl, site.lookup.dv }}
+        {{ content | article_cleanup: site.baseurl, site.lookup.article }}
     </div>
     <hr />
 

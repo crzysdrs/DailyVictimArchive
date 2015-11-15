@@ -4,10 +4,10 @@ module Jekyll
       #Jekyll.logger.info lookup
       input.gsub(/%ARTICLE\[([0-9]+)\]%/) {
         |m| baseurl + lookup["#{$1}".to_i].url
-      }.gsub(/src="(img\/[^"]+)"/) {
-        |m| "src=\"#{baseurl}#{$1}\""
-      }.gsub(/href="\.\/"/) {
-        |m| "href=\"#{baseurl}#\""
+      }.gsub(/(src|href)="(img\/[^"]+)"/) {
+        |m| "#{$1}=\"#{baseurl}#{$2}\""
+      }.gsub(/(src|href)="\.\/"/) {
+        |m| "(#{$1}=\"#{baseurl}#\""
       }
     end
 

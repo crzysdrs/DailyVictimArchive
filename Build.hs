@@ -26,7 +26,7 @@ archivedir = builddir </> "archive"
 votefile id = builddir </> "archive" </> "archive.gamespy.com" </> "comics" </> "DailyVictim" </> concat ["vote.asp_id_", id, "_dontvote_true"]
 htmlfile id = builddir </> "archive" </> "archive.gamespy.com" </> "Dailyvictim" </> concat ["index.asp_id_", id, ".html"]
 articlefile id = tmpdir </> concat [id, ".article"]
-articlemd id = tmpdir </> "md" </> concat [id, ".md"]
+articlemd id = "_article" </> concat [id, ".md"]
 mirrorhtml id = mirrordir </> concat [id, ".html"]
 mirrorvote id = mirrordir </> concat [id, ".vote.html"]
 historyfile id = builddir </> "archive" </> concat ["history", id, ".*.html"]
@@ -103,12 +103,6 @@ main = do
     need (anatomy_html ++ top10_html ++ all_articles ++ all_votes ++ [scriptdir </> "loaddb.pl"])
     liftIO $ removeFiles "" [dbfile]
     cmd ["." </> scriptdir </> "loaddb.pl", dbfile, tmpdir, mirrordir]
-
-  articlemd "*" %> \out -> do
-    let id = takeFileName $ dropExtension $ out
-    let mdformatter = "." </> scriptdir </> "articlefm.py"
-    need [mdformatter, articlefile id, voteout id]
-    cmd [mdformatter, articlefile id, voteout id, out]
 
   articlefile "*" %> \out -> do
     let id = takeFileName $ dropExtension $ out
