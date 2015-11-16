@@ -38,13 +38,15 @@ layout: default
     <tbody>
       {% assign victims = site.collections.article.docs | sort: 'date' %}
       {% for victim in victims %}
+      {% assign inlink_len = victim.inlinks | size %}
+      {% assign outlink_len = victim.outlinks | size %}
       <tr class="Text" data-vicpicsmall="{{victim.vicpic_small}}">
 	<td class="nb">{{victim.date}}</td>
 	<td class="nb num">{{victim.score}}</td>
 	<td class="nb num">{{victim.votes}}</td>
-	<td class="nb num">{{victim.inlinks}}</td>
-	<td class="nb num">{{victim.outlinks}}</td>
-	<td class="nb num">{{victim.total}}</td>
+	<td class="nb num">{{inlink_len}}</td>
+	<td class="nb num">{{outlink_len}}</td>
+	<td class="nb num">{{inlink_len | plus: outlink_len }}</td>
 	<td class="nb">{{victim.color}}</td>
 	<td><a href="{{site.baseurl | append: victim.url}}">{{victim.title | markdownify | remove_p}}</a>
 	</td>

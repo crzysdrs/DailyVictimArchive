@@ -188,7 +188,7 @@ my $pixel_indent = 30;
 my $rows         = 0;
 my $z_index      = 0;
 
-my $title = "${tmpdir}/../archive/img/title.svg";
+my $title = "img/title.svg";
 my ($title_w, $title_h) = imgsize($title);
 my $title_scale = 8;
 $title_h *= $title_scale;

@@ -31,18 +31,28 @@ layout: default
     </p>
     <hr />
     {% if page.inlinks %}
+    <h2> Links to This Article </h2>
     {% for inlink in page.inlinks %}
-    <a href="{{ site.baseurl | append: site.lookup.article[inlink].url }}">
-        {{ site.lookup.article[inlink].title | markdownify | remove_p }}
-    </a>
+    <ul>
+        <li>
+            <a href="{{ site.baseurl | append: site.lookup.article[inlink].url }}">
+                {{ site.lookup.article[inlink].title | markdownify | remove_p }}
+            </a>
+        </li>
+    </ul>
     {% endfor %}
     {% endif %}
     
     {% if page.outlinks %}
+    <h2> Links In This Article </h2>
     {% for outlink in page.outlinks %}
-    <a href="{{ site.baseurl | append: site.lookup.article[outlink].url }}">
-        {{ site.lookup.article[outlink].title | markdownify | remove_p }}
-    </a>
+    <ul>
+        <li>
+            <a href="{{ site.baseurl | append: site.lookup.article[outlink].url }}">
+                {{ site.lookup.article[outlink].title | markdownify | remove_p }}
+            </a>
+        </li>
+    </ul>
     {% endfor %}
     {% endif %}
 

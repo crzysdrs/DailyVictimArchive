@@ -18,7 +18,6 @@ sub sort_unique {
 }
 
 my ($id, $dagdir, $dbfile)  = @ARGV;
-my $archivedir = "_build/archive";
 
 my $dbh = DBI->connect("dbi:SQLite:dbname=${dbfile}", "", "");
 
@@ -117,7 +116,7 @@ if ($id ne 'all') {
             if ($row->{id} == $id) {
                 $label = "color=red,";
             }
-            my $img = $archivedir . "/img/$row->{vicpic_small}";
+            my $img = "img/$row->{vicpic_small}";
             my $fmt = format_node($row->{id}, $row->{title}, $label, $img, '');
             print $pipe $fmt;
         }
@@ -133,7 +132,7 @@ if ($id ne 'all') {
     
     open my $pipe,
       "| ccomps -x -z | dot | gvpack -g | sed -e 's/label=\"[^\"]*\",\\?//ig' | neato -Nlabel= -s -y -n2 -Tpng -o $all_png -Tplain -o $all_plain -Tcmapx -o $all_map";
-    
+
     binmode ($pipe, ":utf8");
 
     print $pipe "digraph G {\n";
@@ -141,9 +140,10 @@ if ($id ne 'all') {
     my $all = $dbh->prepare("SELECT id, title, vicpic_small FROM article");
 
     $all->execute();
+    
     while (my $allrow = $all->fetchrow_hashref) {
         print $pipe format_node($allrow->{id}, $allrow->{title}, "",
-            $archivedir . '/img/' . $allrow->{vicpic_small}, '');
+                                'img/' . $allrow->{vicpic_small}, '');
     }
 
     my $all_conns = $dbh->prepare("SELECT src, dst from conns");
