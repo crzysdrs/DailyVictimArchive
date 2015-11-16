@@ -5,7 +5,8 @@ id: 3
 title: Top 10 Daily Victims
 ---
 
-[![](img/top10/july01/victims/logo.jpg)](./){: .right}
+[![](img/top10/july01/victims/logo.jpg)](./)
+{: .right}
 
 \[UPDATE: No sooner do I write this list than, just this weekend, a [New
 Victim](%ARTICLE[259]%) entered the top 10! It goes to show you how

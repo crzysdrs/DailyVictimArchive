@@ -22,7 +22,8 @@ exclude: [
   "Build.hs",
   "dist",
   "shakefile.cabal",
-  "stack.yaml"
+  "stack.yaml",
+  "_build"
   ]
 
 # Default values

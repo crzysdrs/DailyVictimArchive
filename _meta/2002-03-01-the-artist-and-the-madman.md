@@ -14,7 +14,8 @@ little "chat."
 
 **The Internet's HotSoup:** They won't work this time -- I'm grounded.
 
-![](img/columns/image/mar03_planetfargo_hotsoup.jpg){: .right}
+![](img/columns/image/mar03_planetfargo_hotsoup.jpg)
+{: .right}
 
 **Fargo:** Okay, fine. On to the questions, then! The Daily Victim was
 running for a year with a different artist -- Gabe from Penny-Arcade --
