@@ -11,7 +11,7 @@ layout: default
     </div>
     <hr />
     <div id="articleBlurb" style="overflow: auto;">
-        <img style="float:left; padding-right: 5px; height:100px; width:100px;"
+        <img class="left" style="height:100px; width:100px;"
              src="{{ site.baseurl | append: '/img/' | append: page.vicpic_small | replace: '//', '/' }}"
              alt="Victim Pic Small" />
         {{ page.blurb | markdownify | article_cleanup: site.baseurl, site.lookup.article }}
@@ -30,9 +30,36 @@ layout: default
     </em>
     </p>
     <hr />
+ 
+    <div style="overflow: auto;" >
+    {% if page.previous %}
+    <p style="text-align: left; overflow:auto; width:50%; float:left;">
+        <a href="{{ site.baseurl | append: page.previous.url }}">
+            <img class="left" src="{{ site.baseurl }}img/images/sub_layout/prev.gif" alt="Previous" /><br />
+            <img class="left"
+                 src="{{ site.baseurl | append: '/img/' | append: page.previous.vicpic_small | replace: '//', '/' }}" />
+            {{ page.previous.title | markdownify | remove_p}}
+        </a>
+    </p>
+    {% endif %}
+    {% if page.next %}
+    <p style="text-align: right; overflow:auto; width:50%; float:left;">
+        <a href="{{ site.baseurl | append: page.next.url }}">
+            <img class="right" src="{{ site.baseurl }}img/images/sub_layout/next.gif" alt="Next" /><br />
+            <img class="right"
+                 src="{{ site.baseurl | append: '/img/' | append: page.next.vicpic_small | replace: '//', '/' }}" />
+            {{ page.next.title | markdownify | remove_p}}
+        </a>
+    </p>
+    {% endif %}
+    </div>
+    <p style="text-align: center;">
+        <a href="{{ site.baseurl }}">Back To Index</a>
+    </p>
+    <hr />
     {% assign inlinks_len = page.inlinks | size %}
     {% if inlinks_len > 0 %}
-    <h2> Links to This Article </h2>
+    <h3> Links to This Article </h3>
     {% for inlink in page.inlinks %}
     <ul>
         <li>
@@ -46,7 +73,7 @@ layout: default
 
     {% assign outlinks_len = page.outlinks | size %}
     {% if outlinks_len > 0 %}
-    <h2> Links In This Article </h2>
+    <h3> Links In This Article </h3>
     {% for outlink in page.outlinks %}
     <ul>
         <li>
@@ -56,22 +83,5 @@ layout: default
         </li>
     </ul>
     {% endfor %}
-    {% endif %}
-
-    {% if page.previous %}
-    <p>
-        Previous:
-        <a href="{{ site.baseurl | append: page.previous.url }}">
-            {{ page.previous.title | markdownify | remove_p}}
-        </a>
-    </p>
-    {% endif %}
-    {% if page.next %}
-    <p>
-        Next:
-        <a href="{{ site.baseurl | append: page.next.url }}">
-            {{ page.next.title | markdownify | remove_p}}
-        </a>
-    </p>
     {% endif %}
 </article>
