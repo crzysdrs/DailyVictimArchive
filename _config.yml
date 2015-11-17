@@ -1,11 +1,11 @@
 # Site settings
-title: Emerald | A simple Jekyll blog
-description: "A minimal blog template, build with Jekyll."
-url: "http://www.jacoporabolini.com/emerald"
+title: Daily Victim Archive
+description: "An archive of the old GameSpy Daily Victims."
+url: "http://www.crzysdrs.sytes.net/dv/"
 author:
-  name: "Jacopo Rabolini"
-  email: "hello@jacoporabolini.com"
-  url: "http://www.jacoporabolini.com"
+  name: "Mitch Souders"
+  email: "crzysdrs@gmail.com"
+  url: "http://crzysdrs.sytes.net"
 
 # Build settings
 baseurl: /dv/ # Change this to your relative path (ex: /blog/), or leave just a /
@@ -36,12 +36,12 @@ defaults:
       layout: "post"
 
 # Custom variables
-version: "1.1.0"
+version: "1.0.0"
 
 # Options
 custom_header: false
 custom_nav_footer: false
-reverse: false
+reverse: true
 
 collections:
   article:

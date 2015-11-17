@@ -162,10 +162,13 @@ main = do
            outdir </> "_redirect.htaccess"
           ] ++ all_dags ++ all_charts ++ all_md)
 
-  phony "jekyll" $ do
+  phony "jekyll_build" $ do
     need ["prereq"]
     cmd ["jekyll", "build"]
 
   phony "all" $ do
-    need ["jekyll"]
-          
+    need ["jekyll_build"]
+
+  phony "serve" $ do
+    need ["build"]
+    cmd ["jekyll", "serve"]
