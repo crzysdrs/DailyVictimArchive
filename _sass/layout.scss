@@ -252,3 +252,18 @@ footer {
   text-align: center;
   padding: 0.6667em 0;
 }
+
+footer { 
+  a {
+    color: $background-color;
+    padding: 0.33334em 0;
+    font-size: 1.5em;
+    font-weight: 400;
+    @media (min-width: 940px) {
+      font-size: 1em;
+    }
+  }
+  span {
+      font-weight: 200;
+    }
+}
