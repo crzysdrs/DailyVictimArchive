@@ -59,8 +59,8 @@ score = get_score(post, scoredate)
 post['permalink'] = '/%s/%s/' % (post['id'], yamltitle(post['title']))
 post['score'] = round(score[0], 2)
 post['votes'] = score[1]
-post['inlinks'] = map(lambda r : r['dst'], froms)
-post['outlinks'] = map(lambda r : r['src'], tos)
+post['outlinks'] = map(lambda r : r['dst'], froms)
+post['inlinks'] = map(lambda r : r['src'], tos)
 
 out = codecs.open(args.fm_target, 'w', 'utf-8')
 frontmatter.dump(post, out, Dumper=frontmatter.yaml.Dumper, allow_unicode=True)

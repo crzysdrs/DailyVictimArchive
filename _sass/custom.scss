@@ -15,6 +15,10 @@
        padding-left: 10px;
 }
 
+.clear {
+       clear: both;
+}
+
 .caption {
         width: 200px;
         font-size: 11px;
@@ -29,26 +33,19 @@
         text-align: center;
 }
 
-.left img {
+.caption img {
        margin-bottom: 0px;
 }
 
-.right img {
+.bigcaption img {
        margin-bottom: 0px;
 }
 
-.center img {
-      margin-bottom: 0px;
-}
 .center {
         text-align:center;
 }
 .center p {
         display: inline-block;
-}
-
-article p {
-        overflow: auto;
 }
 
 .uline {

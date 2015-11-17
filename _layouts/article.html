@@ -3,8 +3,8 @@ layout: default
 ---
 <article id="post-page">
     <h2>{{ page.title | markdownify | remove_p}}</h2>
-    <time datetime="{{ page.date | date_to_xmlschema }}" class="by-line">{{ page.date | date_to_string }}</time>
-    <div class="content" style="overflow: auto;">
+    <time datetime="{{ page.date | date_to_xmlschema }}" class="by-line">{{ page.date | date_to_string }}</time>    
+    <div class="content" style="overflow:auto;">
         <img style="float:right;"
              src="{{ site.baseurl | append: '/img/' | append: page.vicpic | replace: '//', '/' }}" />
         {{ content | article_cleanup: site.baseurl, site.lookup.article }}
@@ -30,7 +30,8 @@ layout: default
     </em>
     </p>
     <hr />
-    {% if page.inlinks %}
+    {% assign inlinks_len = page.inlinks | size %}
+    {% if inlinks_len > 0 %}
     <h2> Links to This Article </h2>
     {% for inlink in page.inlinks %}
     <ul>
@@ -42,8 +43,9 @@ layout: default
     </ul>
     {% endfor %}
     {% endif %}
-    
-    {% if page.outlinks %}
+
+    {% assign outlinks_len = page.outlinks | size %}
+    {% if outlinks_len > 0 %}
     <h2> Links In This Article </h2>
     {% for outlink in page.outlinks %}
     <ul>
