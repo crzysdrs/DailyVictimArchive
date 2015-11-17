@@ -149,8 +149,18 @@ main = do
     () <- cmd [alphashape_cmd, file, src]
     cmd ["touch", file]
 
+  outdir </> "_redirect.htaccess" %> \r -> do
+    let redir = "." </> scriptdir </> "redirects.py"
+    all_meta <- getDirectoryFiles "_meta" ["//*.md"]
+    need ([redir, "_config.yml"] ++ all_md ++ map (\x -> "_meta" </> x) all_meta)
+    cmd [redir, "_meta", "_article", r]
+         
   phony "prereq" $ do
-    need ([dbfile, outdir </> "tiles" </> "reunion", outdir </> "tiles" </> "all"] ++ all_dags ++ all_charts ++ all_md)
+    need ([dbfile,
+           outdir </> "tiles" </> "reunion",
+           outdir </> "tiles" </> "all",
+           outdir </> "_redirect.htaccess"
+          ] ++ all_dags ++ all_charts ++ all_md)
 
   phony "jekyll" $ do
     need ["prereq"]
