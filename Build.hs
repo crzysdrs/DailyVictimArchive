@@ -172,3 +172,7 @@ main = do
   phony "serve" $ do
     need ["build"]
     cmd ["jekyll", "serve"]
+
+  phony "dev" $ do
+    need ["build"]
+    cmd ["jekyll", "serve", "--config", "_config.yml,_config.dev.yml"]
