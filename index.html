@@ -35,8 +35,10 @@ layout: default
 	<th>Score</th>
 	<th>Votes</th>
 	<th>Links To This</th>
+        <!--
 	<th>Links In This</th>
 	<th>Total</th>
+        -->
 	<th>Color</th>
 	<th>Title</th>
     </tr></thead>
@@ -50,8 +52,10 @@ layout: default
 	<td class="nb num">{{victim.score}}</td>
 	<td class="nb num">{{victim.votes}}</td>
 	<td class="nb num">{{inlink_len}}</td>
+        <!--
 	<td class="nb num">{{outlink_len}}</td>
 	<td class="nb num">{{inlink_len | plus: outlink_len }}</td>
+        -->
 	<td class="nb">{{victim.color}}</td>
 	<td><a href="{{site.baseurl | append: victim.url}}">{{victim.title | markdownify | remove_p}}</a>
 	</td>

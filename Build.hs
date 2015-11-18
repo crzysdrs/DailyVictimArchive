@@ -170,9 +170,9 @@ main = do
     need ["jekyll_build"]
 
   phony "serve" $ do
-    need ["build"]
-    cmd ["jekyll", "serve"]
+    need ["prereq"]
+    cmd ["jekyll", "serve", "--watch"]
 
   phony "dev" $ do
-    need ["build"]
-    cmd ["jekyll", "serve", "--config", "_config.yml,_config.dev.yml"]
+    need ["prereq"]
+    cmd ["jekyll", "serve", "--watch", "--config", "_config.yml,_config.dev.yml"]

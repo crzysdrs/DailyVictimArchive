@@ -9,20 +9,26 @@ layout: default
     </div>
     <hr />
 
-    {% if page.previous %}
-    <p>
-        Previous:
-        <a href="{{ site.baseurl | append: page.previous.url }}">
-            {{ page.previous.title | markdownify | remove_p}}
-        </a>
-    </p>
-    {% endif %}
-    {% if page.next %}
-    <p>
-        Next:
-        <a href="{{ site.baseurl | append: page.next.url }}">
-            {{ page.next.title | markdownify | remove_p}}
-        </a>
-    </p>
-    {% endif %}
+    <div style="overflow: auto;" >
+        {% if page.previous %}
+        <p class="prevnext" id="prevblock">
+            <a href="{{ site.baseurl | append: page.previous.url }}">
+                <img id="prev" class="left" src="{{ site.baseurl }}img/images/sub_layout/prev.gif" alt="Previous" /><br />
+                <span id="prevtext">
+                    {{ page.previous.title | markdownify | remove_p}}
+                </span>
+            </a>
+        </p>
+        {% endif %}
+        {% if page.next %}
+        <p class="prevnext" id="nextblock">
+            <a href="{{ site.baseurl | append: page.next.url }}">
+                <img id="next" class="right" src="{{ site.baseurl }}img/images/sub_layout/next.gif" alt="Next" /><br />
+                <span id="nexttext">
+                    {{ page.next.title | markdownify | remove_p}}
+                </span>
+            </a>
+        </p>
+        {% endif %}
+    </div>
 </article>
