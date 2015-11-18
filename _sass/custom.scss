@@ -100,3 +100,16 @@ ol {
         max-width:50%;
     }
 }
+
+.viclist li {
+    list-style:none;
+}
+
+.viclist img {
+    vertical-align: middle;
+    max-height: 32px;
+    @media (min-width: 940px) {
+	max-height: 36px;
+    }
+    display: inline;
+}

@@ -38,8 +38,8 @@ layout: default
         <!--
 	<th>Links In This</th>
 	<th>Total</th>
-        -->
 	<th>Color</th>
+        -->
 	<th>Title</th>
     </tr></thead>
     <tbody>
@@ -55,8 +55,8 @@ layout: default
         <!--
 	<td class="nb num">{{outlink_len}}</td>
 	<td class="nb num">{{inlink_len | plus: outlink_len }}</td>
-        -->
 	<td class="nb">{{victim.color}}</td>
+        -->
 	<td><a href="{{site.baseurl | append: victim.url}}">{{victim.title | markdownify | remove_p}}</a>
 	</td>
       </tr>

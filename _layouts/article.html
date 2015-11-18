@@ -17,7 +17,8 @@ layout: default
         {{ page.blurb | markdownify | article_cleanup: site.baseurl, site.lookup.article }}
     </div>
     <hr />
-    <p style="text-align: right;">
+    {% if page.score > 0 %}
+    <p style="text-align: right;">        
     <em>
         <span rel="v:rating">
 	    <span typeof="v:Rating">
@@ -30,7 +31,8 @@ layout: default
     </em>
     </p>
     <hr />
- 
+    {% endif %}
+    
     <div style="overflow: auto;" >
     {% if page.previous %}
     <p class="prevnext" id="prevblock">
@@ -65,8 +67,9 @@ layout: default
     {% if inlinks_len > 0 %}
     <h3> Links to This Article </h3>
     {% for inlink in page.inlinks %}
-    <ul>
+    <ul class="viclist">
         <li>
+            <img src="{{ site.baseurl | append: '/img/' | append: site.lookup.article[inlink].vicpic_small }}" />
             <a href="{{ site.baseurl | append: site.lookup.article[inlink].url }}">
                 {{ site.lookup.article[inlink].title | markdownify | remove_p }}
             </a>
@@ -79,8 +82,9 @@ layout: default
     {% if outlinks_len > 0 %}
     <h3> Links In This Article </h3>
     {% for outlink in page.outlinks %}
-    <ul>
+    <ul class="viclist">
         <li>
+            <img src="{{ site.baseurl | append: '/img/' | append: site.lookup.article[outlink].vicpic_small }}" />
             <a href="{{ site.baseurl | append: site.lookup.article[outlink].url }}">
                 {{ site.lookup.article[outlink].title | markdownify | remove_p }}
             </a>
