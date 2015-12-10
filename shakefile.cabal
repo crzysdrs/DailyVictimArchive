@@ -14,5 +14,4 @@ Executable shakefile
               , directory
               , process
               , filepath
-              , pandoc
               , shake

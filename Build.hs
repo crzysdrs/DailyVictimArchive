@@ -16,9 +16,10 @@ builddir =  "_build"
 scriptdir = "_scripts"
 localdir = "_local"
 outdir = builddir </> "out"
-tmpdir = builddir </> "tmp" 
+tmpdir = builddir </> "tmp"
 dagdir = outdir </> "dags"
 dbfile = outdir </> "dv.db"
+jsondb = outdir </> "articles.json"
 mirrordir = builddir </> "archive" </> "mirror"
 archivedir = builddir </> "archive"
 localarticlemd id = "_local" </> "article" </> concat [id, ".md"]
@@ -45,14 +46,14 @@ main :: IO ()
 main = do
   setEnv "PERL5LIB" scriptdir
   shakeArgs shakeOptions{shakeFiles=builddir} $ do
-  
+
   want["all"]
 
   phony "extract" $ do
     () <- cmd ["git", "annex", "init"]
     Exit _ <- cmd ["git", "remote", "add", "web", "http://crzysdrs.sytes.net/dv.git"]
     cmd ["git", "annex", "get", "."]
-    
+
   cachedir <- newCache $ \globpath-> do
     putNormal (concat ["Reading cached dir: ", globpath])
     files <- liftIO (glob globpath)
@@ -62,10 +63,10 @@ main = do
     putNormal "Cleaning files in _build"
     removeFilesAfter builddir ["//*"]
 
-  dbfile %> \db -> do
+  [dbfile, jsondb] &%> \[db, j]  -> do
     need (all_local_md ++ [scriptdir </> "loaddb.py"])
     liftIO $ removeFiles "" [dbfile]
-    cmd ["." </> scriptdir </> "loaddb.py", "_local" </> "article", dbfile]
+    cmd ["." </> scriptdir </> "loaddb.py", "_local" </> "article", dbfile, j]
 
   outdir </> "tiles" </> "*" %> \t -> do
     let id = takeFileName t
@@ -123,7 +124,7 @@ main = do
     let id = (takeFileName . takeBaseName) file
     need [localarticlemd id, dbfile, scriptdir </> "updatefm.py"]
     cmd [scriptdir </> "updatefm.py", localarticlemd id, dbfile, finalarticlemd id]
-    
+
   scriptdir </> "alpha_shape" %> \file -> do
     let c = scriptdir </> "alpha_shape.c"
     need [c]
@@ -154,7 +155,7 @@ main = do
     all_meta <- getDirectoryFiles "_meta" ["//*.md"]
     need ([redir, "_config.yml"] ++ all_md ++ map (\x -> "_meta" </> x) all_meta)
     cmd [redir, "_meta", "_article", r]
-         
+
   phony "prereq" $ do
     need ([dbfile,
            outdir </> "tiles" </> "reunion",

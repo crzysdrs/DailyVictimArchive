@@ -1,6 +1,11 @@
 #!/bin/sh
 
 cpan install Lingua:EN:Titlecase:HTML
+pip install \
+    yaml-frontmatter \
+    pillow \
+
+
 apt-get install \
         gnuplot \
         graphviz \
@@ -21,4 +26,3 @@ apt-get install \
         libjson-perl \
         jekyll \
         haskell-stack \
-        

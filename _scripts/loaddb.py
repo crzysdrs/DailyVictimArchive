@@ -6,6 +6,7 @@ import re
 import frontmatter
 import os
 import sys
+import json
 
 def find_articles(id, s):
     articles = re.findall("%ARTICLE\[([0-9]+)\]%", s)
@@ -15,6 +16,7 @@ def find_articles(id, s):
 parser = argparse.ArgumentParser(description='Process History into Frontmatter')
 parser.add_argument('article_dir', help='article dir')
 parser.add_argument('db_loc', help='database location')
+parser.add_argument('json', help='json location')
 args = parser.parse_args()
 
 if os.path.isfile(args.db_loc):
@@ -23,7 +25,7 @@ if os.path.isfile(args.db_loc):
 if not os.path.isdir(args.article_dir):
     print "%s is not a directory!" % (args.article_dir)
     sys.exit(1)
-    
+
 conn = sqlite3.connect(args.db_loc)
 conn.row_factory = sqlite3.Row
 cur = conn.cursor()
@@ -33,16 +35,31 @@ cur.execute("CREATE TABLE article(id INTEGER PRIMARY KEY ASC, date TEXT, title T
 files = glob.glob(args.article_dir + "/*.md")
 conns = []
 articles = []
+json_articles = {}
+
 for f in files:
     fm = frontmatter.load(f)
     conns = conns + find_articles(fm['id'], fm.content)
     conns = conns + find_articles(fm['id'], fm['blurb'])
 
     a = (fm['id'], fm['date'], fm['title'], fm['vicpic'], fm['vicpic_small'], fm.content, fm['blurb'])
+
+    json_articles[fm['id']] = {
+        'title':fm['title'],
+        'score':fm['score'],
+        'vicsmall':fm['vicpic_small'],
+        'date':fm['date']
+    }
+
     articles.append(a)
-    
+
 cur.executemany("INSERT INTO conns (src, dst) VALUES (?, ?);", conns)
 cur.executemany("INSERT INTO article(id, date, title, vicpic, vicpic_small, article, blurb) VALUES (?, ?, ?, ?, ?, ?, ?);", articles)
 
 conn.commit()
 conn.close()
+
+
+j = open(args.json, 'w')
+j.write(json.dumps(json_articles))
+j.close()
