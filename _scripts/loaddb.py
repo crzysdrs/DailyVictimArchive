@@ -59,7 +59,6 @@ cur.executemany("INSERT INTO article(id, date, title, vicpic, vicpic_small, arti
 conn.commit()
 conn.close()
 
-
 j = open(args.json, 'w')
 j.write(json.dumps(json_articles))
 j.close()

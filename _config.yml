@@ -46,12 +46,17 @@ reverse: true
 collections:
   article:
     output: true
-    id: id    
+    id: id
   meta:
     output: true
     id: date
     permalink: /:collection/:path/
-    
+  map:
+    output: true
+    id: name
+    permalink: /:collection/:path/
+    sort_by: title
+
 defaults:
   - scope:
       path: ""
@@ -63,4 +68,8 @@ defaults:
       type: meta
     values:
       layout: meta
-      
+  - scope:
+      path: ""
+      type: map
+    values:
+      layout: map
