@@ -1,6 +1,5 @@
 ---
 title: Daily Victim Reunion
-tile_loc: tiles/reunion/
 tile_name: reunion
 min_zoom: 0
 max_zoom: 5

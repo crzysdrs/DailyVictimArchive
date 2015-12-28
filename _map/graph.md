@@ -1,6 +1,5 @@
 ---
 title: Daily Victim Connections
-tile_loc: tiles/all/
 tile_name: all
 min_zoom: 0
 max_zoom: 5

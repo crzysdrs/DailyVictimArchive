@@ -17,15 +17,17 @@ scriptdir = "_scripts"
 localdir = "_local"
 outdir = builddir </> "out"
 tmpdir = builddir </> "tmp"
+jsondir = outdir </> "json"
 dagdir = outdir </> "dags"
 dbfile = outdir </> "dv.db"
-jsondb = outdir </> "articles.json"
+jsondb = jsondir </> "articles.json"
 mirrordir = builddir </> "archive" </> "mirror"
 archivedir = builddir </> "archive"
 localarticlemd id = "_local" </> "article" </> concat [id, ".md"]
 finalarticlemd id = outdir </> "article" </> concat [id, ".md"]
-alphaout id = tmpdir </> "alpha" </> concat [id, ".alpha.png"]
-alphashape id = tmpdir </> "alpha" </> concat [id, ".alpha_shape"]
+alphadir = tmpdir </> "alpha"
+alphaout id = alphadir </> concat [id, ".alpha.png"]
+alphashape id = alphadir  </> concat [id, ".alpha_shape"]
 scorechart id = outdir </> "chart" </> concat [id, ".score.png"]
 historychart id = outdir </> "chart" </> concat [id, ".history.png"]
 
@@ -77,7 +79,7 @@ main = do
                    "reunion" -> outdir </> "reunion.png"
                    _ -> error "Unknown tiled image"
     need [dfile]
-    when (id == "all") $ need [outdir </> "dags" </> "all_poly.js"]
+    when (id == "all") $ need [jsondir </> "all.json"]
     cmd [tiles, "-v", "--path", dropFileName t, dfile]
 
   dagfiles "*" &%> \[dpng, dmap, dplain] -> do
@@ -86,7 +88,7 @@ main = do
     need [dag,  dbfile]
     cmd [dag, id, dagdir, dbfile]
 
-  outdir </> "dags" </> "all_poly.js" %> \file -> do
+  jsondir </> "all.json" %> \file -> do
     let polyfiles = dagfiles "all"
     let poly = "." </> scriptdir </> "poly.pl"
     need ([poly, dbfile] ++ polyfiles)
@@ -131,10 +133,10 @@ main = do
     Stdout magick <- cmd ["Magick++-config", "--cppflags", "--cxxflags", "--ldflags", "--libs"]
     cmd (["g++", c, "-o", file, "-lCGAL", "-lgmp", "-frounding-math", "-g"] ++ (words magick))
 
-  [outdir </> "reunion.png", outdir </> "reunion.json"] &%> \[png, json] -> do
+  [outdir </> "reunion.png", jsondir </> "reunion.json"] &%> \[png, json] -> do
     let comp = "." </> scriptdir </> "composite.pl"
     need $ [comp] ++ all_alpha ++ all_shapes
-    cmd [comp, dbfile, tmpdir, outdir]
+    cmd [comp, dbfile, alphadir, png, json]
 
   [scorechart "*", historychart "*"] &%> \[score, history] -> do
     let id = (takeFileName . takeBaseName . takeBaseName) score

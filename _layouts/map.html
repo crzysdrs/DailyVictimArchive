@@ -12,7 +12,7 @@
     <script type="text/javascript">
       function do_map() {
       var map = init_map('google-map',
-                         '{{ site.baseurl | append: page.tile_loc }}',
+                         '{{ site.baseurl | append: 'tiles/' }}',
                          '{{ page.tile_name}}',
                          {{ page.min_zoom }},
                          {{ page.max_zoom }}

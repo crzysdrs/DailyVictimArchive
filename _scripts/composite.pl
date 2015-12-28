@@ -20,7 +20,7 @@ sub handle_row($$) {
     return $max_height;
 }
 
-my ($dbfile, $tmpdir, $outdir) = @ARGV;
+my ($dbfile, $alphadir, $reunion_png, $reunion_json) = @ARGV;
 
 my @accumulate = (
     [510, 501],
@@ -159,7 +159,7 @@ foreach my $a (@accumulate) {
     $ids{$first} = $a;
 }
 my @imgs;
-foreach my $path (`ls ${tmpdir}/alpha/*.alpha.png`) {
+foreach my $path (`ls ${alphadir}/*.alpha.png`) {
     chomp $path;
     my ($width, $height) = imgsize($path);
     my ($id) = ($path =~ m/([0-9]+).alpha.png/);
@@ -240,7 +240,7 @@ foreach my $i (@imgs) {
 
 $max_y += 100;
 
-my $fargo = "${tmpdir}/alpha/fargo.alpha.png";
+my $fargo = "${alphadir}/fargo.alpha.png";
 my ($w, $h) = imgsize($fargo);
 push @imgs,
   {
@@ -251,7 +251,7 @@ push @imgs,
     w     => $w,
     id    => 'fargo'
   };
-my $gabe = "${tmpdir}/alpha/gabe.alpha.png";
+my $gabe = "${alphadir}/gabe.alpha.png";
 my ($w, $h) = imgsize($gabe);
 push @imgs,
   {
@@ -262,7 +262,7 @@ push @imgs,
     w     => $w,
     id    => 'gabe'
   };
-my $hotsoup = "${tmpdir}/alpha/hotsoup.alpha.png";
+my $hotsoup = "${alphadir}/hotsoup.alpha.png";
 my ($w, $h) = imgsize($hotsoup);
 push @imgs,
   {
@@ -322,7 +322,7 @@ foreach my $i (@imgs) {
         $shadow->Colorize(fill => 'gray');
         my $temp = $comp->Clone();
         $w = $temp->Composite('image' => $shadow, 'compose' => 'in');
-        $shadow = $temp;    
+        $shadow = $temp;
         $shadow->Blur(
             'sigma'   => $sigma,
             'radius'  => 3,
@@ -348,7 +348,7 @@ foreach my $i (@imgs) {
     warn "$w" if "$w";
 }
 
-$w = $canvas->Write(filename => "${outdir}/reunion.png");
+$w = $canvas->Write(filename => $reunion_png);
 warn "$w" if "$w";
 
 #http://karthaus.nl/rdp/js/rdp.js
@@ -406,7 +406,7 @@ my $y_img_off = int (($dim - $max_y) / 2);
 
 my %composite_json;
 foreach my $i (@imgs) {
-    open my $sample, "<$tmpdir/alpha/$i->{id}.alpha_shape";
+    open my $sample, "<$alphadir/$i->{id}.alpha_shape";
     my @points;
     my $x_off = int ($i->{x_loc});
     my $y_off = int ($i->{y_loc});
@@ -460,5 +460,5 @@ foreach my $i (@imgs) {
     $composite_json{$i->{id}} = \%json;
 }
 
-write_file("${outdir}/reunion.json",
+write_file($reunion_json,
     'var reunion_json = ' . to_json(\%composite_json));
