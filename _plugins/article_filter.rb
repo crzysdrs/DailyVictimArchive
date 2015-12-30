@@ -7,7 +7,7 @@ module Jekyll
       }.gsub(/(src|href)="(img\/[^"]+)"/) {
         |m| "#{$1}=\"#{baseurl}#{$2}\""
       }.gsub(/(src|href)="\.\/"/) {
-        |m| "(#{$1}=\"#{baseurl}#\""
+        |m| "#{$1}=\"#{baseurl}#\""
       }
     end
 
