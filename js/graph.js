@@ -1,5 +1,9 @@
-var polys = window.polys;	   
+var polys;
 var map;
+var urls;
+var articles;
+var base_url;
+
 var default_style = {strokeColor:'', strokeWeight:'', strokeOpacity:0};
 var modified = new Array();
 var lines = new Array();
@@ -47,7 +51,7 @@ function gv_bezier(pts, degree, t) {
     for (var j = 0; j <= degree; j++) {
 	    vtemp[0][j] = pts[j];
     }
-    
+
     for (var i = 1; i <= degree; i++) {
 	for (var j = 0; j <= degree -i; j++) {
 	    vtemp[i][j] = new google.maps.LatLng(
@@ -83,7 +87,7 @@ function draw_polyline(list, color) {
 function create_points(list) {
     var gpoints = [];
     for (var i = 0; i < list['xs'].length; i++) {
-	var gp = new google.maps.Point(list['xs'][i], list['ys'][i]);	      
+	var gp = new google.maps.Point(list['xs'][i], list['ys'][i]);
 	gpoints.push(convert(gp, map_img_size));
     }
     return gpoints;
@@ -119,9 +123,9 @@ function make_click(id) {
 	draw_ins(id);
 	var infoWindow = new google.maps.InfoWindow({
 	    content:
-	    '<div style="overflow: none;"><a href="' 
-		+ polys[id]['href'] + '">'
-		+ polys[id]['title'] + '</a></div>',
+	    '<div style="overflow: none;"><a href="'
+		+ urls[id] + '">'
+		+ articles[id]['title_html'] + '</a></div>',
 	    maxWidth:300
 	});
 	infoWindow.setPosition(event.latLng);
@@ -130,13 +134,18 @@ function make_click(id) {
     }
 }
 
-function init_polys(set_map) {
+function init_polys(set_base_url, set_map, set_articles, set_polys, set_urls) {
+    base_url = set_base_url;
+    articles = set_articles;
     map = set_map;
-    for (x in polys) {	 
+    polys = set_polys;
+    urls = set_urls;
+    articles = set_articles;
+    for (x in polys) {
 	polys[x]['poly'] = new google.maps.Polygon({
 	    paths:create_points(polys[x]['points']),
 	    strokeColor:"#f33f00",
-	    strokeWeight:1, 
+	    strokeWeight:1,
 	    strokeOpacity:0,
 	    fillColor:"#ff0000",
 	    fillOpacity:0.0

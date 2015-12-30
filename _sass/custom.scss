@@ -17,7 +17,7 @@
 @media (max-width: 400px) {
     #prevblock {
         clear:both;
-        width:100%;        
+        width:100%;
     }
     #nextblock {
         clear:both;
@@ -80,17 +80,17 @@ ol {
     color: #5555FF;
 }
 
-.prevnext {
+#nextblock {
       overflow:auto;
       width:50%;
-      float:left;
-}
-
-#nextblock {
+      float:right;
       text-align: right;
 }
 
 #prevblock {
+      overflow:auto;
+      width:50%;
+      float: left;
       text-align: left;
 }
 
@@ -103,13 +103,26 @@ ol {
 
 .viclist li {
     list-style:none;
+    overflow: auto;
 }
 
 .viclist img {
     vertical-align: middle;
     max-height: 32px;
+    padding-right: 5px;
     @media (min-width: 940px) {
 	max-height: 36px;
     }
-    display: inline;
+    float: left;
+}
+
+.viclist .text {
+    float: left;
+}
+.nb {
+ white-space: nowrap;
+}
+
+.num {
+ text-align: right;
 }

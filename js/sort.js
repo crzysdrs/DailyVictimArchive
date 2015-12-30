@@ -3,11 +3,11 @@
         a = (a === "-" || a === "") ? 0 : a.replace( /[^\d\-\.]/g, "" );
         return parseFloat( a );
     },
- 
+
     "formatted-num-asc": function ( a, b ) {
         return a - b;
     },
- 
+
     "formatted-num-desc": function ( a, b ) {
         return b - a;
     }
@@ -26,6 +26,13 @@
 
 $(document).ready(function(){
   $('#meta_articles').dataTable(
+	{
+	"bPaginate":false,
+	"bInfo":false,
+	"bStateSave":true,
+	 }
+  );
+  $('#maps').dataTable(
 	{
 	"bPaginate":false,
 	"bInfo":false,
@@ -58,7 +65,7 @@ $(document).ready(function(){
           },
           hide: {
               fixed: true
-          }	  
-      }, event); 
-  }); 
+          }
+      }, event);
+  });
  });

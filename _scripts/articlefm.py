@@ -23,7 +23,7 @@ def fix(s, title=False):
     s = re.sub(u'([\n\s]|&nbsp;)*$', '\n', s)
     if title:
         s = re.sub('\n*$', '', s)
-        
+
     return s
 
 def yamltitle(s):
@@ -66,20 +66,20 @@ if scoredate in votes['votes']:
         count += int(val)
     score /= float(count)
 
-    for date, datevotes in sorted(votes['votes'].iteritems()):    
+    for date, datevotes in sorted(votes['votes'].iteritems()):
         date_scores = []
         for i in range(1, 11):
             if str(i) in datevotes:
                 date_scores.append(int(datevotes[str(i)]))
             else:
-                date_scores.append(0)            
+                date_scores.append(0)
 
         history.append({
             'date':date,
             'votes':date_scores
         })
-        
-        
+
+
 post = frontmatter.loads("")
 post.content= md
 post['blurb'] = blurb_md
@@ -89,7 +89,7 @@ post['vicpic_small'] = article['vicpic_small']
 post['vicpic'] = article['vicpic']
 post['date'] = article['date']
 post['color'] = bool(int(article['color']))
-post['permalink'] = '/%s/%s/' % (post['id'], yamltitle(post['title']))
+post['permalink'] = '/article/%s/%s/' % (post['id'], yamltitle(post['title']))
 post['score'] = round(score, 2)
 post['votes'] = count
 post['history'] = history

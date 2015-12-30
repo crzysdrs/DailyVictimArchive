@@ -3,15 +3,28 @@ title: Daily Victim Reunion
 tile_name: reunion
 min_zoom: 0
 max_zoom: 5
+description: A group photo of all Daily Victims.
 
 head: >
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
-    <script type="text/javascript" src="reunion.json"></script>
-    <script type="text/javascript" src="reunion.js"></script>
+    <script type="text/javascript" src="{{ site.baseurl | append: "js/reunion.js" }}"></script>
 
 map_init: >
     map.setZoom(2);
-    init_polys(map);
+    console.log("Do Map");
+    var polys, urls, articles;
+    $.when(
+        $.getJSON( "{{ site.baseurl }}/js/json/reunion.json", function( json ) {
+            polys = json;
+        }).error(function(jqXHR, textStatus, errorThrown) { console.log("json error: " + textStatus);}),
+        $.getJSON( "{{ site.baseurl }}/js/links.json", function( json ) {
+            urls = json;
+            }).error(function(jqXHR, textStatus, errorThrown) { console.log("json error: " + textStatus);}),
+        $.getJSON( "{{ site.baseurl }}/js/json/articles.json", function( json ) {
+            articles = json;
+        }).error(function(jqXHR, textStatus, errorThrown) { console.log("json error: " + textStatus);})
+    ).then(function() {
+        init_polys({{ site.baseurl }}, map, articles, polys, urls);
+    });
     
 ---
 

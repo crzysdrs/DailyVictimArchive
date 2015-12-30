@@ -36,7 +36,7 @@ def get_score(fm, date):
         score /= float(count)
 
     return (score, count)
-    
+
 frontmatter.yaml.Dumper.add_representer(unicode, str_presenter)
 parser = argparse.ArgumentParser(description='Process Article into Frontmatter')
 parser.add_argument('fm_src', help='fm article')
@@ -56,7 +56,7 @@ froms = cur.execute("SELECT * FROM conns WHERE src = ?;", (post['id'],)).fetchal
 tos = cur.execute("SELECT * FROM conns WHERE dst = ?;", (post['id'],)).fetchall()
 
 score = get_score(post, scoredate)
-post['permalink'] = '/%s/%s/' % (post['id'], yamltitle(post['title']))
+post['permalink'] = '/victim/%s/%s/' % (post['id'], yamltitle(post['title']))
 post['score'] = round(score[0], 2)
 post['votes'] = score[1]
 post['outlinks'] = map(lambda r : r['dst'], froms)

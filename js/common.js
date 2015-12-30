@@ -1,3 +1,7 @@
+---
+
+---
+
 jQuery.expr[':'].regex = function(elem, index, match) {
     var matchParams = match[3].split(','),
         validLabels = /^(data|css):/,
@@ -13,7 +17,7 @@ jQuery.expr[':'].regex = function(elem, index, match) {
 
 
 function article_jquery() {
-    $(':regex(href,article\.php\\?id=[0-9]+$)').qtip({
+    $(':regex(href,/victim/[0-9]+/)').qtip({
 	style: {classes:'qtip-light qtip-shadow myCustomClass'},
 	position: {
 	    my: 'bottom left',
@@ -24,24 +28,21 @@ function article_jquery() {
 	show: {
 	    effect: false,
 	},
-	content: {	    
+	content: {
 	    text: function(event, api) {
-		var id = $(this).attr('href').match(/id=([0-9]+)/)[1];
+		var id = $(this).attr('href').match(/\/victim\/([0-9]+)\//)[1];
 		$.ajax({
-		    url: 'json_article.php',
+		    url: '{{site.baseurl}}/js/json/articles.json',
 		    type: 'GET',
 		    dataType: 'json',
-		    data: {
-			id: [id]
-		    },
 		}).then(function(data) {
 		    var data_id = data[id];
-		    var content = '<img style="float: left"; height="100px" width="100px" src="img/' + data_id.vicpic_small + '" />';
+		    var content = '<img style="float: left"; height="100px" width="100px" src="{{ site.baseurl }}/img/' + data_id['vicsmall'] + '" />';
 		    content += '<div style="float: right;">';
 		    content += '<table>';
-		    content += '<tr><td><strong>Date</strong></td><td>' + data_id.date + '</td></tr>';
-		    content += '<tr><td><strong>Score</strong></td><td>' + data_id.avg.toFixed(2) + '</td></tr>';
-		    content += '<tr><td><strong>Votes</strong></td><td>' + data_id.votes + '</td></tr>';
+		    content += '<tr><td><strong>Date</strong></td><td>' + data_id['date'] + '</td></tr>';
+		    content += '<tr><td><strong>Score</strong></td><td>' + data_id['score'].toFixed(2) + '</td></tr>';
+		    content += '<tr><td><strong>Votes</strong></td><td>' + data_id['votes'] + '</td></tr>';
 		    content += '</table>';
 		    content += '</div>';
 		    api.set('content.text',content);
@@ -57,7 +58,7 @@ function article_jquery() {
     $(':regex(href,\.(jpe?g|png|gif)$)').fancybox();
     $(':regex(href,^http://web.archive.org)').qtip({
 	style: {classes:'qtip-light qtip-shadow myCustomClass'},
-	content: {	    
+	content: {
 	    text:'Since many pages referenced in Daily Victims no longer exist, this link is to an archived version of the website on the date this Daily Victim was posted.',
 	    title:'Wayback Machine',
 	}

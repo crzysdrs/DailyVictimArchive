@@ -7,11 +7,21 @@ import frontmatter
 import os
 import sys
 import json
+import markdown
 
 def find_articles(id, s):
     articles = re.findall("%ARTICLE\[([0-9]+)\]%", s)
     articles = map(lambda x: (id, int(x)), articles)
     return articles
+
+def remove_html(s):
+    s = re.sub("<.+?>", "", s)
+    return s
+
+def remove_p(s):
+    s = re.sub("^<p>", "", s)
+    s = re.sub("</p>$", "", s)
+    return s
 
 parser = argparse.ArgumentParser(description='Process History into Frontmatter')
 parser.add_argument('article_dir', help='article dir')
@@ -37,6 +47,8 @@ conns = []
 articles = []
 json_articles = {}
 
+md = markdown.Markdown()
+
 for f in files:
     fm = frontmatter.load(f)
     conns = conns + find_articles(fm['id'], fm.content)
@@ -44,11 +56,16 @@ for f in files:
 
     a = (fm['id'], fm['date'], fm['title'], fm['vicpic'], fm['vicpic_small'], fm.content, fm['blurb'])
 
+    html_title = remove_p(md.convert(fm['title']))
+
     json_articles[fm['id']] = {
         'title':fm['title'],
+        'title_plain':remove_html(html_title),
+        'title_html':html_title,
         'score':fm['score'],
         'vicsmall':fm['vicpic_small'],
-        'date':fm['date']
+        'date':fm['date'],
+        'votes':fm['votes'],
     }
 
     articles.append(a)

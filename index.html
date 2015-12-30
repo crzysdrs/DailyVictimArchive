@@ -16,18 +16,38 @@ layout: default
 	<th>Authors</th>
     </tr></thead>
     <tbody>
-      {% assign meta = site.collections.meta.docs | sort: 'date' %}
+      {% assign meta = site.collections[1].docs | sort: 'date' %}
       {% for m in meta %}
       <tr class="Text" data-vicpicsmall="{{victim.vicpic_small}}">
-	<td class="nb">{{m.date}}</td>
+	<td class="nb">{{m.date | date: "%Y-%m-%d"}}</td>
 	<td>
 	  <a href="{{site.baseurl | append: m.url}}">{{m.title | markdownify | remove_p}}</a>
 	</td>
-	<td class="nb">{{m.author}}</td>
+	<td>{{m.author}}</td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+
+  <h1>Visualizations</h1>
+  <table id="maps" class="display" cellpadding="0" cellspacing="0">
+    <thead><tr>
+	<th>Title</th>
+	<th>Description</th>
+    </tr></thead>
+    <tbody>
+      {% assign maps = site.collections[2].docs | sort: 'title' %}
+      {% for m in maps %}
+      <tr class="Text">
+	<td>
+	  <a href="{{site.baseurl | append: m.url}}">{{m.title}}</a>
+	</td>
+        <td class="nb">{{ m.description }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
   <h1>The Daily Victims</h1>
   <table id="dailyvictims" class="display" cellpadding="0" cellspacing="0">
     <thead><tr>
@@ -43,13 +63,13 @@ layout: default
 	<th>Title</th>
     </tr></thead>
     <tbody>
-      {% assign victims = site.collections.article.docs | sort: 'date' %}
+      {% assign victims = site.collections[0].docs | sort: 'date' %}
       {% for victim in victims %}
       {% assign inlink_len = victim.inlinks | size %}
       {% assign outlink_len = victim.outlinks | size %}
       <tr class="Text" data-vicpicsmall="{{victim.vicpic_small}}">
-	<td class="nb">{{victim.date}}</td>
-	<td class="nb num">{{victim.score}}</td>
+	<td class="nb">{{victim.date | date: "%Y-%m-%d" }}</td>
+	<td class="nb num">{{victim.score | round: 2}}</td>
 	<td class="nb num">{{victim.votes}}</td>
 	<td class="nb num">{{inlink_len}}</td>
         <!--

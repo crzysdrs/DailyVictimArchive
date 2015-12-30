@@ -3,7 +3,7 @@ layout: default
 ---
 <article id="post-page">
     <h2>{{ page.title | markdownify | remove_p}}</h2>
-    <time datetime="{{ page.date | date_to_xmlschema }}" class="by-line">{{ page.date | date_to_string }}</time>    
+    <time datetime="{{ page.date | date_to_xmlschema }}" class="by-line">{{ page.date | date_to_string }}</time>
     <div class="content" style="overflow:auto;">
         <img id="vicpic"
              src="{{ site.baseurl | append: '/img/' | append: page.vicpic | replace: '//', '/' }}" />
@@ -18,24 +18,24 @@ layout: default
     </div>
     <hr />
     {% if page.score > 0 %}
-    <p style="text-align: right;">        
+    <p style="text-align: right;">
     <em>
         <span rel="v:rating">
 	    <span typeof="v:Rating">
-	        Score: <span property="v:average">{{page.score}}</span>; 
-                <span property="v:best" content="10"/>  
-                <span property="v:worst" content="1"/> 
+	        Score: <span property="v:average">{{page.score}}</span>;
+                <span property="v:best" content="10"/>
+                <span property="v:worst" content="1"/>
 	    </span>
-        </span> 
+        </span>
         Total Votes: <span property="v:votes">{{page.votes}}</span> as of 2009-12-09.
     </em>
     </p>
     <hr />
     {% endif %}
-    
+
     <div style="overflow: auto;" >
     {% if page.previous %}
-    <p class="prevnext" id="prevblock">
+    <p id="prevblock">
         <a href="{{ site.baseurl | append: page.previous.url }}">
             <img id="prev" class="left" src="{{ site.baseurl }}img/images/sub_layout/prev.gif" alt="Previous" /><br />
             <img class="left"
@@ -47,7 +47,7 @@ layout: default
     </p>
     {% endif %}
     {% if page.next %}
-    <p class="prevnext" id="nextblock">
+    <p id="nextblock">
         <a href="{{ site.baseurl | append: page.next.url }}">
             <img id="next" class="right" src="{{ site.baseurl }}img/images/sub_layout/next.gif" alt="Next" /><br />
             <img class="right"

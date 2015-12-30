@@ -460,5 +460,4 @@ foreach my $i (@imgs) {
     $composite_json{$i->{id}} = \%json;
 }
 
-write_file($reunion_json,
-    'var reunion_json = ' . to_json(\%composite_json));
+write_file($reunion_json, to_json(\%composite_json));

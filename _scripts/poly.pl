@@ -55,8 +55,8 @@ sub create_poly($$$$$$) {
 
     my ($graph_w, $graph_h) = (0, 0);
 
-    print $out
-      "/* img from $unmod_x,$unmod_y through $new_x,$new_y to $dim,$dim*/\n";
+    #print $out
+    #  "/* img from $unmod_x,$unmod_y through $new_x,$new_y to $dim,$dim*/\n";
 
     my $visible = 0;
 
@@ -69,12 +69,6 @@ sub create_poly($$$$$$) {
             my ($key, $id, $x, $y, $w, $h, $l, $style, $shape, $color,
                 $fillcolor)
               = split (/ /, $l);
-            my $href = "article.php?id=$id";
-            $node->execute($id);
-            my $title = "Unspecified Title";
-            if (my $row = $node->fetchrow_hashref) {
-                $title = $row->{title};
-            }
             my @coords = (
                 $x + $w / 2,
                 $y + $h / 2,
@@ -121,8 +115,6 @@ sub create_poly($$$$$$) {
                 'preds'  => \@pred,
                 'succs'  => \@succ,
                 'points' => {'xs' => \@xs, 'ys' => \@ys},
-                'title'  => $title,
-                'href'   => $href,
                 'outs'   => {}
             };
         } elsif ($l =~ /^edge/) {
@@ -162,8 +154,8 @@ sub create_poly($$$$$$) {
         }
     }
 
-    print $out "var polys = " . to_json(\%polys) . ";";
+    print $out to_json(\%polys);
     close $out;
-}
 
+}
 1;

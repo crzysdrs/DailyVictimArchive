@@ -38,7 +38,7 @@ all_dags = map (dagfile . show) article_ids ++ [dagfile "all"]
 all_md = map (finalarticlemd . show) article_ids
 all_local_md = map (localarticlemd . show) article_ids
 all_alpha = map alphaout ((map show article_ids) ++ ["fargo", "hotsoup", "gabe"])
-all_shapes = map (alphashape . show) article_ids
+all_shapes = map (alphashape . show) article_ids ++ map alphashape ["fargo", "hotsoup", "gabe"]
 all_charts = map (scorechart . show) article_ids ++ map (historychart . show) article_ids
 
 dagfiles id = [dagdir </> concat [id,  x] | x <- [".png", ".plain", ".map"]]

@@ -1,0 +1,7 @@
+---
+
+---
+{
+{% assign victims = site.collections[0].docs %}
+{% for victim in victims %}"{{ victim.id }}":"{{site.baseurl | append: victim.url}}",{% endfor %}"BADID":""
+}
