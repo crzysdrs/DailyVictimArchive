@@ -3,16 +3,16 @@
 This repo contains all the build scripts neccesary to build the Daily Victim Archive along with the corresponding site.
 
 This includes:
-* Archive Munging Scripts
+* Markdown Formatted Articles and Meta Articles
+* All Daily Victim Images
 * Alpha Masks of Specific Images
 * Transparency Fill Data
 * Google Map Generation Scripts
   * Graph of all connections
   * Group photo reunion
 * Site
-  * Smarty Templates
+  * Jekyll Templates
   * Javascript/CSS
-  * PHP files
 
 ## Build
 
@@ -22,10 +22,13 @@ the Daily Victim Archive.
 ```
 # Requires SuperUser permissions to install dependencies
 sudo ./depends
-# Extracting some file s
+# Invoke Git Annex to Retrieve Binary Files (images)
 ./build extract
 ./build -j
 ```
+
+Optionally you can ```./build -j serve``` to view the in development
+site locally in a web browser.
 
 ## Misc
 
