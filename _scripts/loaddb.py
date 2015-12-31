@@ -9,6 +9,17 @@ import sys
 import json
 import markdown
 
+def should_use_block(value):
+    for c in u"\u000a\u000d\u001c\u001d\u001e\u0085\u2028\u2029":
+        if c in value:
+            return True
+        return False
+
+def str_presenter(dumper, data):
+    if should_use_block(data):
+        return dumper.represent_scalar('tag:yaml.org,2002:str', data, style='>')
+    return dumper.represent_scalar('tag:yaml.org,2002:str', data)
+
 def find_articles(id, s):
     articles = re.findall("%ARTICLE\[([0-9]+)\]%", s)
     articles = map(lambda x: (id, int(x)), articles)
@@ -23,6 +34,7 @@ def remove_p(s):
     s = re.sub("</p>$", "", s)
     return s
 
+frontmatter.yaml.Dumper.add_representer(unicode, str_presenter)
 parser = argparse.ArgumentParser(description='Process History into Frontmatter')
 parser.add_argument('article_dir', help='article dir')
 parser.add_argument('db_loc', help='database location')
@@ -49,6 +61,8 @@ json_articles = {}
 
 md = markdown.Markdown()
 
+allimgs = []
+missing = []
 for f in files:
     fm = frontmatter.load(f)
     conns = conns + find_articles(fm['id'], fm.content)
@@ -68,6 +82,18 @@ for f in files:
         'votes':fm['votes'],
     }
 
+    pattern = "img/[^\)\]]+"
+    imgs = re.findall(pattern, fm.content)
+    imgs += re.findall(pattern, fm['blurb'])
+    imgs += ["img/" + fm['vicpic_small']]
+    imgs += ["img/" + fm['vicpic']]
+
+    for i in imgs:
+        if not os.path.exists(i):
+            print "Missing " + f + " " + i
+            missing.append(i)
+
+    allimgs += imgs
     articles.append(a)
 
 cur.executemany("INSERT INTO conns (src, dst) VALUES (?, ?);", conns)
@@ -79,3 +105,8 @@ conn.close()
 j = open(args.json, 'w')
 j.write(json.dumps(json_articles))
 j.close()
+
+print "Missing {}/{} Images".format(len(missing), len(allimgs))
+
+if len(missing) > 0:
+    sys.exit(1)
