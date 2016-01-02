@@ -14,17 +14,6 @@
     }
 }
 
-@media (max-width: 400px) {
-    #prevblock {
-        clear:both;
-        width:100%;
-    }
-    #nextblock {
-        clear:both;
-        width:100%;
-    }
-}
-
 .left {
     float: left;
     display: block;
@@ -92,6 +81,17 @@ ol {
       width:50%;
       float: left;
       text-align: left;
+}
+
+@media (max-width: 500px) {
+    #prevblock {
+        clear:both;
+        width:100%;
+    }
+    #nextblock {
+        clear:both;
+        width:100%;
+    }
 }
 
 #vicpic {
