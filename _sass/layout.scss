@@ -2,7 +2,7 @@
 
 /* Navigation */
 
-#nav, #nav-left { 
+#nav, #nav-left {
   a {
     display: block;
     color: $background-color;
@@ -104,7 +104,7 @@
 /* Main content */
 
 .fixed {
-  position: fixed;
+  /*  position: fixed; */
   @media (min-width: 940px) {
     position: static;
   }
@@ -253,7 +253,7 @@ footer {
   padding: 0.6667em 0;
 }
 
-footer { 
+footer {
   a {
     color: $background-color;
     padding: 0.33334em 0;
