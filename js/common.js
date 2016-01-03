@@ -55,7 +55,8 @@ function article_jquery() {
 	    }
 	}
     });
-    $(':regex(href,\.(jpe?g|png|gif)$)').fancybox();
+    // $(':regex(href,\\.(jpe?g|png|gif)$)').fancybox();
+    $("a[href$='.jpg'],a[href$='.jpeg'],a[href$='.png'],a[href$='.gif']").attr('rel', 'gallery').fancybox();
     $(':regex(href,^http://web.archive.org)').qtip({
 	style: {classes:'qtip-light qtip-shadow myCustomClass'},
 	content: {

@@ -104,7 +104,7 @@
 /* Main content */
 
 .fixed {
-  /*  position: fixed; */
+  position: fixed;
   @media (min-width: 940px) {
     position: static;
   }

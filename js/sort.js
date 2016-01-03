@@ -26,46 +26,61 @@
 
 $(document).ready(function(){
   $('#meta_articles').dataTable(
-	{
-	"bPaginate":false,
-	"bInfo":false,
-	"bStateSave":true,
-	 }
+    {
+      "bPaginate":false,
+      "bInfo":false,
+      "bStateSave":true,
+      "responsive":true,
+      "columnDefs": [
+        { responsivePriority: 1, targets: -1 },
+        { responsivePriority: 2, targets: 0 },
+      ],
+    }
   );
   $('#maps').dataTable(
-	{
-	"bPaginate":false,
-	"bInfo":false,
-	"bStateSave":true,
-	 }
+    {
+      "bPaginate":false,
+      "bInfo":false,
+      "bStateSave":true,
+      "responsive":true,
+      "columnDefs": [
+        { responsivePriority: 1, targets: 0 },
+      ],
+    }
   );
   $('#dailyvictims').dataTable(
-	{
-	"bPaginate":false,
-	"bInfo":false,
-	"bStateSave":true,
-        "aaSorting": [[0, "asc"]],
-	}
+    {
+      "bPaginate":false,
+      "bInfo":false,
+      "bStateSave":true,
+      "responsive":true,
+      "columnDefs": [
+        { responsivePriority: 1, targets: -1 },
+        { responsivePriority: 2, targets: 0 }
+      ],
+      "aaSorting": [[0, "asc"]],
+
+    }
   ).on('mouseenter', 'tr[data-vicpicsmall]', function (event) {
-      var img = $(this).data('vicpicsmall');
-      $(this).qtip({
-          style: {classes:'qtip-light qtip-shadow myCustomClass'},
-          overwrite: false,
-          content: '<img style="height: 100px; width: 100px;" src="img/' + img + '"/>',
-          position: {
-              my: 'bottom left',
-              at: 'top right',
-              target: $('td', this),
-              //target: 'mouse',
-              viewport: $('#dailyvictims')
-          },
-          show: {
-              event: event.type,
-              ready: true,
-          },
-          hide: {
-              fixed: true
-          }
-      }, event);
+    var img = $(this).data('vicpicsmall');
+    $(this).qtip({
+      style: {classes:'qtip-light qtip-shadow myCustomClass'},
+      overwrite: false,
+      content: '<img style="height: 100px; width: 100px;" src="img/' + img + '"/>',
+      position: {
+        my: 'bottom left',
+        at: 'top right',
+        target: $('td', this),
+        //target: 'mouse',
+        viewport: $('#dailyvictims')
+      },
+      show: {
+        event: event.type,
+        ready: true,
+      },
+      hide: {
+        fixed: true
+      }
+    }, event);
   });
- });
+});
