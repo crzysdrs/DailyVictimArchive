@@ -32,7 +32,7 @@ $(document).ready(function(){
       "bStateSave":true,
       "responsive":true,
       "columnDefs": [
-        { responsivePriority: 1, targets: -1 },
+        { responsivePriority: 1, targets: 1 },
         { responsivePriority: 2, targets: 0 },
       ],
     }
