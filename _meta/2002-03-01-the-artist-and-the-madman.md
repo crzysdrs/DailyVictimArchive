@@ -14,7 +14,7 @@ little "chat."
 
 **The Internet's HotSoup:** They won't work this time -- I'm grounded.
 
-![](img/columns/image/mar03_planetfargo_hotsoup.jpg)
+![](img/columns/image/mar03_planetfargo_hotsoup.png)
 {: .right}
 
 **Fargo:** Okay, fine. On to the questions, then! The Daily Victim was

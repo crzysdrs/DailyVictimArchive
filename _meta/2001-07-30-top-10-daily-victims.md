@@ -5,7 +5,7 @@ id: 3
 title: Top 10 Daily Victims
 ---
 
-[![](img/top10/july01/victims/logo.jpg){: #vicpic}](./)
+[![](img/top10/july01/victims/logo.png){: #vicpic}](./)
 
 
 \[UPDATE: No sooner do I write this list than, just this weekend, a [New
@@ -51,7 +51,7 @@ comments included. Plus trivia. On with the list!
 
 **10. [The Daily Victim Easter Special](%ARTICLE[171]%)**
 
-[![](img/top10/july01/victims/10.jpg)](%ARTICLE[171]%)
+[![](img/top10/july01/victims/10.png)](%ARTICLE[171]%)
 
   
  This Victim immediately scored high on the richter scale because it
@@ -74,7 +74,7 @@ Week](%ARTICLE[203]%) that was pretty funny.
 
 **9. [Arch Nemesis In A Body Cast](%ARTICLE[211]%)**
 
-[![](img/top10/july01/victims/9.jpg)](%ARTICLE[211]%)
+[![](img/top10/july01/victims/9.png)](%ARTICLE[211]%)
 
   
  I was surprised that the color version of this victim did better than
@@ -98,7 +98,7 @@ Either way.
 **8. [The Server Admin Who Torments People on His Unreal
 Server](%ARTICLE[143]%)**
 
-[![](img/top10/july01/victims/8.jpg)](%ARTICLE[143]%)
+[![](img/top10/july01/victims/8.png)](%ARTICLE[143]%)
 
   
  Sometimes I have a lot of trouble coming up with a color version of a
@@ -122,7 +122,7 @@ can read gibs, foretold this whole storyline. Creeeepy...
 **7. [Tribes 2 Suicide Pilot Meets His Arch
 Nemesis](%ARTICLE[253]%)**
 
-[![](img/top10/july01/victims/7.jpg)](%ARTICLE[253]%)
+[![](img/top10/july01/victims/7.png)](%ARTICLE[253]%)
 
   
  People seem to respond better when I trigger in on games they know and
@@ -155,7 +155,7 @@ recently.
 **6. [Kid Who Got a Puppy for Christmas ... Instead of Quake
 3](%ARTICLE[82]%)**
 
-[![](img/top10/july01/victims/6.jpg)](%ARTICLE[82]%)
+[![](img/top10/july01/victims/6.png)](%ARTICLE[82]%)
 
   
  This Victim generated a lot of email from us, including a bunch from
@@ -172,7 +172,7 @@ didn't quite have the same oomph.
 
 **5. [The Frozen Air-Conditioning Guy](%ARTICLE[123]%)**
 
-[![](img/top10/july01/victims/5.jpg)](%ARTICLE[123]%)
+[![](img/top10/july01/victims/5.png)](%ARTICLE[123]%)
 
   
  Now we're busting into the top five with the air conditioning guy. It's
@@ -201,7 +201,7 @@ Salmon Jerky guy had scored higher.
 **4. [Low Ping Superhero Does Battle With Forces of
 Overclocking](%ARTICLE[194]%)**
 
-[![](img/top10/july01/victims/4.jpg)](%ARTICLE[194]%)
+[![](img/top10/july01/victims/4.png)](%ARTICLE[194]%)
 
   
  I couldn't figure out why this Victim scored so high. I thought the
@@ -221,7 +221,7 @@ LAUGHING NOW, University of Iowa?"
 
 **3. [The Unix Administration Wizard](%ARTICLE[119]%)**
 
-[![](img/top10/july01/victims/3.jpg)](%ARTICLE[119]%)
+[![](img/top10/july01/victims/3.png)](%ARTICLE[119]%)
 
   
  I'm totally thrilled that this guy is in the top 3. I used to do a
@@ -248,7 +248,7 @@ circumstance. Long live da wiz!
 
 **2. [The Daily Victim Christmas Special](%ARTICLE[80]%)**
 
-[![](img/top10/july01/victims/2.jpg)](%ARTICLE[80]%)
+[![](img/top10/july01/victims/2.png)](%ARTICLE[80]%)
 
   
  For most of the year, this victim was in the number one slot. The first

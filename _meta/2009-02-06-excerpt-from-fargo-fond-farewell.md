@@ -47,7 +47,7 @@ artist and had sketched up a new redesign, but I couldn't justify the
 resources to relaunch the Daily Victim site because of its low numbers.
 
 If you're interested in what could have been, [here's a
-mockup](img/daily_victim_mockup.jpg) I had created of the site I wanted.
+mockup](img/daily_victim_mockup.png) I had created of the site I wanted.
 The site would read almost like a blog written by recurring characters.
 It would've been years ahead of its time. Hold on a second -- now the
 weeping -- okay, I'm better now.

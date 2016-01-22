@@ -24,7 +24,7 @@ like after u finish a step, then scan it, then do the next step and scan
 it and so on? and then send me the steps to see how the magic
 happens?</span>*
 
-[![](img/columns/image/feb04_planetfargo_cards.jpg)](img/columns/image/feb04_planetfargo_cardsbig.jpg)  
+[![](img/columns/image/feb04_planetfargo_cards.png)](img/columns/image/feb04_planetfargo_cardsbig.png)  
 Victim ideas usually start on these yellow notecards I keep by my desk. You never know when
 inspiration will strike.
 {: .right .caption}
@@ -68,7 +68,7 @@ I've scanned the sketch into Photoshop, I bring down the opacity on the
 sketch layer so that I can trace over it on another layer.
 
 <div class="center" markdown="1">
-[![](img/columns/image/feb04_planetfargo_layers.jpg)](img/columns/image/feb04_planetfargo_layersbig.jpg)  
+[![](img/columns/image/feb04_planetfargo_layers.png)](img/columns/image/feb04_planetfargo_layersbig.png)  
 Scanned into photoshop and ready for, uh, "inking." Click to enlarge.
 {: .caption}
 </div>
@@ -79,7 +79,7 @@ Wacom tablet, a big giant one, he hardly uses his mouse anymore.
 **Gabriel:** Okay, yah, here's the tablet:
 
 <div class="center" markdown="1">
-![](img/columns/image/feb04_planetfargo_tablet.jpg)  
+![](img/columns/image/feb04_planetfargo_tablet.png)  
 Mad toolz.
 {: .caption}
 </div>
@@ -91,7 +91,7 @@ common practice as far as cartoons go and I'm sure if you go to school
 for this sort of thing they will even tell you it has a name.
 
 <div class="center" markdown="1">
-[![](img/columns/image/feb04_planetfargo_inking.jpg)](img/columns/image/feb04_planetfargo_inkingbig.jpg)  
+[![](img/columns/image/feb04_planetfargo_inking.png)](img/columns/image/feb04_planetfargo_inkingbig.png)  
 Tracing the outline. It helps to work with a really big image zoomed in.
 {: .caption}
 </div>
@@ -105,7 +105,7 @@ out there know what I'm talking about. Second...hmm I guess it was only
 one fold.
 
 <div class="center" markdown="1">
-[![](img/columns/image/feb04_planetfargo_contrast.jpg)](img/columns/image/feb04_planetfargo_contrastbig.jpg)  
+[![](img/columns/image/feb04_planetfargo_contrast.png)](img/columns/image/feb04_planetfargo_contrastbig.png)  
 Fine tooning.
 {: .caption}
 </div>
@@ -135,7 +135,7 @@ the image and put a text editor window beside it -- that way I'm
 inspired as I write. GameSpy peeps love to stroll by my desk at this
 point to see what's cooking for tomorrow's feature.
 
-[![](img/columns/image/feb04_planetfargo_writing.jpg)](img/columns/image/feb04_planetfargo_writingbig.jpg)  
+[![](img/columns/image/feb04_planetfargo_writing.png)](img/columns/image/feb04_planetfargo_writingbig.png)  
 Having the pic right next to the text editor inspires me.
 {: .right .caption}
 
@@ -168,7 +168,7 @@ is [a Matrix action figure sitting on my monitor](%ARTICLE[79]%). He
 *does* make me feel badass. [One time I had a terrible
 cold](%ARTICLE[87]%), and a victim was the result.
 
-![](img/columns/image/feb04_planetfargo_nopants.jpg)  
+![](img/columns/image/feb04_planetfargo_nopants.png)  
 I've never shown up at an important meeting without pants, at least, not when I was sober enough
 to remember it.
 {: .left .caption}
@@ -217,7 +217,7 @@ don't post it anywhere.
 
 **Don't Be Afraid to Go All Weird**
 
-![](img/columns/image/feb04_planetfargo_christmas.jpg)  
+![](img/columns/image/feb04_planetfargo_christmas.png)  
 Strange is good.
 {: .left .caption}
 
@@ -301,7 +301,7 @@ resolution. Who da man? Why yes, yes I am.
 
 **Posting the Victim**
 
-![](img/columns/image/feb04_planetfargo_finished.jpg)  
+![](img/columns/image/feb04_planetfargo_finished.png)  
 Voila! The finished product.
 {: .right .caption}
 

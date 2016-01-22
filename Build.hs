@@ -101,7 +101,14 @@ main = do
     let id = (takeFileName . takeBaseName . takeBaseName) alpha
     let alphadone = localdir </> "alpha_done" </> concat [id,  ".mask.png"]
     let pre_alpha = localdir </> "alpha_data" </> concat [id, ".alpha"]
-    let img_path = "img" </> "victimpics" </> concat [id, ".gif"]
+    let base_img = "img" </> "victimpics" </> id
+    png_exist <- Development.Shake.doesFileExist $ concat [base_img, ".png"]
+    let img_path = if png_exist
+                   then do
+                     concat [base_img , ".png"]
+                   else do
+                     concat [base_img , ".gif"]
+
     alpha_done_exist <- Development.Shake.doesFileExist alphadone
     Development.Shake.doesFileExist pre_alpha
     img_exist <- Development.Shake.doesFileExist img_path

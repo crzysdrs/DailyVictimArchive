@@ -12,7 +12,7 @@ all works to see how Fargo uses he army of amphibious piranhas to keep
 the Soup in line.
 
 **Dave "Fargo" Kosak**  
- [![](img/victimpics/fargo.gif){: .left }](mailto:fargo@gamespy.com) Fargo
+ [![](img/victimpics/fargo.png){: .left }](mailto:fargo@gamespy.com) Fargo
 realized early in life that he wanted to be a Space Marine. However, our
 foolish political leaders continue to hem and haw and refuse to arm our
 people with a military space force -- must we wait until it's too late?
@@ -28,7 +28,7 @@ preschool.
   
 
 **Lemuel "HotSoup" Pew**  
- [![](img/victimpics/hotsoup.gif){: .right }](mailto:hotsoup@gamespy.com) Here we
+ [![](img/victimpics/hotsoup.png){: .right }](mailto:hotsoup@gamespy.com) Here we
 have the resident artist known as Hot Soup. Banished from his sacred
 brotherhood of underground assassins, only because he won't take off
 that silly hat, Soup now works as the artistic counterpart to Fargo.
@@ -49,7 +49,7 @@ and
   
 
 **Mike "Gabriel" Krahulik**  
- [![](img/victimpics/gabe.gif){: .left }](mailto:gabriel@penny-arcade.com) The
+ [![](img/victimpics/gabe.png){: .left }](mailto:gabriel@penny-arcade.com) The
 first 300 or so Victims in the archives were the work of this immensely
 talented artist, who has since moved on to other things. "Gabe," as he
 is known, was artifically created in an enormous, bubbling vat,
