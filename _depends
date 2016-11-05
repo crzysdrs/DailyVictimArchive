@@ -1,0 +1,28 @@
+#!/bin/sh
+
+cpan install Lingua:EN:Titlecase:HTML
+pip install \
+    python-frontmatter \
+    pillow \
+
+
+apt-get install \
+        gnuplot \
+        graphviz \
+        libimage-size-perl \
+        imagemagick \
+        libwebp-dev \
+        libdbd-sqlite3-perl \
+        build-essential \
+        sqlite3 \
+        libgraphicsmagick1-dev \
+        graphicsmagick-libmagick-dev-compat \
+        libmagickcore-6-arch-config \
+        libfile-slurp-unicode-perl \
+        libencode-perl \
+        libcgal-dev \
+        libmoosex-getopt-perl \
+        git-annex \
+        libjson-perl \
+        jekyll \
+        haskell-stack \
