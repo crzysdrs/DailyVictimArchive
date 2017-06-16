@@ -6,17 +6,6 @@ import re
 import codecs
 import sqlite3
 
-def should_use_block(value):
-    for c in u"\u000a\u000d\u001c\u001d\u001e\u0085\u2028\u2029":
-        if c in value:
-            return True
-        return False
-
-def str_presenter(dumper, data):
-    if should_use_block(data):
-        return dumper.represent_scalar('tag:yaml.org,2002:str', data, style='>')
-    return dumper.represent_scalar('tag:yaml.org,2002:str', data)
-
 def yamltitle(s):
     s = re.sub('[^ a-zA-Z0-9]', '', s);
     s = re.sub(' ', '-', s)
@@ -37,7 +26,6 @@ def get_score(fm, date):
 
     return (score, count)
 
-#frontmatter.yaml.Dumper.add_representer(unicode, str_presenter)
 parser = argparse.ArgumentParser(description='Process Article into Frontmatter')
 parser.add_argument('fm_src', help='fm article')
 parser.add_argument('db', help='db')
@@ -62,7 +50,5 @@ post['votes'] = score[1]
 post['outlinks'] = map(lambda r : r['dst'], froms)
 post['inlinks'] = map(lambda r : r['src'], tos)
 
-#out = codecs.open(args.fm_target, 'w', 'utf-8')
 out = open(args.fm_target, 'w')
-#frontmatter.dump(post, out, Dumper=frontmatter.yaml.Dumper, allow_unicode=True)
 frontmatter.dump(post, out)

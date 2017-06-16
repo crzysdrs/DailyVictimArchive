@@ -49,8 +49,8 @@ for f in meta:
     redir.write("RewriteRule meta.php$ %s? [L,R=%d]\n" % (l, code))
 
 boring = {
-    'dv/reunion.php':'dv/map/reunion/'
+    'reunion.php':'map/reunion/'
 }
 
 for s, t in boring.iteritems():
-    redir.write('RewriteRule {}$ {} [L,R={code}]'.format(s, t, code=code))
+    redir.write('RewriteRule ^{}$ {} [L,R={code}]\n'.format(s, t, code=code))
