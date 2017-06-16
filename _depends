@@ -4,6 +4,7 @@ cpan install Lingua:EN:Titlecase:HTML
 pip install \
     python-frontmatter \
     pillow \
+    markdown \
 
 
 apt-get install \

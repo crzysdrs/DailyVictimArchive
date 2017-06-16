@@ -34,7 +34,7 @@ def remove_p(s):
     s = re.sub("</p>$", "", s)
     return s
 
-frontmatter.yaml.Dumper.add_representer(unicode, str_presenter)
+#frontmatter.yaml.Dumper.add_representer(unicode, str_presenter)
 parser = argparse.ArgumentParser(description='Process History into Frontmatter')
 parser.add_argument('article_dir', help='article dir')
 parser.add_argument('db_loc', help='database location')

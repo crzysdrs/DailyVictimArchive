@@ -37,7 +37,7 @@ def get_score(fm, date):
 
     return (score, count)
 
-frontmatter.yaml.Dumper.add_representer(unicode, str_presenter)
+#frontmatter.yaml.Dumper.add_representer(unicode, str_presenter)
 parser = argparse.ArgumentParser(description='Process Article into Frontmatter')
 parser.add_argument('fm_src', help='fm article')
 parser.add_argument('db', help='db')
@@ -62,5 +62,7 @@ post['votes'] = score[1]
 post['outlinks'] = map(lambda r : r['dst'], froms)
 post['inlinks'] = map(lambda r : r['src'], tos)
 
-out = codecs.open(args.fm_target, 'w', 'utf-8')
-frontmatter.dump(post, out, Dumper=frontmatter.yaml.Dumper, allow_unicode=True)
+#out = codecs.open(args.fm_target, 'w', 'utf-8')
+out = open(args.fm_target, 'w')
+#frontmatter.dump(post, out, Dumper=frontmatter.yaml.Dumper, allow_unicode=True)
+frontmatter.dump(post, out)
