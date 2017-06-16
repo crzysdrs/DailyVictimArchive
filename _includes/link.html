@@ -1,4 +1,4 @@
-{% assign maps = site.collections[2].docs | sort: 'title' %}
+{% assign maps = site.collections[1].docs | sort: 'title' %}
 {% for m in maps %}
 <a href="{{site.baseurl | append: m.url}}">{{m.title}}</a>
 {% endfor %}

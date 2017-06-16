@@ -16,7 +16,7 @@ layout: default
 	<th>Authors</th>
     </tr></thead>
     <tbody>
-      {% assign meta = site.collections[1].docs | sort: 'date' %}
+      {% assign meta = site.collections[2].docs | sort: 'date' %}
       {% for m in meta %}
       <tr class="Text" data-vicpicsmall="{{victim.vicpic_small}}">
 	<td class="nb">{{m.date | date: "%Y-%m-%d"}}</td>
@@ -36,7 +36,7 @@ layout: default
 	<th>Description</th>
     </tr></thead>
     <tbody>
-      {% assign maps = site.collections[2].docs | sort: 'title' %}
+      {% assign maps = site.collections[1].docs | sort: 'title' %}
       {% for m in maps %}
       <tr class="Text">
 	<td>
