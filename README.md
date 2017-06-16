@@ -22,6 +22,7 @@ the Daily Victim Archive.
 ```
 # Requires SuperUser permissions to install dependencies
 sudo ./_depends
+stack setup
 # Invoke Git Annex to Retrieve Binary Files (images)
 ./build extract
 ./build -j
