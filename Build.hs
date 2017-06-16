@@ -53,7 +53,7 @@ main = do
 
   phony "extract" $ do
     () <- cmd ["git", "annex", "init"]
-    Exit _ <- cmd ["git", "remote", "add", "web", "http://crzysdrs.sytes.net/dv.git"]
+    Exit _ <- cmd ["git", "remote", "add", "blockade_annex", "http://git.crzysdrs.net/git/DailyVictimArchive.git"]
     cmd ["git", "annex", "get", "."]
 
   cachedir <- newCache $ \globpath-> do
