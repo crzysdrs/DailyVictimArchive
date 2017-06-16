@@ -22,7 +22,7 @@ if not os.path.isdir(args.articledir):
 if not os.path.isdir(args.metadir):
     print "%s is not a directory!" % (args.metadir)
     sys.exit(1)
-  
+
 articles = glob.glob(args.articledir + "/*.md")
 
 redir = open(args.redir, "w")
@@ -47,3 +47,10 @@ for f in meta:
     l = l[1:]
     redir.write("RewriteCond %%{QUERY_STRING} ^id=%d$ [NC]\n" % (post['id']))
     redir.write("RewriteRule meta.php$ %s? [L,R=%d]\n" % (l, code))
+
+boring = {
+    'dv/reunion.php':'dv/map/reunion/'
+}
+
+for s, t in boring.iteritems():
+    redir.write('RewriteRule {}$ {} [L,R={code}]'.format(s, t, code=code))
