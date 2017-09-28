@@ -1,0 +1,4 @@
+#!/bin/bash
+rsync -v -ar --delete _site/ blockade:/var/www/dv
+ssh blockade 'find /var/www/dv/ -type d -exec chmod -R 555 {} \;'
+ssh blockade 'find /var/www/dv/ -type f -exec chmod -R 444 {} \;'
