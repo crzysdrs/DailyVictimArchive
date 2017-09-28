@@ -68,6 +68,7 @@ for f in files:
         'vicsmall':fm['vicpic_small'],
         'date':fm['date'],
         'votes':fm['votes'],
+        'url':fm['permalink'],
     }
 
     pattern = "img/[^\)\]]+"

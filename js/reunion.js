@@ -1,4 +1,4 @@
-var map, urls, articles, base_url;
+var map, articles, base_url;
 var reunion_json;
 var reunion_img_size = Math.pow(2,5);
 
@@ -58,7 +58,7 @@ function make_click(ids) {
 	for (var i = 0; i < ids.length; i++) {
 	    var id = ids[i]
 	    content += '<div style="overflow: auto;">';
-	    content += '<div><a href="' + urls[id] + '">' + articles[id]['title_html'] + '</a></div>';
+	    content += '<div><a href="/dv/victim/' + articles[id]['url'] + '">' + articles[id]['title_html'] + '</a></div>';
 	    content += '<div>';
 	    content += '<img style="float: left; height:100px; width:100px;" src="' + base_url + '/img/' + articles[id]['vicsmall'] + '" />';
 	    content += '<div style="float: right;">';
@@ -82,11 +82,10 @@ function make_click(ids) {
     }
 }
 
-function init_polys(set_base_url, set_map, set_articles, set_reunion, set_urls) {
+function init_polys(set_base_url, set_map, set_articles, set_reunion) {
     base_url = set_base_url;
     map = set_map;
     reunion_json = set_reunion
-    urls = set_urls
     articles = set_articles;
 
     for (var x in reunion_json) {

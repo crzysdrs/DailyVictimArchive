@@ -1,6 +1,5 @@
 var polys;
 var map;
-var urls;
 var articles;
 var base_url;
 
@@ -124,7 +123,7 @@ function make_click(id) {
 	var infoWindow = new google.maps.InfoWindow({
 	    content:
 	    '<div style="overflow: none;"><a href="'
-		+ urls[id] + '">'
+		+ '/dv/victim/' + articles[id]['url'] + '">'
 		+ articles[id]['title_html'] + '</a></div>',
 	    maxWidth:300
 	});
@@ -134,12 +133,11 @@ function make_click(id) {
     }
 }
 
-function init_polys(set_base_url, set_map, set_articles, set_polys, set_urls) {
+function init_polys(set_base_url, set_map, set_articles, set_polys) {
     base_url = set_base_url;
     articles = set_articles;
     map = set_map;
     polys = set_polys;
-    urls = set_urls;
     articles = set_articles;
     for (x in polys) {
 	polys[x]['poly'] = new google.maps.Polygon({

@@ -16,14 +16,11 @@ map_init: >
         $.getJSON( "{{ site.baseurl }}/js/json/reunion.json", function( json ) {
             polys = json;
         }).error(function(jqXHR, textStatus, errorThrown) { console.log("json error: " + textStatus);}),
-        $.getJSON( "{{ site.baseurl }}/js/links.json", function( json ) {
-            urls = json;
-            }).error(function(jqXHR, textStatus, errorThrown) { console.log("json error: " + textStatus);}),
         $.getJSON( "{{ site.baseurl }}/js/json/articles.json", function( json ) {
             articles = json;
         }).error(function(jqXHR, textStatus, errorThrown) { console.log("json error: " + textStatus);})
     ).then(function() {
-        init_polys({{ site.baseurl }}, map, articles, polys, urls);
+        init_polys({{ site.baseurl }}, map, articles, polys);
     });
     
 ---
