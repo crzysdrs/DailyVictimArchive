@@ -25,7 +25,8 @@ sudo ./_depends
 stack setup
 # Invoke Git Annex to Retrieve Binary Files (images)
 ./build extract
-./build -j
+# The production gets around an issue with Jekyll incorrectly copying symlinks
+JEKYLL_ENV=production ./build -j
 ```
 
 Optionally you can ```./build -j serve``` to view the in development
