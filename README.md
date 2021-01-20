@@ -11,13 +11,16 @@ This includes:
   * Graph of all connections
   * Group photo reunion
 * Site
-  * Jekyll Templates
+  * Zola Templates
   * Javascript/CSS
 
 ## Build
 
 If you are on Ubuntu 15.04, these steps should fully build the entirety of
 the Daily Victim Archive.
+
+**Warning** To build this it currently needs a pre-release version of Zola 0.14.0.
+
 
 ```
 # Requires SuperUser permissions to install dependencies
@@ -26,7 +29,7 @@ stack setup
 # Invoke Git Annex to Retrieve Binary Files (images)
 ./build extract
 # The production gets around an issue with Jekyll incorrectly copying symlinks
-JEKYLL_ENV=production ./build -j
+./build -j
 ```
 
 Optionally you can ```./build -j serve``` to view the in development
@@ -34,6 +37,6 @@ site locally in a web browser.
 
 ## Misc
 
-Git-Annex will get the archive from https://dl.dropboxusercontent.com/u/13119212/gamespy.tar.gz
+Git-Annex will get files found in [gamespy.tar.gz](https://crzysdrs.net/gamespy.tar.gz)
 
-The site based on these scripts is located at http://crzysdrs.sytes.net/dv/ .
+The site based on these scripts is located at http://crzysdrs.net/dv/ .
