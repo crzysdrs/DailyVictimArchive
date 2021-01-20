@@ -1,0 +1,8 @@
+{% if inline %}
+{% set block = "span" %}
+{% else %}
+{% set block = "p" %}
+{% endif %}
+<{{ block }} {% if class %} class="{{class}}" {% endif %} {% if style %} style="{{style}}" {% endif %} {% if id %} id="{{id}}" {% endif %}>
+     {{body | markdown(inline=true) | safe}}
+</{{block }}>

@@ -1,2 +1,0 @@
-#!/bin/bash
-rsync -v -ar --delete --chmod=D755,F644 --perms  _site/ blockade:/var/www/html/dv

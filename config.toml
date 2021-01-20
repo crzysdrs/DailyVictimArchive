@@ -1,0 +1,30 @@
+base_url = "https://crzysdrs.net/dv/"
+
+title = "Daily Victim Archive"
+default_language = "en"
+
+#theme="after-dark"
+theme="default"
+
+compile_sass = true
+
+taxonomies = [
+    # You can enable/disable RSS
+    {name = "categories", rss = true},
+    {name = "tags", rss = true},
+]
+
+[slugify]
+        paths = "safe"
+
+[link_checker]
+skip_prefixes = [
+              "http://web.archive.org"
+]
+
+[extra]
+        reverse = true
+        custom_header = false
+        custom_nav_footer = false
+        version = 1.0
+        

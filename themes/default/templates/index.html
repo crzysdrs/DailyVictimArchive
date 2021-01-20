@@ -1,0 +1,86 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+<script src="js/sort.js" type="text/javascript" defer="defer"></script>
+<!-- Posts -->
+<ul id="posts">
+  <h1>Just What <em>was</em> the Daily Victim?</h1>
+  <p>
+    The Daily Victim was GameSpy's daily tribute to the millions of fine people who populated Internet culture. Every weekday a new victim was posted. The most beloved victims returned in their full-color feature and continued story each week.
+  </p>
+  <h1>About The Daily Victim</h1>
+  <table id="meta_articles" class="display" cellpadding="0" cellspacing="0">
+    <thead><tr>
+	<th data-priority="2">Date</th>
+	<th data-priority="1">Title</th>
+	<th>Authors</th>
+    </tr></thead>
+    <tbody>
+      {% set meta = get_section(path="meta/_index.md") %}
+      {% for m in meta.pages %}
+      <tr class="Text">
+	<td class="nb">{{m.date | date(format="%Y-%m-%d") }}</td>
+	<td>
+	  <a href="{{m.permalink}}">{{m.title}}</a>
+	</td>
+	<td>{{m.extra.author}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h1>Visualizations</h1>
+  <table id="maps" class="display" cellpadding="0" cellspacing="0">
+    <thead><tr>
+	<th data-priority="1">Title</th>
+	<th>Description</th>
+    </tr></thead>
+    <tbody>
+      {% set maps = get_section(path="map/_index.md") %}
+      {% for m in maps.pages %}
+      <tr class="Text">
+	<td>
+	  <a href="{{m.permalink}}">{{m.title}}</a>
+	</td>
+        <td>{{ m.description }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+  <h1>The Daily Victims</h1>
+  <table id="dailyvictims" class="display" cellpadding="0" cellspacing="0">
+    <thead><tr>
+	<th data-priority="2">Date</th>
+	<th>Score</th>
+	<th>Votes</th>
+	<th>Links To This</th>
+        <!--
+	<th>Links In This</th>
+	<th>Total</th>
+	<th>Color</th>
+        -->
+	<th data-priority="1">Title</th>
+    </tr></thead>
+    <tbody>
+      {% set victims = get_section(path="victim/_index.md") %}
+      {% for victim in victims.pages %}
+      {% set inlink_len = victim.extra.inlinks | length %}
+      {% set outlink_len = victim.extra.outlinks | length %}
+      <tr class="Text" data-vicpicsmall="{{victim.extra.vicpic_small}}">
+	<td class="nb">{{victim.date | date(format="%Y-%m-%d") }}</td>
+	<td class="nb num">{{victim.extra.score | round(precision=2)}}</td>
+	<td class="nb num">{{victim.extra.votes}}</td>
+	<td class="nb num">{{inlink_len}}</td>
+        <!--
+	<td class="nb num">{{outlink_len}}</td>
+	<td class="nb num">{{inlink_len + outlink_len }}</td>
+	<td class="nb">{{victim.extra.color}}</td>
+        -->
+	<td><a href="{{victim.permalink}}">{{victim.title | markdown(inline=True) | striptags | safe }}</a>
+	</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</ul>
+{% endblock content %}

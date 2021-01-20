@@ -1,0 +1,97 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+<article id="post-page">
+  <h2>{{ page.title | markdown(inline=true) | safe}}</h2>
+    <time datetime="{{ page.date }}" class="by-line">{{ page.date }}</time>
+    <div class="content" style="overflow:auto;">
+        <img id="vicpic"
+             src="{{ config.base_url ~ '/img/' ~  page.extra.vicpic }}" />
+        {{ page.content | safe }}
+    </div>
+    <hr />
+    <div id="articleBlurb" style="overflow: auto;">
+        <img class="left"
+             src="{{ config.base_url ~ '/img/' ~ page.extra.vicpic_small  }}"
+             alt="Victim Pic Small" />
+        {{ page.extra.blurb | markdown | safe  }}
+    </div>
+    <hr />
+    {% if page.extra.score > 0 %}
+    <p style="text-align: right;">
+    <em>
+        <span rel="v:rating">
+	    <span typeof="v:Rating">
+	        Score: <span property="v:average">{{page.extra.score}}</span>;
+                <span property="v:best" content="10"/>
+                <span property="v:worst" content="1"/>
+	    </span>
+        </span>
+        Total Votes: <span property="v:votes">{{page.extra.votes}}</span> as of 2009-12-09.
+    </em>
+    </p>
+    <hr />
+    {% endif %}
+
+    <div style="overflow: auto;" >
+      {% if page.earlier %}
+    <p id="prevblock">
+        <a href="{{ page.earlier.permalink }}">
+            <img id="prev" class="left" src="{{ config.base_url }}/img/images/sub_layout/prev.gif" alt="Previous" /><br />
+            <img class="left"
+                 src="{{ config.base_url~ '/img/'~ page.earlier.extra.vicpic_small }}" />
+            <span id="prevtext">
+                {{ page.earlier.title | markdown(inline=true) | safe}}
+            </span>
+        </a>
+    </p>
+    {% endif %}
+    {% if page.later %}
+    <p id="nextblock">
+        <a href="{{ page.later.permalink }}">
+            <img id="next" class="right" src="{{ config.base_url }}/img/images/sub_layout/next.gif" alt="Next" /><br />
+            <img class="right"
+                 src="{{ config.base_url~ '/img/'~ page.later.extra.vicpic_small }}" />
+            <span id="nexttext">
+                {{ page.later.title | markdown(inline=true) | safe}}
+            </span>
+        </a>
+    </p>
+    {% endif %}
+    </div>
+    <p style="text-align: center;">
+        <a href="{{ config.base_url }}">Back To Index</a>
+    </p>
+    <hr />
+    
+    {% set inlinks_len = page.extra.inlinks | length %}
+    {% if inlinks_len > 0 %}    
+    <h3> Links to This Article </h3>
+    <ul class="viclist">
+      {% for inlink in page.extra.inlinks %}
+      <li>
+        {% set inlink_page = get_page(path="victim/" ~ inlink ~ ".md") %}
+            <img src="{{ config.base_url~ '/img/'~ inlink_page.extra.vicpic_small }}" />
+            <a href="{{ inlink_page.permalink }}">
+                {{ inlink_page.title | markdown(inline=true) | safe }}
+            </a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% set outlinks_len = page.extra.outlinks | length %}
+    {% if outlinks_len > 0 %}
+    <h3> Links In This Article </h3>
+    <ul class="viclist">
+      {% for outlink in page.extra.outlinks %}
+      <li>
+         {% set outlink_page = get_page(path="victim/" ~ outlink ~ ".md") %}
+            <img src="{{ config.base_url~ '/img/'~ outlink_page.extra.vicpic_small }}" />
+            <a href="{{ outlink_page.permalink }}">
+                {{ outlink_page.title | markdown(inline=true) | safe }}
+            </a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+</article>
+{%endblock content %}

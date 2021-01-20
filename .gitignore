@@ -4,16 +4,13 @@ archive.tar.bz2
 *.d
 history.d
 .tidayall.d
-alpha_data
-_build
-alpha_shape
+obj
+build
 dist
 .stack-work
+deploy
 
-#####=== Jekyll ===#####
-
-_site/
-.sass-cache/
-
-tiles
-_article
+static/tiles
+static/js/json
+public/
+content/victim/

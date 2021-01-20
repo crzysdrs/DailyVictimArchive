@@ -1,0 +1,33 @@
+<!-- Meta -->
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Jekyll">
+
+<title>{%if config.title %}{{ config.title | markdown(inline=true) | striptags | safe }}{% else %}{{ config.title }}{% endif %}</title>
+
+<!-- CSS & fonts -->
+<link rel="stylesheet" type='text/css' href="{{  config.base_url ~ "/main.css"  | safe }}">
+<link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900,400italic%7CSignika:700,300,400,600' rel='stylesheet' type='text/css'>
+
+<!-- RSS -->
+<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" />
+
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"/>
+<link type="text/css" rel="stylesheet" href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" />
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.css"/>
+<link type="stylesheet" src="//cdn.datatables.net/responsive/2.0.0/css/responsive.dataTables.min.css" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.js"></script>
+
+<script type="text/javascript" src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/responsive/2.0.0/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+<script type="text/javascript" src="{{ config.base_url ~ "/js/common.js" }} "></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+      article_jquery("{{ config.base_url | safe}}");
+  });
+</script>

@@ -1,0 +1,22 @@
+<nav {% if config.extra.reverse == true %}id="nav-left"{% else %}id="nav"{% endif %}>
+	<div id="nav-list">
+		<a href="{{ config.base_url }}">Home</a>
+
+		<!-- Nav pages -->
+                {% set maps = get_section(path="map/_index.md") %}
+                {% for m in maps.pages %}
+	        <a href="{{ m.permalink }}" title="{{ m.title }}">{{ m.title }}</a>
+	        {% endfor %}
+    <!-- Nav links -->
+	  {% include "layouts/includes/link.html" %}
+
+	</div>
+  
+  <!-- Nav footer -->
+	{% if config.extra.custom_nav_footer == true %}
+	  {% include "layouts/includes/nav-footer-custom.html" %}
+	{% else %}
+	  {% include "layouts/includes/nav-footer.html" %}
+	{% endif %}
+
+</nav>

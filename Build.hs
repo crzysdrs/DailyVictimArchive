@@ -12,19 +12,20 @@ import qualified Data.Map as Map
 import System.Process
 import Control.Monad
 
-builddir =  "_build"
-scriptdir = "_scripts"
-localdir = "_local"
+builddir =  "obj"
+srcdir = "src"
+scriptdir = srcdir </> "scripts"
 outdir = builddir </> "out"
+staticdir = "static"
 tmpdir = builddir </> "tmp"
-jsondir = outdir </> "json"
+jsondir = staticdir </> "js" </> "json"
 dagdir = outdir </> "dags"
 dbfile = outdir </> "dv.db"
 jsondb = jsondir </> "articles.json"
 mirrordir = builddir </> "archive" </> "mirror"
 archivedir = builddir </> "archive"
-localarticlemd id = "_local" </> "article" </> concat [id, ".md"]
-finalarticlemd id = outdir </> "article" </> concat [id, ".md"]
+localarticlemd id = srcdir </> "victim" </> concat [id, ".md"]
+finalarticlemd id = "content" </> "victim" </> concat [id, ".md"]
 alphadir = tmpdir </> "alpha"
 alphaout id = alphadir </> concat [id, ".alpha.png"]
 alphashape id = alphadir  </> concat [id, ".alpha_shape"]
@@ -34,7 +35,8 @@ historychart id = outdir </> "chart" </> concat [id, ".history.png"]
 dagfile id = outdir </> "dags" </> concat[id, ".png"]
 
 article_ids = [x | x <- [10..700], x /= 12, x /= 18, x /= 228, x /= 464]
-all_dags = map (dagfile . show) article_ids ++ [dagfile "all"]
+-- all_dags = map (dagfile . show) article_ids ++ [dagfile "all"]
+all_dags = [dagfile "all"]
 all_md = map (finalarticlemd . show) article_ids
 all_local_md = map (localarticlemd . show) article_ids
 all_alpha = map alphaout ((map show article_ids) ++ ["fargo", "hotsoup", "gabe"])
@@ -68,9 +70,9 @@ main = do
   [dbfile, jsondb] &%> \[db, j]  -> do
     need (all_local_md ++ [scriptdir </> "loaddb.py"])
     liftIO $ removeFiles "" [dbfile]
-    cmd ["." </> scriptdir </> "loaddb.py", "_local" </> "article", dbfile, j]
+    cmd ["." </> scriptdir </> "loaddb.py", srcdir </> "victim", dbfile, j]
 
-  outdir </> "tiles" </> "*" %> \t -> do
+  staticdir </> "tiles" </> "*" %> \t -> do
     let id = takeFileName t
     let tiles = "." </> scriptdir </> "create_tiles.pl"
     putNormal id
@@ -99,9 +101,9 @@ main = do
     let alpha_done_cmd = "." </> scriptdir </> "alpha_done.py"
     need [alpha_cmd, alpha_done_cmd]
     let id = (takeFileName . takeBaseName . takeBaseName) alpha
-    let alphadone = localdir </> "alpha_done" </> concat [id,  ".mask.png"]
-    let pre_alpha = localdir </> "alpha_data" </> concat [id, ".alpha"]
-    let base_img = "img" </> "victimpics" </> id
+    let alphadone = srcdir </> "alpha_done" </> concat [id,  ".mask.png"]
+    let pre_alpha = srcdir </> "alpha_data" </> concat [id, ".alpha"]
+    let base_img = staticdir </> "img" </> "victimpics" </> id
     png_exist <- Development.Shake.doesFileExist $ concat [base_img, ".png"]
     let img_path = if png_exist
                    then do
@@ -134,11 +136,11 @@ main = do
     need [localarticlemd id, dbfile, scriptdir </> "updatefm.py"]
     cmd [scriptdir </> "updatefm.py", localarticlemd id, dbfile, finalarticlemd id]
 
-  scriptdir </> "alpha_shape" %> \file -> do
+  builddir </> "alpha_shape" %> \file -> do
     let c = scriptdir </> "alpha_shape.c"
     need [c]
     Stdout magick <- cmd ["Magick++-config", "--cppflags", "--cxxflags", "--ldflags", "--libs"]
-    cmd (["g++", c, "-o", file, "-lCGAL", "-lgmp", "-frounding-math", "-g"] ++ (words magick))
+    cmd (["g++", c, "-o", file, "-lgmp", "-frounding-math", "-g"] ++ (words magick))
 
   [outdir </> "reunion.png", jsondir </> "reunion.json"] &%> \[png, json] -> do
     let comp = "." </> scriptdir </> "composite.pl"
@@ -153,36 +155,32 @@ main = do
 
   alphashape "*" %> \file -> do
     let id = (takeFileName . takeBaseName) file
-    let alphashape_cmd = "." </> scriptdir </> "alpha_shape"
+    let alphashape_cmd = "." </> builddir </> "alpha_shape"
     let src = tmpdir </> "alpha" </> concat [id, ".mask.png"]
     need [src, alphashape_cmd]
     () <- cmd [alphashape_cmd, file, src]
     cmd ["touch", file]
 
-  outdir </> "_redirect.htaccess" %> \r -> do
-    let redir = "." </> scriptdir </> "redirects.py"
-    all_meta <- getDirectoryFiles "_meta" ["//*.md"]
-    need ([redir, "_config.yml"] ++ all_md ++ map (\x -> "_meta" </> x) all_meta)
-    cmd [redir, "_meta", "_article", r]
+  -- outdir </> "_redirect.htaccess" %> \r -> do
+  --   let redir = "." </> scriptdir </> "redirects.py"
+  --   all_meta <- getDirectoryFiles "_meta" ["//*.md"]
+  --   need ([redir, "_config.yml"] ++ all_md ++ map (\x -> "_meta" </> x) all_meta)
+  --   cmd [redir, "_meta", "_article", r]
 
   phony "prereq" $ do
     need ([dbfile,
-           outdir </> "tiles" </> "reunion",
-           outdir </> "tiles" </> "all",
-           outdir </> "_redirect.htaccess"
+         staticdir </> "tiles" </> "reunion",
+         staticdir </> "tiles" </> "all"
+--           outdir </> "_redirect.htaccess"
           ] ++ all_dags ++ all_charts ++ all_md)
 
-  phony "jekyll_build" $ do
+  phony "zola_build" $ do
     need ["prereq"]
-    cmd ["jekyll", "build"]
+    cmd ["zola", "build"]
 
   phony "all" $ do
-    need ["jekyll_build"]
+    need ["zola_build"]
 
   phony "serve" $ do
     need ["prereq"]
-    cmd ["jekyll", "serve", "--watch"]
-
-  phony "dev" $ do
-    need ["prereq"]
-    cmd ["jekyll", "serve", "--watch", "--config", "_config.yml,_config.dev.yml"]
+    cmd ["zola", "serve"]

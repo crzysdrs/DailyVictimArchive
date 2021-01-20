@@ -1,0 +1,37 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+<article id="post-page">
+    <h2>{{ page.title | markdown(inline=true) |safe }}</h2>
+    <time datetime="{{ page.date | date(format="%Y-%m-%d") }}" class="by-line">{{ page.date | date(format="%Y-%m-%d") }}</time>
+    <div class="content" style="overflow: auto;">
+        {{ page.content |  safe }}
+    </div>
+    <hr />
+
+    <div style="overflow: auto;" >
+        {% if page.previous %}
+        <p class="prevnext" id="prevblock">
+            <a href="{{ config.base_url ~ page.previous.url }}">
+                <img id="prev" class="left" src="{{ config.base_url }}img/images/sub_layout/prev.gif" alt="Previous" /><br />
+                <span id="prevtext">
+                    {{ page.previous.title | markdown(inline=true) | safe }}
+                </span>
+            </a>
+        </p>
+        {% endif %}
+        {% if page.next %}
+        <p class="prevnext" id="nextblock">
+            <a href="{{ config.base_url ~ page.next.url }}">
+                <img id="next" class="right" src="{{ config.base_url }}img/images/sub_layout/next.gif" alt="Next" /><br />
+                <span id="nexttext">
+                    {{ page.next.title | markdown(inline=true) | safe}}
+                </span>
+            </a>
+        </p>
+        {% endif %}
+    </div>
+    <p style="text-align: center;">
+        <a href="{{ config.base_url }}">Back To Index</a>
+    </p>
+</article>
+{%endblock content %}

@@ -1,0 +1,8 @@
+{#
+{% assign maps = site.collections[1].docs | sort: 'title' %}
+{% for m in maps %}
+<a href="{{config.base_url ~ m.url}}">{{m.title}}</a>
+{% endfor %}
+#}
+
+<a href="https://github.com/crzysdrs/DailyVictimArchive">Project On Github</a>
