@@ -16,19 +16,12 @@ This includes:
 
 ## Build
 
-If you are on Ubuntu 15.04, these steps should fully build the entirety of
-the Daily Victim Archive.
-
-**Warning** To build this it currently needs a pre-release version of Zola 0.14.0.
-
+Requires docker with BuildKit, but otherwise should be pretty easy.
 
 ```
-# Requires SuperUser permissions to install dependencies
-sudo ./_depends
-stack setup
 # Invoke Git Annex to Retrieve Binary Files (images)
 ./build extract
-# The production gets around an issue with Jekyll incorrectly copying symlinks
+# Build all intermediates
 ./build -j
 ```
 
