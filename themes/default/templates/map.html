@@ -4,13 +4,13 @@
 <!--<script type="text/javascript" src="//maps.google.com/maps/api/js?libraries=geometry&sensor=false"></script>-->
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWIeYs-MfI8tXgPEn7yr8gJFQ0AfeZJN8&callback=do_map"
         type="text/javascript"></script>
-<script type="text/javascript" src="{{ config.base_url ~ "/js/map.js" }}"></script>
-<script type="text/javascript" src="{{ config.base_url ~ "/js/" ~ page.extra.tile_name ~ ".js" }}"></script>
+<script type="text/javascript" src="{{ config.base_url ~ "js/map.js" }}"></script>
+<script type="text/javascript" src="{{ config.base_url ~ "js/" ~ page.extra.tile_name ~ ".js" }}"></script>
 <script type="text/javascript">
   function do_map() {
       var map = init_map(
           'google-map',
-          '{{ config.base_url ~ '/tiles/' }}',
+          '{{ config.base_url ~ 'tiles/' }}',
           '{{ page.extra.tile_name}}',
           {{ page.extra.min_zoom }},
           {{ page.extra.max_zoom }}
@@ -19,10 +19,10 @@
       console.log("Do Map");
       var polys, urls, articles;
       $.when(
-          $.getJSON( "{{ config.base_url | safe }}/js/json/{{ page.extra.tile_name }}.json", function( json ) {
+          $.getJSON( "{{ config.base_url | safe }}js/json/{{ page.extra.tile_name }}.json", function( json ) {
               polys = json;
           }).error(function(jqXHR, textStatus, errorThrown) { console.log("json error: " + textStatus);}),
-          $.getJSON( "{{ config.base_url | safe }}/js/json/articles.json", function( json ) {
+          $.getJSON( "{{ config.base_url | safe }}js/json/articles.json", function( json ) {
               articles = json;
           }).error(function(jqXHR, textStatus, errorThrown) { console.log("json error: " + textStatus);})
       ).then(function() {

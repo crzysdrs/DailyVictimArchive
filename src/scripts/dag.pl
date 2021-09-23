@@ -129,9 +129,10 @@ if ($id ne 'all') {
     my $all_png   = $dagdir . "/all.png";
     my $all_plain = $dagdir . "/all.plain";
     my $all_map   = $dagdir . "/all.map";
+    my $all_svg   = $dagdir . "/all.svg";
     
     open my $pipe,
-      "| ccomps -x -z | dot | gvpack -g | sed -e 's/label=\"[^\"]*\",\\?//ig' | neato -Nlabel= -s -y -n2 -Tpng -o $all_png -Tplain -o $all_plain -Tcmapx -o $all_map";
+      "| ccomps -x -z | dot | gvpack -g | sed -e 's/label=\"[^\"]*\",\\?//ig' | neato -Nlabel= -s -y -n2 -Tpng -o $all_png -Tplain -o $all_plain -Tcmapx -o $all_map -Tsvg -o $all_svg";
 
     binmode ($pipe, ":utf8");
 

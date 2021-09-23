@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import frontmatter
 import argparse
 from PIL import Image
@@ -43,7 +43,7 @@ else:
     img = "static/img/" + post['vicpic']
     
 if not os.path.isfile(img):
-    print "%s does not exist!" % img
+    print("%s does not exist!" % img)
     sys.exit(1)
 
 if args.if_exists == img:

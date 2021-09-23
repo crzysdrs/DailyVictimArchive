@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import subprocess
 import sqlite3
 import argparse
@@ -35,7 +35,7 @@ args = parser.parse_args()
 fm = frontmatter.load(args.article_fm)
 
 scoredate = "2009-12-09 15:45:37"
-score = filter(lambda x : x['date'] == scoredate, fm['history'])
+score = list(filter(lambda x : x['date'] == scoredate, fm['history']))
 
 if len(score) == 1:
     plot = subprocess.Popen(['gnuplot'], stdin=subprocess.PIPE)

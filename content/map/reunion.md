@@ -16,10 +16,10 @@ extra:
         console.log("Do Map");
         var polys, urls, articles;
         $.when(
-            $.getJSON( "{{ site.baseurl }}/js/json/reunion.json", function( json ) {
+            $.getJSON( "{{ site.baseurl }}js/json/reunion.json", function( json ) {
                 polys = json;
             }).error(function(jqXHR, textStatus, errorThrown) { console.log("json error: " + textStatus);}),
-        $.getJSON( "{{ site.baseurl }}/js/json/articles.json", function( json ) {
+        $.getJSON( "{{ site.baseurl }}js/json/articles.json", function( json ) {
             articles = json;
         }).error(function(jqXHR, textStatus, errorThrown) { console.log("json error: " + textStatus);})
         ).then(function() {

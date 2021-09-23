@@ -5,13 +5,13 @@
     <time datetime="{{ page.date }}" class="by-line">{{ page.date }}</time>
     <div class="content" style="overflow:auto;">
         <img id="vicpic"
-             src="{{ config.base_url ~ '/img/' ~  page.extra.vicpic }}" />
+             src="{{ config.base_url ~ 'img/' ~  page.extra.vicpic }}" />
         {{ page.content | safe }}
     </div>
     <hr />
     <div id="articleBlurb" style="overflow: auto;">
         <img class="left"
-             src="{{ config.base_url ~ '/img/' ~ page.extra.vicpic_small  }}"
+             src="{{ config.base_url ~ 'img/' ~ page.extra.vicpic_small  }}"
              alt="Victim Pic Small" />
         {{ page.extra.blurb | markdown | safe  }}
     </div>
@@ -36,9 +36,9 @@
       {% if page.earlier %}
     <p id="prevblock">
         <a href="{{ page.earlier.permalink }}">
-            <img id="prev" class="left" src="{{ config.base_url }}/img/images/sub_layout/prev.gif" alt="Previous" /><br />
+            <img id="prev" class="left" src="{{ config.base_url }}img/images/sub_layout/prev.gif" alt="Previous" /><br />
             <img class="left"
-                 src="{{ config.base_url~ '/img/'~ page.earlier.extra.vicpic_small }}" />
+                 src="{{ config.base_url~ 'img/'~ page.earlier.extra.vicpic_small }}" />
             <span id="prevtext">
                 {{ page.earlier.title | markdown(inline=true) | safe}}
             </span>
@@ -48,9 +48,9 @@
     {% if page.later %}
     <p id="nextblock">
         <a href="{{ page.later.permalink }}">
-            <img id="next" class="right" src="{{ config.base_url }}/img/images/sub_layout/next.gif" alt="Next" /><br />
+            <img id="next" class="right" src="{{ config.base_url }}img/images/sub_layout/next.gif" alt="Next" /><br />
             <img class="right"
-                 src="{{ config.base_url~ '/img/'~ page.later.extra.vicpic_small }}" />
+                 src="{{ config.base_url~ 'img/'~ page.later.extra.vicpic_small }}" />
             <span id="nexttext">
                 {{ page.later.title | markdown(inline=true) | safe}}
             </span>
@@ -70,7 +70,7 @@
       {% for inlink in page.extra.inlinks %}
       <li>
         {% set inlink_page = get_page(path="victim/" ~ inlink ~ ".md") %}
-            <img src="{{ config.base_url~ '/img/'~ inlink_page.extra.vicpic_small }}" />
+            <img src="{{ config.base_url~ 'img/'~ inlink_page.extra.vicpic_small }}" />
             <a href="{{ inlink_page.permalink }}">
                 {{ inlink_page.title | markdown(inline=true) | safe }}
             </a>
@@ -85,7 +85,7 @@
       {% for outlink in page.extra.outlinks %}
       <li>
          {% set outlink_page = get_page(path="victim/" ~ outlink ~ ".md") %}
-            <img src="{{ config.base_url~ '/img/'~ outlink_page.extra.vicpic_small }}" />
+            <img src="{{ config.base_url~ 'img/'~ outlink_page.extra.vicpic_small }}" />
             <a href="{{ outlink_page.permalink }}">
                 {{ outlink_page.title | markdown(inline=true) | safe }}
             </a>

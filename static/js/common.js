@@ -29,12 +29,12 @@ function article_jquery(base_url) {
 	    text: function(event, api) {
 		var id = $(this).attr('href').match(/\/victim\/([0-9]+)/)[1];
 		$.ajax({
-		    url: base_url + '/js/json/articles.json',
+		    url: base_url + 'js/json/articles.json',
 		    type: 'GET',
 		    dataType: 'json',
 		}).then(function(data) {
 		    var data_id = data[id];
-		    var content = '<img style="float: left"; height="100px" width="100px" src="' + base_url + '/img/' + data_id['vicsmall'] + '" />';
+		    var content = '<img style="float: left"; height="100px" width="100px" src="' + base_url + 'img/' + data_id['vicsmall'] + '" />';
 		    content += '<div style="float: right;">';
 		    content += '<table>';
 		    content += '<tr><td><strong>Date</strong></td><td>' + data_id['date'] + '</td></tr>';

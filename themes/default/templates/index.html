@@ -68,8 +68,8 @@
       {% set outlink_len = victim.extra.outlinks | length %}
       <tr class="Text" data-vicpicsmall="{{victim.extra.vicpic_small}}">
 	<td class="nb">{{victim.date | date(format="%Y-%m-%d") }}</td>
-	<td class="nb num">{{victim.extra.score | round(precision=2)}}</td>
-	<td class="nb num">{{victim.extra.votes}}</td>
+	<td class="nb num">{{victim.extra.score | float | round(precision=2)}}</td>
+	<td class="nb num">{{victim.extra.votes | num_format }}</td>
 	<td class="nb num">{{inlink_len}}</td>
         <!--
 	<td class="nb num">{{outlink_len}}</td>

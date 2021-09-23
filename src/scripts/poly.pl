@@ -4,9 +4,10 @@ use Image::Size;
 use DBI;
 use JSON;
 
-my ($dbfile, $original, $square, $plain, $map, $output) = @ARGV;
+my ($dbfile, $original, $plain, $map, $svg, $output) = @ARGV;
+print(@ARGV);
 my $dbh = DBI->connect("dbi:SQLite:dbname=$dbfile", "", "");
-create_poly($dbh, $original, '', $square, $plain, $map, $output);
+create_poly($dbh, $original, $plain, $map, $output);
 
 sub new_loc($$$) {
     my ($scale, $off, $pixel) = @_;
@@ -20,7 +21,7 @@ sub plain($$$) {
 }
 
 sub create_poly($$$$$$) {
-    my ($dbh, $original, $square, $plain, $map, $output) = @_;
+    my ($dbh, $original, $plain, $map, $output) = @_;
     my $node_conn = $dbh->prepare(
         "SELECT src, dst FROM conns WHERE conns.src=? OR conns.dst=?");
     my $node = $dbh->prepare("SELECT title FROM article WHERE id=?");

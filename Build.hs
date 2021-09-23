@@ -41,9 +41,9 @@ all_md = map (finalarticlemd . show) article_ids
 all_local_md = map (localarticlemd . show) article_ids
 all_alpha = map alphaout ((map show article_ids) ++ ["fargo", "hotsoup", "gabe"])
 all_shapes = map (alphashape . show) article_ids ++ map alphashape ["fargo", "hotsoup", "gabe"]
-all_charts = map (scorechart . show) article_ids ++ map (historychart . show) article_ids
+-- all_charts = map (scorechart . show) article_ids ++ map (historychart . show) article_ids
 
-dagfiles id = [dagdir </> concat [id,  x] | x <- [".png", ".plain", ".map"]]
+dagfiles id = [dagdir </> concat [id,  x] | x <- [".png", ".plain", ".map", ".svg"]]
 
 feather_size = 2
 main :: IO ()
@@ -72,19 +72,20 @@ main = do
     liftIO $ removeFiles "" [dbfile]
     cmd ["." </> scriptdir </> "loaddb.py", srcdir </> "victim", dbfile, j]
 
-  staticdir </> "tiles" </> "*" %> \t -> do
-    let id = takeFileName t
+  staticdir </> "tiles" </> "*" </> "0" </> "0-0.jpg" %> \t -> do
+    let id = takeFileName $ dropTrailingPathSeparator $ dropFileName $ dropTrailingPathSeparator $ dropFileName t
+
     let tiles = "." </> scriptdir </> "create_tiles.pl"
     putNormal id
     let dfile = case id of
                    "all" -> outdir </> "dags" </> "all.png"
                    "reunion" -> outdir </> "reunion.png"
-                   _ -> error "Unknown tiled image"
+                   _ -> error ("Unknown tiled image " ++ id)
     need [dfile]
     when (id == "all") $ need [jsondir </> "all.json"]
-    cmd [tiles, "-v", "--path", dropFileName t, dfile]
+    cmd [tiles, "-v", "--path", staticdir </> "tiles", dfile]
 
-  dagfiles "*" &%> \[dpng, dmap, dplain] -> do
+  dagfiles "*" &%> \[dpng, dmap, dplain, dsvg] -> do
     let id = takeFileName $ dropExtension $ dpng
     let dag = "." </> scriptdir </> "dag.pl"
     need [dag,  dbfile]
@@ -147,11 +148,11 @@ main = do
     need $ [comp] ++ all_alpha ++ all_shapes
     cmd [comp, dbfile, alphadir, png, json]
 
-  [scorechart "*", historychart "*"] &%> \[score, history] -> do
-    let id = (takeFileName . takeBaseName . takeBaseName) score
-    let plot = "." </> scriptdir </> "plot.py"
-    need [plot, localarticlemd id]
-    cmd [plot, localarticlemd id, scorechart id, historychart id]
+  -- [scorechart "*", historychart "*"] &%> \[score, history] -> do
+  --   let id = (takeFileName . takeBaseName . takeBaseName) score
+  --   let plot = "." </> scriptdir </> "plot.py"
+  --   need [plot, localarticlemd id]
+  --   cmd [plot, localarticlemd id, scorechart id, historychart id]
 
   alphashape "*" %> \file -> do
     let id = (takeFileName . takeBaseName) file
@@ -169,10 +170,12 @@ main = do
 
   phony "prereq" $ do
     need ([dbfile,
-         staticdir </> "tiles" </> "reunion",
-         staticdir </> "tiles" </> "all"
+         staticdir </> "tiles" </> "reunion" </> "0" </> "0-0.jpg",
+         staticdir </> "tiles" </> "all" </> "0" </> "0-0.jpg"
 --           outdir </> "_redirect.htaccess"
-          ] ++ all_dags ++ all_charts ++ all_md)
+          ] ++ all_dags
+          -- ++ all_charts
+          ++ all_md)
 
   phony "zola_build" $ do
     need ["prereq"]
@@ -183,4 +186,4 @@ main = do
 
   phony "serve" $ do
     need ["prereq"]
-    cmd ["zola", "serve"]
+    cmd ["zola", "serve", "-i", "0.0.0.0", "-u", "localhost"]

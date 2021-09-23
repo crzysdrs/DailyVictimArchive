@@ -1,4 +1,19 @@
-#!/bin/sh -e
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
 
-stack build
-stack exec -- shakefile "$@"
+export DOCKER_BUILDKIT=1
+docker build --progress=plain  . -t dva-build --build-arg UID=$(id -u) --build-arg GID=$(id -g)
+command="cd /dva \
+       && stack build \
+       && stack exec -- shakefile "$@" \
+       "
+echo $command
+
+docker run       \
+       -it \
+       -p 1111:1111 \
+       --mount type=bind,src=$(pwd),target=/dva  \
+       --mount type=bind,src=$HOME/.stack,target=/home/dva/.stack  \
+       dva-build \
+       sh -c $command

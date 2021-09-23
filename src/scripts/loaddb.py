@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import sqlite3
 import glob
 import argparse
@@ -11,7 +11,7 @@ import markdown
 
 def find_articles(id, s):
     articles = re.findall("@/victim/([0-9]+).md", s)
-    articles = map(lambda x: (id, int(x)), articles)
+    articles = list(map(lambda x: (id, int(x)), articles))
     return articles
 
 def remove_html(s):
@@ -33,7 +33,7 @@ if os.path.isfile(args.db_loc):
     os.remove(args.db_loc)
 
 if not os.path.isdir(args.article_dir):
-    print "%s is not a directory!" % (args.article_dir)
+    print("%s is not a directory!" % (args.article_dir))
     sys.exit(1)
 
 conn = sqlite3.connect(args.db_loc)
@@ -72,14 +72,14 @@ for f in files:
     }
 
     pattern = "img/[^\)\]]+"
-    imgs = map(lambda s: "static/" + s, re.findall(pattern, fm.content))
-    imgs += map(lambda s: "static/" + s, re.findall(pattern, fm['blurb']))
+    imgs = list(map(lambda s: "static/" + s, re.findall(pattern, fm.content)))
+    imgs += list(map(lambda s: "static/" + s, re.findall(pattern, fm['blurb'])))
     imgs += ["static/img/" + fm['vicpic_small']]
     imgs += ["static/img/" + fm['vicpic']]
 
     for i in imgs:
         if not os.path.exists(i):
-            print "Missing " + f + " " + i
+            print("Missing " + f + " " + i)
             missing.append(i)
 
     allimgs += imgs
@@ -95,7 +95,7 @@ j = open(args.json, 'w')
 j.write(json.dumps(json_articles))
 j.close()
 
-print "Missing {}/{} Images".format(len(missing), len(allimgs))
+print("Missing {}/{} Images".format(len(missing), len(allimgs)))
 
 if len(missing) > 0:
     sys.exit(1)
