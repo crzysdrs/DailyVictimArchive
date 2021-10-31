@@ -21,12 +21,12 @@
     <em>
         <span rel="v:rating">
 	    <span typeof="v:Rating">
-	        Score: <span property="v:average">{{page.extra.score}}</span>;
+	        Score: <span property="v:average">{{page.extra.score | float | round(precision=2) }}</span>;
                 <span property="v:best" content="10"/>
                 <span property="v:worst" content="1"/>
 	    </span>
         </span>
-        Total Votes: <span property="v:votes">{{page.extra.votes}}</span> as of 2009-12-09.
+        Total Votes: <span property="v:votes">{{page.extra.votes | num_format}}</span> as of 2009-12-09.
     </em>
     </p>
     <hr />
@@ -36,7 +36,7 @@
       {% if page.earlier %}
     <p id="prevblock">
         <a href="{{ page.earlier.permalink }}">
-            <img id="prev" class="left" src="{{ config.base_url }}img/images/sub_layout/prev.gif" alt="Previous" /><br />
+            <img id="prev" class="left" src="{{ config.base_url }}img/images/sub_layout/prev.png" alt="Previous" /><br />
             <img class="left"
                  src="{{ config.base_url~ 'img/'~ page.earlier.extra.vicpic_small }}" />
             <span id="prevtext">
@@ -48,7 +48,7 @@
     {% if page.later %}
     <p id="nextblock">
         <a href="{{ page.later.permalink }}">
-            <img id="next" class="right" src="{{ config.base_url }}img/images/sub_layout/next.gif" alt="Next" /><br />
+            <img id="next" class="right" src="{{ config.base_url }}img/images/sub_layout/next.png" alt="Next" /><br />
             <img class="right"
                  src="{{ config.base_url~ 'img/'~ page.later.extra.vicpic_small }}" />
             <span id="nexttext">

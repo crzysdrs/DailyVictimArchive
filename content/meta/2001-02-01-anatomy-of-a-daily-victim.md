@@ -62,7 +62,7 @@ them up:
 
 <div class="center">
 {% css_class(class="center caption") %}
-[![](/img/columns/image/feb04_planetfargo_sketch.jpg)](/img/columns/image/feb04_planetfargo_sketchbig.jpg)  
+[![](/img/columns/image/feb04_planetfargo_sketch.png)](/img/columns/image/feb04_planetfargo_sketchbig.png)  
 The original sketch, all rough-lookin'.
 {% end %}
 </div>
@@ -209,7 +209,7 @@ them around until they strike me as plausible, but ridiculous. :)
 **How Do I Get Good At Writing?**
 
 {% css_class(class="float-right caption") %}
-![](/img/columns/image/feb04_planetfargo_dotcoms.jpg)  
+![](/img/columns/image/feb04_planetfargo_dotcoms.png)  
 Tip 54: Make fun of dot.com companies.
 {% end %}
 
@@ -266,7 +266,7 @@ funny story though -- so I ran with it.
 **Different Victims for Different Folks**
 
 {% css_class(class="float-left caption") %}
-![](/img/columns/image/feb04_planetfargo_smacktalk.jpg)  
+![](/img/columns/image/feb04_planetfargo_smacktalk.png)  
 I really liked this guy, but he scored really low. Ah well.
 {% end %}
 

@@ -5,15 +5,18 @@ IFS=$'\n\t'
 export DOCKER_BUILDKIT=1
 docker build --progress=plain  . -t dva-build --build-arg UID=$(id -u) --build-arg GID=$(id -g)
 command="cd /dva \
-       && stack build \
-       && stack exec -- shakefile "$@" \
+       && make $@ 
        "
 echo $command
 
 docker run       \
        -it \
+       --rm \
+       --user dva \
        -p 1111:1111 \
        --mount type=bind,src=$(pwd),target=/dva  \
-       --mount type=bind,src=$HOME/.stack,target=/home/dva/.stack  \
+       --mount "type=volume,source=cargoreg,destination=/home/dva/.cargo/registry" \
+       --mount "type=volume,source=cargogit,destination=/home/dva/.cargo/git" \
        dva-build \
        sh -c $command
+        

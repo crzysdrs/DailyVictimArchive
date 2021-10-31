@@ -10,7 +10,7 @@ extra:
 <div class="center" markdown="1">
 
 {% css_class(class="bigcaption") %}
-![](/img/columns/image/article/952/952145/planetfargo-a-fond-farewell.jpg)
+![](/img/columns/image/article/952/952145/planetfargo-a-fond-farewell.png)
 The Daily Victim cast during the HotSoup era...
 {% end %}
 

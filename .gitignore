@@ -12,5 +12,8 @@ deploy
 
 static/tiles
 static/js/json
+static/img/sprites.png
+static/img/dag.svg
+static/img/reunion.png
 public/
 content/victim/

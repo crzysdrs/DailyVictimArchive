@@ -9,33 +9,14 @@ RUN apt-get update \
     && apt-get -y --no-install-recommends install \
         gnuplot \
         graphviz \
-        libimage-size-perl \
         imagemagick \
-        libwebp-dev \
-        libdbd-sqlite3-perl \
         build-essential \
-        sqlite3 \
-        libgraphicsmagick1-dev \
-        graphicsmagick-libmagick-dev-compat \
-        libmagickcore-6-arch-config \
-        libfile-slurp-unicode-perl \
-        libencode-perl \
         libcgal-dev \
-        libmoosex-getopt-perl \
         git-annex \
-        libjson-perl \
-        haskell-stack \
-        python3 \
-        python3-pip \
         bc \
+        libclang-dev \
+        ca-certificates \
         && apt-get clean
-
-RUN cpan install Lingua:EN:Titlecase:HTML
-
-RUN python3 -m pip install \
-    python-frontmatter \
-    pillow \
-    markdown
 
 ARG ZOLA_VERSION=v0.14.1
 ARG ZOLA_TARGET=x86_64-unknown-linux-gnu
@@ -46,8 +27,6 @@ RUN curl -L https://github.com/getzola/zola/releases/download/$ZOLA_VERSION/$ZOL
 RUN curl -L "http://www.fmwconcepts.com/imagemagick/downloadcounter.php?scriptname=feather&dirname=feather" -o /usr/bin/feather \
     && chmod +x /usr/bin/feather
 
-RUN stack upgrade
-
 RUN groupadd -g $GID -o dva \
     && useradd -m -u $UID -g $GID -o -s /bin/bash dva \
     && usermod -aG sudo -aG plugdev dva \
@@ -55,3 +34,8 @@ RUN groupadd -g $GID -o dva \
 
 WORKDIR /dva
 USER dva
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+RUN mkdir ~/.cargo/git ~/.cargo/registry
+ENV PATH=/home/dva/.cargo/bin:$PATH

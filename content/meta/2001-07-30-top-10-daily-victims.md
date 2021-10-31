@@ -280,7 +280,7 @@ she has to say at this poor (possibly frightened) bird.
 
 **1. [Creeping Horror at Palace Park Amusements](@/victim/190.md)**
 
-[![](/img/top10/july01/victims/1.gif)](@/victim/190.md)
+[![](/img/top10/july01/victims/1.png)](@/victim/190.md)
 
   
  Certainly the best Daily Victim to date, this is also one of the best

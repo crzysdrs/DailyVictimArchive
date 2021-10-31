@@ -1,0 +1,12 @@
+[package]
+name = "svg"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+dot = {path="../dot"}
+svg = "0.10.0"
+image = "0.23.14"
+common = {path="../common"}

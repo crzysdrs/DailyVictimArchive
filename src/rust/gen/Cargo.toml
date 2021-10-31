@@ -1,0 +1,26 @@
+[package]
+name = "gen"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+common = {path="../common"}
+walkdir = "2.3.2"
+frontmatter = "0.4.0"
+serde-frontmatter = "0.1.0"
+serde = {version="1.0.127", features=["derive"]}
+re = "0.1.0"
+comrak = "0.11.0"
+regex = "1.5.4"
+clap = {version="3.0.0-beta.5"}
+serde_json = "1.0.66"
+alpha = {path="../alpha"}
+image = "0.23.14"
+tempfile = "3.2.0"
+rayon = "1.5.1"
+resvg = "0.15.0"
+usvg = "0.15.0"
+tiny-skia = "0.5.1"
+svg = {path="../svg"}

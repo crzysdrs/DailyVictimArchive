@@ -1,0 +1,8 @@
+[workspace]
+members = [
+        "common",
+        "dot",
+        "svg",
+        "gen",
+        "alpha",
+]
