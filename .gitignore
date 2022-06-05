@@ -17,3 +17,6 @@ static/img/dag.svg
 static/img/reunion.png
 public/
 content/victim/
+**/target
+**/feather*.mpc
+**/feather*.cache

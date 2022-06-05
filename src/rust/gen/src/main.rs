@@ -1,5 +1,6 @@
 use alpha::cgal_alpha_shape;
 use clap::Parser;
+use cmd_lib::run_cmd;
 use common::{Article, ArticleRef, Votes};
 use image::{ImageBuffer, Rgba};
 use rayon::prelude::*;
@@ -156,7 +157,6 @@ fn analyze_markdown(body: &str) -> (Vec<PathBuf>, Vec<ArticleRef>) {
 
     (imgs, conns)
 }
-
 fn main() -> std::io::Result<()> {
     let opts: Opts = Opts::parse();
 
@@ -343,81 +343,30 @@ fn create_dag(
     articles: &HashMap<ArticleRef, Article>,
 ) -> Result<(), std::io::Error> {
     use std::io::Write;
-    use std::process::{Command, Stdio};
-    let chained = vec![
-        (
-            {
-                let mut c = Command::new("ccomps");
-                c.args(&["-x", "-z"]);
-                c
-            },
-            1,
-        ),
-        (Command::new("dot"), 0),
-        (
-            {
-                let mut c = Command::new("gvpack");
-                c.arg("-g");
-                c
-            },
-            0,
-        ),
-        (
-            {
-                let mut c = Command::new("neato");
-                c.arg("-s")
-                    .arg("-y")
-                    .arg("-n2")
-                    .arg("-Tplain")
-                    .arg("-o")
-                    .arg(plain);
-                c
-            },
-            0,
-        ),
-    ];
-    let mut pipe = None;
-    let mut children = chained
-        .into_iter()
-        .map(|(mut p, ret)| {
-            if let Some(pipe) = pipe.take() {
-                p.stdin(pipe);
-            } else {
-                p.stdin(Stdio::piped());
-            }
-            p.stdout(Stdio::piped());
-            let mut child = p.spawn().unwrap();
-            pipe = child.stdout.take();
-            (child, ret)
-        })
-        .collect::<Vec<_>>();
-    {
-        let mut out = children[0].0.stdin.take().unwrap();
+    let mut out = tempfile::NamedTempFile::new().unwrap();
 
-        writeln!(out, "digraph G {{")?;
-        writeln!(out, "graph[size=\"7.75,10.25\"];")?;
-        for (_, v) in articles {
-            writeln!(
-                out,
-                "{} [nodesep=0.75,shape=square,image=\"{}\"];",
-                v.id.0,
-                root.join("static")
-                    .join("img")
-                    .join(&v.vicpic_small)
-                    .display()
-            )?;
-            for c in &v.conns {
-                writeln!(out, "{} -> {};", v.id.0, c.0)?;
-            }
+    writeln!(out, "digraph G {{")?;
+    writeln!(out, "graph[size=\"7.75,10.25\"];")?;
+    for (_, v) in articles {
+        writeln!(
+            out,
+            "{} [nodesep=0.75,shape=square,image=\"{}\"];",
+            v.id.0,
+            root.join("static")
+                .join("img")
+                .join(&v.vicpic_small)
+                .display()
+        )?;
+        for c in &v.conns {
+            writeln!(out, "{} -> {};", v.id.0, c.0)?;
         }
-
-        writeln!(out, "}}")?;
     }
 
-    for (mut c, ret) in children {
-        let exit = c.wait()?;
-        assert_eq!(Some(ret), exit.code());
-    }
+    writeln!(out, "}}")?;
+
+    let out_path = out.path();
+
+    run_cmd!(ignore ccomps -x -z ${out_path} | dot | gvpack -g | neato -s -y -n2 -Tplain -o ${plain})?;
 
     Ok(())
 }
@@ -446,11 +395,17 @@ fn alpha_mask(id: ArticleRef, img: &Path, mask: &Path, alpha_data: &Path) {
         _ => 0.5,
     } * 100.0;
 
-    let mut floods = vec![];
-    let matte = |v| format!("matte {} floodfill", v);
-    let (w, _h) = image::io::Reader::open(img).unwrap().into_dimensions().unwrap();
-    floods.push(matte(format!("{},{}", w - 1, 0)));
-    floods.push(matte(format!("{},{}", 0, 0)));
+    use std::borrow::Cow;
+    let mut floods: Vec<Cow<str>> = vec![];
+    let matte = |v: &mut Vec<Cow<str>>, r| {
+        v.extend(["-draw".into(), format!("matte {} floodfill", r).into()])
+    };
+    let (w, _h) = image::io::Reader::open(img)
+        .unwrap()
+        .into_dimensions()
+        .unwrap();
+    matte(&mut floods, format!("{},{}", w - 1, 0));
+    matte(&mut floods, format!("{},{}", 0, 0));
 
     if alpha_data.exists() {
         let alpha_data = std::fs::File::open(alpha_data).unwrap();
@@ -458,46 +413,20 @@ fn alpha_mask(id: ArticleRef, img: &Path, mask: &Path, alpha_data: &Path) {
 
         for l in alpha_buf.lines() {
             let l = l.unwrap();
-            floods.push(matte(l));
+            matte(&mut floods, l);
         }
     }
-
-    let mut cmd = std::process::Command::new("convert");
-    cmd.arg(img)
-        .args(&["-alpha", "set", "-channel", "RGBA", "-fuzz"])
-        .arg(format!("{}%", threshold))
-        .args(&["-fill", "none"]);
-
-    for f in floods {
-        cmd.arg("-draw").arg(f);
-    }
-
-    cmd
-        //.args(&["-shave", "1x1"])
-        .arg(&alpha)
-        .spawn()
-        .expect("Spawn convert")
-        .wait()
-        .unwrap();
-
-    std::process::Command::new("convert")
-        .arg(&alpha)
-        .arg("-alpha")
-        .arg("extract")
-        .arg(mask)
-        .spawn()
-        .expect("Convert alpha mask")
-        .wait()
-        .unwrap();
-
     let feather_size = 2;
-    std::process::Command::new("feather")
-        .arg("-d")
-        .arg(format!("{}", feather_size))
-        .arg(mask)
-        .arg(mask)
-        .spawn()
-        .expect("Feather alpha mask");
+
+    //let floods: Vec<_> = floods.iter().map(|f| f.as_ref()).collect();
+    let floods = floods.iter().map(|f| f.as_ref());
+
+    run_cmd!(
+        convert ${img} -alpha set -channel RGBA -fuzz ${threshold}% -fill none $[floods] ${alpha};
+        convert ${alpha} -alpha extract ${mask};
+        feather -d ${feather_size} ${mask} ${mask}
+    )
+    .unwrap();
 }
 
 const SAME: &[&[usize]] = &[

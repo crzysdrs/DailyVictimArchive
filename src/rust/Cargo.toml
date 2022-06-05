@@ -6,3 +6,6 @@ members = [
         "gen",
         "alpha",
 ]
+
+[patch.crates-io]
+cmd_lib = { git = "https://github.com/crzysdrs/rust_cmd_lib" }
