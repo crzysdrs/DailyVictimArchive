@@ -1,7 +1,7 @@
 [package]
 name = "gen"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -12,8 +12,8 @@ frontmatter = "0.4.0"
 serde-frontmatter = "0.1.0"
 serde = {version="1.0.127", features=["derive"]}
 comrak = "0.11.0"
-regex = "1.5.5"
-clap = {version="3.0.0-beta.5"}
+regex = "1.11.1"
+clap = {version="3.2.23", features=["derive"]}
 serde_json = "1.0.66"
 alpha = {path="../alpha"}
 image = "0.23.14"
