@@ -2,6 +2,21 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 <meta name="generator" content="Jekyll">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="{{config.title | markdown(inline=true) | striptags}}">
+{% if page.title %}
+<meta name="twitter:title" content="{{page.title | markdown(inline=true) | striptags }}">
+<meta property="og:title" content="{{page.title | markdown(inline=true) | striptags }} " />
+{% else %}
+<meta name="twitter:title" content="{{config.title | markdown(inline=true) | striptags }}">
+<meta property="og:title" content="{{config.title | markdown(inline=true) | striptags }}" />
+{%endif%}
+{% if page.description %}
+<meta name="description" content="{{ page.description | markdown(inline=true) | striptags }}" />
+<meta name="twitter:description" content="{{ page.description | markdown(inline=true) | striptags }}">
+<meta property="og:description" content="{{ page.description | markdown(inline=true) | striptags }}">
+{% endif %}
 
 <title>{%if config.title %}{{ config.title | markdown(inline=true) | striptags | safe }}{% else %}{{ config.title }}{% endif %}</title>
 
