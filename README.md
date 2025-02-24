@@ -19,6 +19,8 @@ This includes:
 Requires docker with BuildKit, but otherwise should be pretty easy.
 
 ```
+sudo apt install docker-buildx git-annex
+sudo usermod -aG docker $USER
 # Invoke Git Annex to Retrieve Binary Files (images)
 ./build extract
 # Build all intermediates
