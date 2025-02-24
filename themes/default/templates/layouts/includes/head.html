@@ -12,6 +12,9 @@
 <meta name="twitter:title" content="{{config.title | markdown(inline=true) | striptags }}">
 <meta property="og:title" content="{{config.title | markdown(inline=true) | striptags }}" />
 {%endif%}
+{% if page.extra.vicpic_small %}
+<meta property="og:image" content="{{ config.base_url ~ 'img/' ~ page.extra.vicpic_small }}" />
+{% endif %}
 {% if page.description %}
 <meta name="description" content="{{ page.description | markdown(inline=true) | striptags }}" />
 <meta name="twitter:description" content="{{ page.description | markdown(inline=true) | striptags }}">
