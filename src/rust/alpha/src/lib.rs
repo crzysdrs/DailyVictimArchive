@@ -13,10 +13,10 @@ unsafe extern "C" fn edge_callback<'a, EdgeFn>(
     y2: c_int,
 ) where
     EdgeFn: FnMut(i32, i32, i32, i32) + 'a,
-{
+{ unsafe {
     let edge_fn = std::mem::transmute::<_, &'a mut EdgeFn>(data);
     edge_fn(x1, y1, x2, y2);
-}
+}}
 
 unsafe extern "C" fn point_callback<'a, PtFn>(
     data: *mut c_void,
@@ -25,7 +25,7 @@ unsafe extern "C" fn point_callback<'a, PtFn>(
 ) -> c_int
 where
     PtFn: Iterator<Item = (i32, i32)> + 'a,
-{
+{ unsafe {
     let pt_fn = std::mem::transmute::<_, &'a mut PtFn>(data);
     if let Some(pt) = pt_fn.next() {
         *x1 = pt.0;
@@ -34,7 +34,7 @@ where
     } else {
         return 0;
     }
-}
+}}
 
 pub fn cgal_alpha_shape<PtFn, EdgeFn>(mut pt: PtFn, mut edge: EdgeFn)
 where

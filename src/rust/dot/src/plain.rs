@@ -204,7 +204,7 @@ mod test {
                     id: NodeId(699),
                     size: (1.0694, 1.0694),
                     center: (51.64, 53.562),
-                    label: "".to_string(),
+                    label: Some("".to_string()),
                     style: vec![
                         "solid".to_string(),
                         "square".to_string(),
@@ -227,14 +227,14 @@ mod test {
             )),
             Ok(("", vec![
                 Graph {
-                    id: 1.0,
+                    scale: 1.0,
                     size: (83.075, 54.097),
                     nodes : vec![
                         Node {
                             id: NodeId(699),
                             size: (1.0694, 1.0694),
                             center: (51.64, 53.562),
-                            label: "test\ntest2\"".to_string(),
+                            label: Some("test\ntest2\"".to_string()),
                             style: vec!["solid".to_string(), "square".to_string(), "black".to_string(),
                                         "lightgrey".to_string()]
                         }

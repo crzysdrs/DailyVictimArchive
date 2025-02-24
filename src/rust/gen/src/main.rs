@@ -32,6 +32,7 @@ struct ArticleFM {
     date: String,
     history: Vec<Votes>,
     color: bool,
+    #[allow(unused)]
     votes: u64,
 }
 
@@ -599,7 +600,7 @@ fn composite(output: &Path, imgs: Vec<(ArticleRef, ImageBuffer<Rgba<u8>, Vec<u8>
     let mut place = (0, 500);
     let mut range = 0..composite.width() - 300;
     let mut start = true;
-    for mut i in &mut imgs {
+    for i in &mut imgs {
         if start {
             start = false;
         } else if !range.contains(&place.0) {
