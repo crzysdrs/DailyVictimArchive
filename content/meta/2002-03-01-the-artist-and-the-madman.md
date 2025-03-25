@@ -14,14 +14,14 @@ little "chat."
 
 \[Fargo pulls out a pair of jumper cables and clacks them menacingly.\]
 
-**The Internet's HotSoup:** They won't work this time -- I'm grounded.
+**The Internet's HotSoup:** They won't work this time — I'm grounded.
 
 {% css_class(class="right") %}
 ![](/img/columns/image/mar03_planetfargo_hotsoup.png)
 {% end %}
 
 **Fargo:** Okay, fine. On to the questions, then! The Daily Victim was
-running for a year with a different artist -- Gabe from Penny-Arcade --
+running for a year with a different artist — Gabe from Penny-Arcade —
 doing the illustrations. When the search for a new artist began, what
 inspired you to enter?
 
@@ -119,7 +119,7 @@ the harmonica), and of course, play video games all the time.
 **HotSoup:** Way.
 
 **Fargo:** That's amazing, because I'm a master of the defensive art
-known as Hiroto poo -- loosely translated, it means "Iron Bowels." Some
+known as Hiroto poo — loosely translated, it means "Iron Bowels." Some
 guy taught it to me once on the subway.
 
 **HotSoup:** I don't think I've ever heard of that one, although I can
@@ -140,7 +140,7 @@ balls...
 my boys intimidating you? Bring it!
 
 **HotSoup:** You know, since we just started working together, I don't
-think it's appropriate to --
+think it's appropriate to —
 
 **Fargo:** I'll determine what's appropriate or not! You! Balls! Kick!
 Now!
@@ -157,6 +157,6 @@ Fargo is an online community gaming journalist who had to repeat the
 sixth grade because he didn't know how to speak Japanese. [Mail
 Fargo](mailto:fargo@gamespy.com)!*
 
-Get Fargo in your Mailbox every day -- [Subscribe to the HTML version of
+Get Fargo in your Mailbox every day — [Subscribe to the HTML version of
 GameSpy's Daily
 Newsletter](https://web.archive.org/web/20020301000000/http://www.gamespy.com/asp/subscribe.shtm).

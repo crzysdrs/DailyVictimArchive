@@ -34,7 +34,7 @@ drawing some guy I met on a messageboard somewhere.
 **Fargo:** In the morning I come into work and discover whatever madness
 HotSoup came up with the night or weekend before. Then I have to turn on
 the funny. You know, it's really hard to be funny on cue, especially if
-your livelihood depends on it. For instance -- well, watch this. SOUP!
+your livelihood depends on it. For instance — well, watch this. SOUP!
 Funny! *NOW!*
 
 **HotSoup:** \[Breaks down into choking sobs\]

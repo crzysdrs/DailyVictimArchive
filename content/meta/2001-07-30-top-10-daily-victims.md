@@ -18,18 +18,18 @@ For nearly a year GameSpy has run a feature that we lovingly call "[The
 Daily Victim.](./)" A combined comedic effort from yours truly and
 Gabriel from
 [Penny-Arcade](https://web.archive.org/web/20010730000000/http://www.penny-arcade.com/),
-it's a unique feature -- part comic, part story, part editorial, partly
+it's a unique feature — part comic, part story, part editorial, partly
 my fault. It's a daily tribute to the Internet gaming culture and the
 characters who inhabit it.
 
 One of the highlights of the feature, though, is the audience
-participation. Each day when a new victim is posted, YOU -- our
-invincible readers -- rank that victim on a scale of one to ten. The
+participation. Each day when a new victim is posted, YOU — our
+invincible readers — rank that victim on a scale of one to ten. The
 votes are tabulated and averaged out, giving each victim a score (this
 may represent the only time many of them will ever score.) At the end of
 the week the highest ranked victims are drawn in full color and are
 featured in a special story of some sort. Frequently the victims will
-run across one another -- characters you like will have a habit of
+run across one another — characters you like will have a habit of
 appearing and reappearing.
 
 As a result, GameSpy can look at those rankings and compile a
@@ -66,7 +66,7 @@ release of Tribes 2 and a Monkey](@/victim/160.md). I always love
 when Victims can run across one another, so making the poor guy hand out
 easter eggs seemed like the perfect excuse to bring back dudes like [The
 Unix Admin Wizard](@/victim/119.md), another personal favorite. The
-unexpected Matrix-twist ending really brings this puppy home -- I'm glad
+unexpected Matrix-twist ending really brings this puppy home — I'm glad
 this made the top ten. I think if I hadn't gone on Vacation he woulda
 been on the Top 5 ... you creeps tend to start ranking victims lower and
 lower if they're online for more than a day or so!
@@ -80,7 +80,7 @@ Week](@/victim/203.md) that was pretty funny.
 
   
  I was surprised that the color version of this victim did better than
-[the black and white version](@/victim/205.md) -- in that one, I
+[the black and white version](@/victim/205.md) — in that one, I
 introduced "Stewie the Frosh," a hardcore deathmatcher who was willing
 to break his own arm in order to even the odds with the victim pictured
 above. It had that kinda Quentin Tarantino-esque "savor the moment
@@ -91,7 +91,7 @@ that?*
 The result was this guy, number 9 on our list. It's the most morbid and
 gruesome Daily Victim EVER. But the black comedy somehow seems to work,
 especially when the guy flatlines in the hospital. The one-upsmanship is
-totally unrealistic -- or is it? I mean, come on, *I* know
+totally unrealistic — or is it? I mean, come on, *I* know
 super-competitive people like that, so the story is ridiculous but it's
 still based around human traits. I think that's why people liked this
 victim. Alternatively, maybe you're just a bunch of SICK BASTARDS.
@@ -141,7 +141,7 @@ Pilot](@/victim/244.md) was just such a character.
 I always think it's funny to mix real-life with game-conventions in
 order to show why the game conventions are ludicrous. For instance, in a
 real war, you don't respawn. So making a "suicide run" has a lot of
-heavy connotations -- like the infamous Kamakazi pilots of World War II.
+heavy connotations — like the infamous Kamakazi pilots of World War II.
 But in the game-world, being a suicider can be a career decision.
 
 Take that same character to the extreme and you get victim number 7
@@ -297,7 +297,7 @@ Believe it or not, this Victim is almost based on a true story. GameSpy
 came across an old *Pole Position II* arcade machine once and snapped it
 up, so it sits in our lobby. I was among the best players in the office
 (nobody could bust on the Suzuka track like ME.) One night I was working
-late -- alone in the office -- when I heard a screeching noise coming
+late — alone in the office — when I heard a screeching noise coming
 from the machine. I padded softly over to it and saw it displaying
 garbledegook and making weird noises. Let's be frank: It scared the
 *crap* out of me. But I went back to my desk and emailed a rough outline
@@ -324,7 +324,7 @@ number 2 slot. Ruining my whole top 10 list! Oh well.
 
 I couldn't resist the opportunity to list my personal favorites here.
 Sometimes I write up a victim and I think it's the greatest thing since
-sliced bread -- when I come in the next morning I find that my readers
+sliced bread — when I come in the next morning I find that my readers
 torched the poor guy. (Of course, the reverse is when I write something
 I don't really like but it turns out to strike a chord.) So here's a few
 of my favs that you won't find on the top 20:

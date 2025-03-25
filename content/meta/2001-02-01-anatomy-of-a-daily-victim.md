@@ -17,7 +17,7 @@ week's column!
 **Fargo:** We nabbed it when we bought Mplayer. So, Gabe, would you like
 to read from your mailbag?
 
-**Gabriel:** Sure -- I got this note from Ovi "graphix" Demetrian:
+**Gabriel:** Sure — I got this note from Ovi "graphix" Demetrian:
 
 {% css_class(style="color: #00AA00;") %}
 *i've printed the first 100 or so of your
@@ -38,8 +38,8 @@ inspiration will strike.
 
 
 **Fargo:** We thought it would be fun to do a whole, "Creating the Daily
-Victim" column. We'll start with the creation of the image -- 'cuz
-that's sexy -- and then we'll go on to how I whip up the writing. Maybe
+Victim" column. We'll start with the creation of the image — 'cuz
+that's sexy — and then we'll go on to how I whip up the writing. Maybe
 it will inspire you. Maybe it will delight you. Maybe it'll pass some
 time while you're microwaving a burrito. Anyways, today we're going to
 look at [the frozen guy](@/victim/123.md), who was just posted
@@ -141,9 +141,9 @@ that right?
 **Fargo:** Riiiiight....  
 
 **Fargo:** So, Gabe sends me a final, inked version of the Victim. I
-don't do anything more with the art -- I crop out the head to make the
+don't do anything more with the art — I crop out the head to make the
 thumbnail image for the front page, but that's about it. Then I open up
-the image and put a text editor window beside it -- that way I'm
+the image and put a text editor window beside it — that way I'm
 inspired as I write. GameSpy peeps love to stroll by my desk at this
 point to see what's cooking for tomorrow's feature.
 
@@ -152,7 +152,7 @@ point to see what's cooking for tomorrow's feature.
 Having the pic right next to the text editor inspires me.
 {% end %}
 
-It takes anywhere from ten minutes to a half hour to write the Victim --
+It takes anywhere from ten minutes to a half hour to write the Victim —
 usually because I already have an idea in my head before I start
 writing. There's nothing technically exciting about *how* I write the
 victim ("Remember kids: always hit the 'enter' key at the end of every
@@ -166,7 +166,7 @@ mailbag](https://web.archive.org/web/20010201000000/http://feedback.gamespy.com/
 where people are welcome to send in ideas. Occasionally I'll see one
 that'll get me going, like [when someone told me the story about the
 Naked Guy](@/victim/114.md). In at least one case, the dude
-practically wrote up the victim himself -- [as was the case with the
+practically wrote up the victim himself — [as was the case with the
 Tribes Hand](@/victim/67.md).
 
 But for the most part ideas just come from observing stuff around you.
@@ -201,7 +201,7 @@ So I had some vague idea of a freezing guy for a Victim. In order to get
 things focused on gaming, I had the frozen guy's game performance
 suffer. It occurred to me that having some guy whine about an air
 conditioner wasn't funny, which is why I threw in another character
-named Crenshaw, who was doing it on purpose -- now, the fact that
+named Crenshaw, who was doing it on purpose — now, the fact that
 someone ELSE is turning on the air conditioner just to win at Quake, now
 *that* was funny. Most of my ideas come from real life, then I tweak
 them around until they strike me as plausible, but ridiculous. :)  
@@ -214,7 +214,7 @@ Tip 54: Make fun of dot.com companies.
 {% end %}
 
 **Fargo:** People occasionally hit me with this question in my email. I'm
-afraid the advice I have isn't really exciting -- just read a lot and
+afraid the advice I have isn't really exciting — just read a lot and
 write every day. It's good to be more than a writer, too. You want to
 have a lot of background to draw from. The fact that I study history,
 know how to program computers and design webpages, and helped build a
@@ -238,7 +238,7 @@ Strange is good.
 {% end %}
 
 I think the biggest problem people have when they're writing or doing
-any kind of art -- the so-called "writer's block" -- is because of
+any kind of art — the so-called "writer's block" — is because of
 self-censorship. Somewhere in the back of their head there's a little
 kid coming up with all sorts of cool ideas, and before they can even
 think about making it happen, part of their brain says, "No, that's too
@@ -252,7 +252,7 @@ that actually encouraged me to break some rules!
 
 Anyways, don't be afraid to play around with really whacked ideas.
 Imagine for a second Steven King sitting in an easy chair brainstorming
-ideas for his next novel -- you think he's sitting there thinking "too
+ideas for his next novel — you think he's sitting there thinking "too
 weird, too weird?" No way! He's running with everything until he finds
 an idea he likes. Work with weird things and you can make weird things
 work.
@@ -261,7 +261,7 @@ That brings us back to the victim we're working on, by the way (and you
 thought I was just rambling.) In real life, people rarely spend a
 weekend rigging up complex networks of plastic hamster-tubes (which, if
 I were president, I'd change immediately.) In the end, it made for a
-funny story though -- so I ran with it.  
+funny story though — so I ran with it.  
 
 **Different Victims for Different Folks**
 
@@ -288,7 +288,7 @@ actually have to think of a beginning middle and end and wrap it all up
 in a few paragraphs. The story about [that guy's calamitous Worms
 Armageddon game](@/victim/104.md) is a good example. The story about
 [The Kid Who Got a Puppy Instead of Team Arena](@/victim/82.md) is
-another classic -- one of the highest ranked ever (I think people are
+another classic — one of the highest ranked ever (I think people are
 morally opposed to giving cute puppydogs low scores.) In general, the
 Victims that actually tell a whole story get ranked WAY higher. All
 along people have been saying that nobody wants to *read* on the web,
@@ -296,7 +296,7 @@ but I guess it kinda goes to show you that people LOVE stories.
 
 For holiday specials I experimented with doing "Group" victims. These
 seem to get really high scores (people love when previous Victims get
-together) so I'm going to keep doing them on occasion -- the [Christmas
+together) so I'm going to keep doing them on occasion — the [Christmas
 Special](@/victim/80.md) is both a story *and* a group piece and
 proves my point about not being afraid to be weird. It's the highest
 ranked Victim ever!
@@ -305,7 +305,7 @@ Finally there are the "non-traditional" victims. These often come from
 Gabe drawing a picture so bizarre I don't know what to do with it. The
 [Force Feedback Guy](@/victim/15.md) is weird. One of the best weird
 ones is [The Quake Pig.](@/victim/83.md) Go there now and look at the
-voting -- funniest graph ever! A lot of times these Victims score really
+voting — funniest graph ever! A lot of times these Victims score really
 low, but I love throwing them in there. You know. The best part of this
 feature is not knowing what you're going to see every day.
 
@@ -337,7 +337,7 @@ which makes it all the more interesting to watch.
 
 I consider anything that scores less than a 7 to be pretty much a loser
 for everyone involved. Anything above 8 I consider a success. Anything
-that hits a 9 or above is a smash hit -- that's a rarity! Soon we'll
+that hits a 9 or above is a smash hit — that's a rarity! Soon we'll
 have forums hooked up to the victim so you can comment on it.
 
 **Fargo, You're Boring Us**

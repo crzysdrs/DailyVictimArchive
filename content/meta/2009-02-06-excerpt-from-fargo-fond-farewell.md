@@ -44,18 +44,18 @@ I would've thought a daily feature like this would've done great traffic
 for us. The people who read it *loved* it. To this day, I still get
 emails and comments about the Daily Victim, more so than any other work
 I've written. And I always felt it was some of my best writing on
-GameSpy. But -- here's the cold reality of writing gaming editorial --
+GameSpy. But — here's the cold reality of writing gaming editorial —
 the traffic wasn't there. For all the work that I put into it, and the
 money we spent on artists, the Daily Victim never got a ton of traffic.
-Early in 2004 things came to a head -- I had brought aboard a third
+Early in 2004 things came to a head — I had brought aboard a third
 artist and had sketched up a new redesign, but I couldn't justify the
 resources to relaunch the Daily Victim site because of its low numbers.
 
 If you're interested in what could have been, [here's a
 mockup](/img/daily_victim_mockup.png) I had created of the site I wanted.
 The site would read almost like a blog written by recurring characters.
-It would've been years ahead of its time. Hold on a second -- now the
-weeping -- okay, I'm better now.
+It would've been years ahead of its time. Hold on a second — now the
+weeping — okay, I'm better now.
 
 It's fun to [read all the Daily Victims from the very
 beginning](@/victim/11.md), but if you don't have that much time,

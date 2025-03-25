@@ -18,9 +18,9 @@ the Soup in line.
  [![](/img/victimpics/fargo.png)](mailto:fargo@gamespy.com) Fargo
 realized early in life that he wanted to be a Space Marine. However, our
 foolish political leaders continue to hem and haw and refuse to arm our
-people with a military space force -- must we wait until it's too late?
+people with a military space force — must we wait until it's too late?
 When will they learn!? Also, he had eyesight problems that prevent him
-from being an astronaut. Instead, Fargo became a writer -- a gaming
+from being an astronaut. Instead, Fargo became a writer — a gaming
 journalist who's been active in the online gaming community since the
 days of Quake. Fargo was GameSpy's first employee, resulting in a
 company culture that continues to resemble beanbag toss day at the
