@@ -17,7 +17,7 @@ this feature continually evolves...\]
 For nearly a year GameSpy has run a feature that we lovingly call "[The
 Daily Victim.](./)" A combined comedic effort from yours truly and
 Gabriel from
-[Penny-Arcade](http://web.archive.org/web/20010730000000/http://www.penny-arcade.com/),
+[Penny-Arcade](https://web.archive.org/web/20010730000000/http://www.penny-arcade.com/),
 it's a unique feature -- part comic, part story, part editorial, partly
 my fault. It's a daily tribute to the Internet gaming culture and the
 characters who inhabit it.
@@ -43,7 +43,7 @@ reader's choice of the best of the best.
 
 The Daily Victim feature just got a [New Look](./) and we've just
 started offering the first ever [Daily Victim
-Tee-Shirt](http://web.archive.org/web/20010730000000/http://www.cafepress.com/cp/store/productdetail.aspx?prodno=1245034),
+Tee-Shirt](https://web.archive.org/web/20010730000000/http://www.cafepress.com/cp/store/productdetail.aspx?prodno=1245034),
 a limited-edition run that will not be available after August 6th. In
 honor of both progress and rampant, unchecked capitalism we present: The
 Top Ten Victims of All Time! As voted by our readers. With my own
@@ -270,7 +270,7 @@ victims. She generated a lot of emails and appeared in a lot of reader
 submissions ("and then the dude should meet the chick with the
 penguin...") As a result, she's featured on [The First Ever Daily Victim
 Limited-Edition
-Shirt](http://web.archive.org/web/20010730000000/http://www.cafepress.com/cp/store/productdetail.aspx?prodno=1245034).
+Shirt](https://web.archive.org/web/20010730000000/http://www.cafepress.com/cp/store/productdetail.aspx?prodno=1245034).
 WHY does she have a penguin? I always thought it was more funny if it
 simply wasn't explained. Gabe (the illustrator) throws me curveballs
 like that. Somehow it's endearing that she's always screaming whatever
@@ -361,15 +361,15 @@ of my favs that you won't find on the top 20:
 That should do 'er. As always, check out [The Daily Victim](./) every
 day! This week happens to be *Gran Turismo 3* week. If you like the
 feature, support it by [snagging a
-Tee-shirt](http://web.archive.org/web/20010730000000/http://www.cafepress.com/cp/store/productdetail.aspx?prodno=1245034).
+Tee-shirt](https://web.archive.org/web/20010730000000/http://www.cafepress.com/cp/store/productdetail.aspx?prodno=1245034).
 Every so often a new one will be available, and the old designs will
 never be sold ever again. Enjoy!
 
 *\[GameSpy Top Tens are posted every Monday. Like clockwork. Want more
 goodness? [Read the
-Archives!](http://web.archive.org/web/20010730000000/http://gamespy.com/top10)
+Archives!](https://web.archive.org/web/20010730000000/http://gamespy.com/top10)
 Have an idea for a Top Ten topic? [Mail
-us](http://web.archive.org/web/20010730000000/http://feedback.gamespy.com/)!
+us](https://web.archive.org/web/20010730000000/http://feedback.gamespy.com/)!
 We'd love to hear what your favorite victims are. Alternatively, you can
 go with the flow and inadvertently send us an email virus instead.
 Grr.\]*

@@ -45,9 +45,9 @@ laugher to anyone unfortunate enough to catch it out of the corner of
 the eye. The Soup spent the last couple years putting his artwork
 online, and his credentials include, but are not limited to, the online
 comics [Lethal
-Doses](http://web.archive.org/web/20001002000000/http://www.lethaldoses.com/)
+Doses](https://web.archive.org/web/20001002000000/http://www.lethaldoses.com/)
 and
-[Winter](http://web.archive.org/web/20001002000000/http://www.wintercomic.com/).
+[Winter](https://web.archive.org/web/20001002000000/http://www.wintercomic.com/).
 x{% end %}
 
 ------------------------------------------------------------------------
@@ -63,9 +63,9 @@ surrounded by blinking lights that have little to no significance. After
 his career as a zeppelin pilot was cut tragically short, he pursued the
 life of an artist. Since then he teamed up with Jerry "Tycho" Holkins
 and together they founded
-[Penny-Arcade](http://web.archive.org/web/20001002000000/http://www.penny-arcade.com/),
+[Penny-Arcade](https://web.archive.org/web/20001002000000/http://www.penny-arcade.com/),
 an awesome gaming comic strip, as well as [The
-Bench.org](http://web.archive.org/web/20001002000000/http://www.thebench.org/),
+Bench.org](https://web.archive.org/web/20001002000000/http://www.thebench.org/),
 which can best be described as "open-source cartooning." Gabe used to do
 much of the illustration work for GameSpy.com and his work still sorta
 sets the "feel" of the site. *Blame him.*

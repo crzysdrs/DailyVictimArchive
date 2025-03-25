@@ -19,7 +19,8 @@ taxonomies = [
 
 [link_checker]
 skip_prefixes = [
-              "http://web.archive.org"
+              "http://web.archive.org",
+              "https://web.archive.org"
 ]
 
 [extra]

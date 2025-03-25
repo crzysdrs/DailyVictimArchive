@@ -33,11 +33,11 @@ dug back up](@/victim/484.md). Hilarity ensues.
 
 Halfway through the run of the Daily Victim, Gabe decided to turn his
 full attention to the [Penny
-Arcade](http://web.archive.org/web/20090206000000/http://www.penny-arcade.com/)
+Arcade](https://web.archive.org/web/20090206000000/http://www.penny-arcade.com/)
 site, and after a brief hiatus the feature returned with the excellent
 Lemuel "HotSoup" Pew providing the art. If you're interested, [HotSoup
 now illustrates BlankIt
-comics](http://web.archive.org/web/20090206000000/http://blankitcomics.com/),
+comics](https://web.archive.org/web/20090206000000/http://blankitcomics.com/),
 which are a lot of fun.
 
 I would've thought a daily feature like this would've done great traffic

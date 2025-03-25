@@ -88,7 +88,7 @@ techniques. I've learned a bunch of tricks for coloring digital images.
 I should hope to pass that knowledge on someday.
 
 **Fargo:** Your claim to fame is the [Lethal
-Doses](http://web.archive.org/web/20020301000000/http://www.lethaldoses.com/)
+Doses](https://web.archive.org/web/20020301000000/http://www.lethaldoses.com/)
 comic strip. Tell me about that, but to make things interesting, you're
 not allowed to use the word "the."
 
@@ -98,7 +98,7 @@ it. It's teh best.
 
 **Fargo:** Ha ha! I get it, you spelled "rhythm" wrong. You also draw
 for an online comic called
-[Winter.](http://web.archive.org/web/20020301000000/http://www.wintercomic.com/)
+[Winter.](https://web.archive.org/web/20020301000000/http://www.wintercomic.com/)
 The art style is different than the others. Tell us about it.
 
 **HotSoup:** You got an Internet full of gamer comics and funny comics,
@@ -106,7 +106,7 @@ but very few serious stories. At least, none in the limelight. So to
 test my art, and the writing skills of some friends, we put together a
 post-apocalyptic drama. It's a lot of fun, and derives most of its feel
 from modern sci-fi stories and mangas. [Check
-it!](http://web.archive.org/web/20020301000000/http://www.wintercomic.com/)
+it!](https://web.archive.org/web/20020301000000/http://www.wintercomic.com/)
 
 **Fargo:** What do you do in "real life?" Or do you draw all the time?
 
@@ -152,11 +152,11 @@ Now!
 **\[[Check out the Daily Victim on GameSpy.com!](./)\]**
 
 *\[PlanetFargo is posted every Friday at GameSpy.com. [Read the
-archives!](http://web.archive.org/web/20020301000000/http://www.gamespy.com/Fargo)
+archives!](https://web.archive.org/web/20020301000000/http://www.gamespy.com/Fargo)
 Fargo is an online community gaming journalist who had to repeat the
 sixth grade because he didn't know how to speak Japanese. [Mail
 Fargo](mailto:fargo@gamespy.com)!*
 
 Get Fargo in your Mailbox every day -- [Subscribe to the HTML version of
 GameSpy's Daily
-Newsletter](http://web.archive.org/web/20020301000000/http://www.gamespy.com/asp/subscribe.shtm).
+Newsletter](https://web.archive.org/web/20020301000000/http://www.gamespy.com/asp/subscribe.shtm).

@@ -54,7 +54,7 @@ function article_jquery(base_url) {
     });
     // $(':regex(href,\\.(jpe?g|png|gif)$)').fancybox();
     $("a[href$='.jpg'],a[href$='.jpeg'],a[href$='.png'],a[href$='.gif']").attr('rel', 'gallery').fancybox();
-    $(':regex(href,^http://web.archive.org)').qtip({
+    $(':regex(href,^https?://web.archive.org)').qtip({
 	style: {classes:'qtip-light qtip-shadow myCustomClass'},
 	content: {
 	    text:'Since many pages referenced in Daily Victims no longer exist, this link is to an archived version of the website on the date this Daily Victim was posted.',

@@ -124,7 +124,7 @@ Fine tooning.
 
 **Gabriel:** The next and probably most important step in this process
 is to load up [Front Line
-Force](http://web.archive.org/web/20010201000000/http://www.planethalflife.com/frontline/)
+Force](https://web.archive.org/web/20010201000000/http://www.planethalflife.com/frontline/)
 and do my damndest to kick some rebel ass. Uhh, but don't tell Fargo
 that.
 
@@ -162,7 +162,7 @@ people ask me in regards to the column.
 **Where Do You Get Your Ideas?**
 
 One of the first places I check is [our
-mailbag](http://web.archive.org/web/20010201000000/http://feedback.gamespy.com/)
+mailbag](https://web.archive.org/web/20010201000000/http://feedback.gamespy.com/)
 where people are welcome to send in ideas. Occasionally I'll see one
 that'll get me going, like [when someone told me the story about the
 Naked Guy](@/victim/114.md). In at least one case, the dude
